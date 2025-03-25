@@ -1,25 +1,25 @@
-# build output
+# Результат сборки
 dist/
-# generated types
+# сгенерированные типы
 .astro/
 
-# dependencies
+# зависимости
 node_modules/
 
-# logs
+# Логи
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
 
-# environment variables
+# переменные окружения
 .env
 .env.production
 
-# macOS-specific files
+# Файлы, специфичные для macOS
 .DS_Store
 
-# jetbrains setting folder
+# Папка настроек JetBrains
 .idea/
 yarn.lock
