@@ -1,25 +1,25 @@
-# Designable 设计器
+# Designable Designer
 
-NocoBase 通过 `createDesignable()` 方法为 Schema 提供设计能力
+NocoBase предоставляет возможность проектирования схем (Schema) через метод `createDesignable()`.
 
 ```ts
 import React from 'react';
 import { Schema } from '@formily/json-schema';
 import { createDesignable } from '@nocobase/client';
 
-// 创建一个 schema 示例
+// Создать пример схемы (schema).
 const current = new Schema({
   name: 'root',
   type: 'void',
   'x-component': 'Page',
 });
 
-// 为当前 schema 创建 designable
+// Создать **designable** для текущей схемы (schema).
 const dn = createDesignable({
   current,
 });
 
-// 在 schema 节点内部新增一个 hello 节点
+// Добавить узел **hello** внутрь узла схемы (schema).
 dn.insertAfterBegin({
   name: 'hello',
   type: 'void',
@@ -42,7 +42,7 @@ console.log(current.toJSON());
 }
 ```
 
-在 Schema 组件中，可以直接使用 `useDesignable()` 来处理当前 Schema 节点
+В компоненте Schema можно напрямую использовать `useDesignable()` для обработки текущего узла схемы (Schema).
 
 ```tsx
 import React from 'react';
@@ -53,7 +53,7 @@ import {
   useDesignable,
 } from '@nocobase/client';
 
-const Hello = () => <h1>Hello, world!</h1>;
+const Hello = () => <h1>Привет, мир!</h1>;
 
 const Page = (props) => {
   const dn = useDesignable();
@@ -67,7 +67,7 @@ const Page = (props) => {
           });
         }}
       >
-        点此新增子节点
+        Нажмите здесь, чтобы добавить дочерний узел
       </Button>
       {props.children}
     </div>
@@ -91,68 +91,68 @@ export default () => {
 
 ## createDesignable vs useDesignable
 
-- createDesignable 需要传 current 参数，useDesignable 直接用于当前节点，不需要传 current
-- createDesignable 可以用在事件中，useDesignable 是 react hook 方法，必须先执行
-- createDesignable 的 current 可以是任意 schema，useDesignable 只能是当前 schema
+- `createDesignable` требует передачи параметра `current`, а `useDesignable` используется напрямую для текущего узла и не требует передачи `current`.
+- `createDesignable` может быть использован в событиях, тогда как `useDesignable` является React hook методом и должен быть выполнен заранее.
+- `current` в `createDesignable` может быть любой схемой (schema), тогда как `useDesignable` работает только с текущей схемой.
 
-使用场景
+### Сценарии использования
 
-- 如果明确就是当前节点操作，直接用 useDesignable 更加便捷
-- 如果操作的不是当前节点，用 createDesignable 更合适
-- 如果是事件触发，如拖拽移动等，用 createDesignable 更合适
+- Если операция явно связана с текущим узлом, удобнее использовать `useDesignable`.
+- Если операция выполняется не над текущим узлом, то `createDesignable` подходит лучше.
+- Если действие вызвано событием, например, перетаскиванием, то `createDesignable` является более подходящим выбором.
 
-## designable 的设计能力
+## Возможности дизайна в designable
 
-designable 为 schema 提供的设计能力体现在
+Возможности дизайна, которые `designable` предоставляет для схемы (schema), включают:
 
-- 增：当前节点相邻位置插入
-- 查：查找子节点
-- 改：通过 patch 修改 schema 参数
-- 删：删除当前节点或者某个子节点
-- 移：节点间的移动
+- **Добавление**: Вставка в соседней позиции текущего узла.
+- **Поиск**: Поиск дочерних узлов.
+- **Изменение**: Изменение параметров схемы через `patch`.
+- **Удаление**: Удаление текущего узла или определенного дочернего узла.
+- **Перемещение**: Перемещение между узлами.
 
-### 增：当前节点相邻位置插入
+### Добавление: Вставка в соседней позиции текущего узла
 
-与 DOM 的 [insert adjacent](https://dom.spec.whatwg.org/#insert-adjacent) 概念相似，Schema 也提供了 `insertAdjacent()` 方法用于解决邻近位置的插入问题。
+Аналогично концепции [insertAdjacent](https://dom.spec.whatwg.org/#insert-adjacent) в DOM, Schema также предоставляет метод `insertAdjacent()` для решения задачи вставки в соседние позиции.
 
-四个邻近位置
+Четыре соседние позиции:
 
 ```html
 <!-- root -->
 <div>
-  <!-- beforeBegin 在当前节点的前面插入 -->
+  <!-- beforeBegin — вставка перед текущим узлом -->
   <p>
-    <!-- afterBegin 在当前节点的第一个子节点前面插入 -->
+    <!-- afterBegin — вставка перед первым дочерним элементом текущего узла -->
     ...
-    <!-- beforeEnd 在当前节点的最后一个子节点后面 -->
+    <!-- beforeEnd — вставка после последнего дочернего элемента текущего узла -->
   </p>
-  <!-- afterEnd 在当前节点的后面 -->
+  <!-- afterEnd — вставка после текущего узла -->
 </div>
 ```
 
-Schema 的写法如下
+Запись для Schema выглядит следующим образом:
 
 ```ts
 {
   type: 'void',
   'x-component': 'div',
   properties: {
-    // beforeBegin 在当前节点的前面插入
+    // beforeBegin — вставка перед текущим узлом
     node1: {
       type: 'void',
       'x-component': 'p',
       properties: {
-        // afterBegin 在当前节点的第一个子节点前面插入
+        // afterBegin — вставка перед первым дочерним элементом текущего узла
         // ...
-        // beforeEnd 在当前节点的最后一个子节点后面
+        // beforeEnd — вставка после последнего дочернего элемента текущего узла
       },
     },
-    // afterEnd 在当前节点的后面
+    // afterEnd — вставка после текущего узла
   },
 }
 ```
 
-使用 `useDesignable()` 在当前 schema 相邻位置插入
+Используйте `useDesignable()` для вставки в соседнюю позицию текущей схемы (schema).
 
 ```tsx
 import React from 'react';
@@ -182,7 +182,7 @@ const Hello = (props) => {
             });
           }}
         >
-          before begin
+          перед началом
         </Button>
         <Button
           onClick={() => {
@@ -192,7 +192,7 @@ const Hello = (props) => {
             });
           }}
         >
-          after begin
+          перед началом
         </Button>
         <Button
           onClick={() => {
@@ -202,7 +202,7 @@ const Hello = (props) => {
             });
           }}
         >
-          before end
+          перед концом
         </Button>
         <Button
           onClick={() => {
@@ -212,7 +212,7 @@ const Hello = (props) => {
             });
           }}
         >
-          after end
+          после конца
         </Button>
       </Space>
       <div style={{ margin: 50 }}>{props.children}</div>
@@ -246,7 +246,7 @@ export default () => {
 };
 ```
 
-使用 `createDesignable()` 在指定 schema 相邻位置插入
+Использовать `createDesignable()` для вставки в соседнюю позицию указанной схемы.
 
 ```tsx
 import React from 'react';
@@ -288,7 +288,7 @@ const Page = (props) => {
           });
         }}
       >
-        在 Title2 后面添加
+        Добавить после Title2.
       </Button>
       {props.children}
     </div>
@@ -327,13 +327,13 @@ export default () => {
 };
 ```
 
-### 查：查找子节点
+### Поиск: Поиск дочерних узлов
 
-formily 的 json-schema 提供了 `reduceProperties` 遍历查找节点，但是太难用了，为此 Designable 提供了更易用的 `findProperties` 和 `findProperty` 方法来查找子节点
+JSON-схема Formily предоставляет метод `reduceProperties` для обхода и поиска узлов, но он слишком сложен в использовании. Для этого Designable предлагает более удобные методы `findProperties` и `findProperty` для поиска дочерних узлов.
 
 #### `findProperties`
 
-查找满足条件的全部子节点，返回一个数组
+Находит все дочерние узлы, соответствующие условию, и возвращает массив.
 
 ```ts
 interface FindOptions {

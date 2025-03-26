@@ -1,6 +1,6 @@
 # SchemaComponent
 
-## 核心组件
+## Основные компоненты
 
 ### `<SchemaComponentProvider />`
 
@@ -8,7 +8,7 @@
 
 ### `<SchemaComponent>`
 
-## 核心方法
+## Основные методы
 
 ### `createDesignable()`
 

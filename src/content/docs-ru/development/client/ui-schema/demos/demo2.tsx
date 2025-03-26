@@ -68,7 +68,7 @@ const app = new Application({
   router: {
     type: 'memory',
   },
-  // 为了更好的展示 demo，直接将 designable 设置为 true
+  // Для лучшей демонстрации примера (demo) значение `designable` установлено в `true`.
   designable: true,
   plugins: [PluginHello],
 });

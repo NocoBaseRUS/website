@@ -15,14 +15,14 @@ class PluginDemoAddSchemaSettingsItem extends Plugin {
     };
 
     this.schemaSettingsManager.addItem(
-      'mySettings', // 示例，已存在的 schema settings name
-      'customItem', // 新增的 item name
+      'mySettings', // Пример существующего имени настроек схемы (schema settings name).
+      'customItem', // Имя добавленного элемента (item name).
       customItem,
     );
   }
 }
 
-// 快捷模拟一个 App
+// Быстрое создание модели приложения (Quickly simulate an App).
 const app = createApp({ 
   plugins: [PluginDemoAddSchemaSettingsItem],
 });

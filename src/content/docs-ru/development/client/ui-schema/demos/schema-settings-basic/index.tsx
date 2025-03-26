@@ -21,7 +21,7 @@ export const SchemaSettingsBlockTitleItem: any = () => {
             title: {
               title: 'Block title',
               type: 'string',
-              // 获取 schema 的默认值
+              // Получить значение по умолчанию для схемы (schema).
               default: dn.getSchemaAttribute('x-decorator-props.title'),
               'x-decorator': 'FormItem',
               'x-component': 'Input',
@@ -31,7 +31,7 @@ export const SchemaSettingsBlockTitleItem: any = () => {
         } as ISchema
       }
       onSubmit={({ title }) => {
-        // 参数覆盖
+        // Переопределение параметров
         dn.deepMerge({
           'x-decorator-props': {
             title,
@@ -50,7 +50,7 @@ class PluginDemoAddSchemaInitializerItem extends Plugin {
   }
 }
 
-// 快捷模拟一个 App
+// Экземпляр Designable для дизайнера.
 const app = createApp({ plugins: [PluginDemoAddSchemaInitializerItem] });
 
 export default app.getRootComponent();

@@ -23,8 +23,8 @@ class PluginDemoAddSchemaInitializerItem extends Plugin {
     };
 
     this.schemaInitializerManager.addItem(
-      'myInitializer', // 示例，已存在的 schema initializer
-      'otherBlocks.custom', // 向 otherBlocks 分组内添加 custom
+      'myInitializer', // Пример существующего schema initializer:
+      'otherBlocks.custom', // Добавить custom в группу otherBlocks
       customItem,
     );
   }

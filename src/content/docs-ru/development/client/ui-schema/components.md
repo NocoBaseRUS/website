@@ -1,23 +1,23 @@
-# Schema 组件库
+# Библиотека компонентов Schema
 
-## 包装器组件
+## Компоненты-обертки
 
 - BlockItem
 - FormItem
 - CardItem
 
-## 布局
+## Макеты
 
 - Page
 - Grid
 - Tabs
 - Space
 
-## 字段组件
+## Компоненты полей
 
-字段组件一般不单独使用，而是用在数据展示组件当中
+Компоненты полей обычно не используются отдельно, а применяются внутри компонентов отображения данных.
 
-- CollectionField：万能组件
+- CollectionField: универсальный компонент
 - Cascader
 - Checkbox
 - ColorSelect
@@ -38,9 +38,9 @@
 - TreeSelect
 - Upload
 
-## 数据展示组件
+## Компоненты отображения данных
 
-需要与字段组件搭配使用
+Должны использоваться в сочетании с компонентами полей.
 
 - Calendar
 - Form
@@ -48,22 +48,22 @@
 - Table
 - TableV2
 
-## 操作（onClick 事件型组件）
+## Операции (компоненты с событием onClick)
 
 - Action
 - Action.Drawer
 - Action.Modal
-- ActionBar：用于操作布局
+- ActionBar: используется для разметки операций
 - Menu
 
-## 其他
+## Прочее
 
 - G2plot
 - Markdown.Void
 
-## `x-designer` 和 `x-initializer` 的使用场景
+## Сценарии использования `x-designer` и `x-initializer`
 
-`x-decorator` 或 `x-component` 是以下组件时，`x-designer` 生效：
+`x-designer` активируется, когда `x-decorator` или `x-component` являются одним из следующих компонентов:
 
 - BlockItem
 - CardItem
@@ -71,7 +71,7 @@
 - Table.Column
 - Tabs.TabPane
 
-`x-decorator` 或 `x-component` 是以下组件时，`x-initializer` 生效：
+`x-initializer` активируется, когда `x-decorator` или `x-component` являются одним из следующих компонентов:
 
 - ActionBar
 - BlockItem

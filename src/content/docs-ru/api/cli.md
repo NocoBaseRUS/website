@@ -1,47 +1,47 @@
 # @nocobase/cli
 
-NocoBase CLI 旨在帮助你开发、构建和部署 NocoBase 应用。
+NocoBase CLI призван помочь вам разрабатывать, собирать и развертывать приложения NocoBase.
 
 <Alert>
 
-NocoBase CLI 支持 ts-node 和 node 两种运行模式
+NocoBase CLI поддерживает два режима работы: ts-node и node.
 
-- ts-node 模式（默认）：用于开发环境，支持实时编译，但是响应较慢
-- node 模式：用于生产环境，响应迅速，但需要先执行 `yarn nocobase build` 将全部源码进行编译
+- Режим ts-node (по умолчанию): используется для среды разработки, поддерживает компиляцию в реальном времени, но имеет более медленный отклик.
+- Режим node: используется для рабочей среды, обеспечивает быстрый отклик, но перед этим необходимо выполнить команду `yarn nocobase build`, чтобы скомпилировать весь исходный код.
 
 </Alert>
 
-## 使用说明
+## Инструкция по использованию
 
 ```bash
 $ yarn nocobase -h
 
-Usage: nocobase [command] [options]
+Использование: nocobase [команда] [опции]
 
-Options:
+Опции:
   -h, --help
 
-Commands:
+Команды:
   console
-  db:auth               校验数据库是否连接成功
-  db:sync               通过 collections 配置生成相关数据表和字段
-  install               安装
-  start                 生产环境启动应用
-  build                 编译打包
-  clean                 删除编译之后的文件
-  dev                   启动应用，用于开发环境，支持实时编译
-  doc                   文档开发
-  test                  测试
+  db:auth               Проверка успешности подключения к базе данных
+  db:sync               Генерация связанных таблиц и полей на основе конфигурации collections
+  install               Установка
+  start                 Запуск приложения в рабочей среде
+  build                 Компиляция и сборка
+  clean                 Удаление скомпилированных файлов
+  dev                   Запуск приложения в среде разработки с поддержкой компиляции в реальном времени
+  doc                   Разработка документации
+  test                  Тестирование
   umi
-  upgrade               升级
-  migrator              数据迁移
-  pm                    插件管理器
+  upgrade               Обновление
+  migrator              Миграция данных
+  pm                    Менеджер плагинов
   help
 ```
 
-## 在脚手架里应用
+## Применение в шаблоне проекта
 
-应用脚手架 `package.json` 里的 `scripts` 如下：
+В разделе `scripts` файла `package.json` шаблона проекта содержится следующее:
 
 ```json
 {
@@ -57,9 +57,9 @@ Commands:
 }
 ```
 
-## 命令行扩展
+## Расширение командной строки
 
-NocoBase CLI 基于 [commander](https://github.com/tj/commander.js) 构建，你可以自由扩展命令，扩展的 command 可以写在 `app/server/index.ts` 里：
+NocoBase CLI построен на базе [commander](https://github.com/tj/commander.js), и вы можете свободно расширять команды. Расширяемые команды могут быть добавлены в файл `app/server/index.ts`:
 
 ```ts
 const app = new Application(config);
@@ -67,7 +67,7 @@ const app = new Application(config);
 app.command('hello').action(() => {});
 ```
 
-或者，写在插件里：
+Или добавить в плагине:
 
 ```ts
 class MyPlugin extends Plugin {
@@ -77,84 +77,84 @@ class MyPlugin extends Plugin {
 }
 ```
 
-终端运行
+Запуск в терминале
 
 ```bash
 $ yarn nocobase hello
 ```
 
-## 内置命令行
+## Встроенные команды
 
-按使用频率排序
+Упорядочены по частоте использования.
 
 ### `dev`
 
-开发环境下，启动应用，代码实时编译。
+В среде разработки запускает приложение с возможностью компиляции кода в реальном времени.
 
 <Alert>
-NocoBase 未安装时，会自动安装（参考 install 命令）
+Если NocoBase не установлен, он будет установлен автоматически (см. команду install).
 </Alert>
 
 ```bash
-Usage: nocobase dev [options]
+Использование: nocobase dev [опции]
 
-Options:
-  -p, --port [port]
-  --client
-  --server
-  -h, --help
+Опции:
+  -p, --port [port]       Порт для запуска приложения
+  --client                Запустить только клиентскую часть
+  --server                Запустить только серверную часть
+  -h, --help              Справка по команде
 ```
 
-示例
+Пример
 
 ```bash
-# 启动应用，用于开发环境，实时编译
+# Запуск приложения в среде разработки с компиляцией в реальном времени
 yarn nocobase dev
-# 只启动服务端
+# Запуск только серверной части
 yarn nocobase dev --server
-# 只启动客户端
+# Запуск только клиентской части
 yarn nocobase dev --client
 ```
 
 ### `start`
 
-生产环境下，启动应用，代码需要 yarn build。
+В рабочей среде запускает приложение, код должен быть предварительно собран с помощью `yarn build`.
 
 <Alert>
 
-- NocoBase 未安装时，会自动安装（参考 install 命令）
-- 源码有修改时，需要重新打包（参考 build 命令）
+- Если NocoBase не установлен, он будет установлен автоматически (см. команду install).
+- При изменении исходного кода требуется повторная сборка (см. команду build).
 
 </Alert>
 
 ```bash
 $ yarn nocobase start -h
 
-Usage: nocobase start [options]
+Использование: nocobase start [опции]
 
-Options:
+Опции:
   -p, --port
   -s, --silent
   -h, --help
 ```
 
-示例
+Пример
 
 ```bash
-# 启动应用，用于生产环境，
+# Запуск приложения в рабочей среде
 yarn nocobase start
 ```
 
 ### `install`
 
-安装
+Установка
 
 ```bash
 $ yarn nocobase install -h
 
-Usage: nocobase install [options]
+Использование: nocobase install [опции]
 
-Options:
+Опции:
   -f, --force
   -c, --clean
   -s, --silent
@@ -165,29 +165,29 @@ Options:
   -h, --help
 ```
 
-示例
+Пример
 
 ```bash
-# 初始安装
+# Первоначальная установка
 yarn nocobase install -l zh-CN -e admin@nocobase.com -p admin123
-# 删除 NocoBase 的所有数据表，并重新安装
+# Удалить все таблицы данных NocoBase и переустановить
 yarn nocobase install -f -l zh-CN -e admin@nocobase.com -p admin123
-# 清空数据库，并重新安装
+# Очистить базу данных и переустановить
 yarn nocobase install -c -l zh-CN -e admin@nocobase.com -p admin123
 ```
 
 <Alert>
 
-`-f/--force` 和 `-c/--clean` 的区别
+Разница между `-f/--force` и `-c/--clean`
 
-- `-f/--force` 删除 NocoBase 的数据表
-- `-c/--clean` 清空数据库，所有数据表都会被删除
+- `-f/--force` удаляет таблицы данных NocoBase.
+- `-c/--clean` очищает всю базу данных, при этом удаляются все таблицы.
 
 </Alert>
 
 ### `upgrade`
 
-升级
+Обновление
 
 ```bash
 yarn nocobase upgrade
@@ -195,166 +195,167 @@ yarn nocobase upgrade
 
 ### `test`
 
-测试，用法与 vitest 一致，和直接运行 vitest 的区别：
+Тестирование, использование аналогично vitest. Отличия от запуска vitest напрямую:
 
-- 指定路径时，可以自动识别前后端，前端的必须包含 `/client/`
-- 后端测试默认为 `--single-thread`，如果要关掉可以加上 `--single-thread=false`
-- 默认为 `--run`，测试运行完退出进程，如果需要监听，加上 `--watch`
+- При указании пути автоматически определяется клиентская или серверная часть; для клиентской части путь должен содержать `/client/`.
+- Тесты серверной части по умолчанию выполняются в режиме `--single-thread`. Чтобы отключить этот режим, добавьте `--single-thread=false`.
+- По умолчанию используется флаг `--run`, тесты завершают выполнение после завершения процесса. Если требуется следить за изменениями, добавьте `--watch`.
 
 ```bash
 $ nocobase test -h
 vitest/1.0.4
 
-Usage:
+Использование:
   $ vitest [...filters]
 ```
 
-示例
+Примеры
 
 ```bash
-# 运行全部测试，前后端并行两个 vitest 进程
+# Запуск всех тестов, клиентская и серверная части выполняются параллельно в двух процессах vitest
 yarn test
 
-# 运行 client 相关测试用例
+# Запуск тестов, связанных с клиентской частью
 yarn test --client
-# 等价于
+# Эквивалентно
 yarn cross-env TEST_ENV=client-side vitest
 
-# 运行 server 相关测试用例
+# Запуск тестов, связанных с серверной частью
 yarn test --server
-# 等价于
+# Эквивалентно
 yarn cross-env TEST_ENV=server-side vitest
 
-# 指定目录或文件
+# Указание директории или файла
 yarn test your/path/src/__tests__/test-file.test.ts
-# 前端文件必须包含 /client/
+# Для клиентских файлов путь должен содержать /client/
 yarn test your/path/client/src/__tests__/test-file.test.ts
 ```
 
 ### `build`
 
-代码部署到生产环境前，需要将源码编译打包，如果代码有修改，也需要重新构建。
+Перед развертыванием кода в рабочей среде необходимо скомпилировать и собрать исходный код. Если код был изменен, требуется повторная сборка.
 
 ```bash
-# 所有包
+# Все пакеты
 yarn nocobase build
-# 指定包
+# Указанные пакеты
 yarn nocobase build app/server app/client
 ```
 
 ### `clean`
 
-删除编译之后的文件
+Удаление скомпилированных файлов
 
 ```bash
 yarn clean
-# 等同于
+# Эквивалентно
 yarn rimraf -rf packages/*/*/{lib,esm,es,dist}
 ```
 
 ### `doc`
 
-文档开发
+Разработка документации
 
 ```bash
-# 启动文档
-yarn doc  --lang=zh-CN # 等同于 yarn doc dev
-# 构建文档，默认输出到 ./docs/dist/ 目录下
+# Запуск документации
+yarn doc --lang=zh-CN # Эквивалентно yarn doc dev
+# Сборка документации, результат по умолчанию выводится в каталог ./docs/dist/
 yarn doc build
-# 查看 dist 输出的文档最终效果
+# Просмотр итогового результата документации из директории dist
 yarn doc serve --lang=zh-CN
 ```
 
 ### `db:auth`
 
-校验数据库是否连接成功
+Проверка успешности подключения к базе данных
 
 ```bash
 $ yarn nocobase db:auth -h
 
-Usage: nocobase db:auth [options]
+Использование: nocobase db:auth [опции]
 
-Options:
-  -r, --retry [retry]   重试次数
-  -h, --help
+Опции:
+  -r, --retry [retry]   Количество попыток повтора
+  -h, --help            Показать справку по команде
 ```
 
 ### `db:sync`
 
-通过 collections 配置生成数据表和字段
+Генерация таблиц и полей на основе конфигурации collections
 
 ```bash
 $ yarn nocobase db:sync -h
 
-Usage: nocobase db:sync [options]
+Использование: nocobase db:sync [опции]
 
-Options:
-  -f, --force
-  -h, --help   display help for command
+Опции:
+  -f, --force           Принудительное выполнение
+  -h, --help            Показать справку по команде
 ```
 
 ### `migrator`
 
-数据迁移
+Миграция данных
 
 ```bash
 $ yarn nocobase migrator
 
-Positional arguments:
+Позиционные аргументы:
   <command>
-    up        Applies pending migrations
-    down      Revert migrations
-    pending   Lists pending migrations
-    executed  Lists executed migrations
-    create    Create a migration file
+    up        Применить ожидающие миграции
+    down      Откатить миграции
+    pending   Список ожидающих миграций
+    executed  Список выполненных миграций
+    create    Создать файл миграции
 ```
 
 ### `pm`
 
-插件管理器
+Менеджер плагинов
 
 ```bash
-# 创建插件
+# Создание плагина
 yarn pm create hello
-# 注册插件
+# Регистрация плагина
 yarn pm add hello
-# 激活插件
+# Активация плагина
 yarn pm enable hello
-# 禁用插件
+# Отключение плагина
 yarn pm disable hello
-# 删除插件
+# Удаление плагина
 yarn pm remove hello
 ```
 
-未实现
+Не реализовано
 
 ```bash
-# 升级插件
+# Обновление плагина
 yarn pm upgrade hello
-# 发布插件
+# Публикация плагина
 yarn pm publish hello
 ```
 
 ### `umi`
 
-`app/client` 基于 [umi](https://umijs.org/) 构建，可以通过 `nocobase umi` 来执行其他相关命令。
+`app/client` построен на основе [umi](https://umijs.org/), и вы можете использовать `nocobase umi` для выполнения других связанных команд.
 
 ```bash
-# 生成开发环境所需的 .umi 缓存
+# Генерация кэша .umi, необходимого для разработки
 yarn nocobase umi generate tmp
 ```
 
 ### `help`
 
-帮助命令，也可以用 option 参数，`-h` 和 `--help`
+Команда справки, также доступна через параметры `-h` и `--help`
 
 ```bash
-# 查看所有 cli
+# Просмотр всех CLI
 yarn nocobase help
-# 也可以用 -h
+# Можно использовать -h
 yarn nocobase -h
-# 或者 --help
+# Или --help
 yarn nocobase --help
-# 查看 db:sync 命令的 option
+# Просмотр опций команды db:sync
 yarn nocobase db:sync -h
+```
 ```

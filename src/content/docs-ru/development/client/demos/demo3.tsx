@@ -30,17 +30,17 @@ const mySettings = new SchemaSettings({
 
 const myInitializer = new SchemaInitializer({
   name: 'MyInitializer',
-  //  按钮标题标题
+  // Заголовок кнопки
   title: 'Button Text',
   wrap: Grid.wrap,
-  // 调用 initializer.render() 时会渲染 items 列表
+  // При вызове `initializer.render()` будет отрендерен список `items`.
   items: [
     {
       name: 'demo1',
       title: 'Demo1',
       Component: () => {
         const itemConfig = useSchemaInitializerItem();
-        // 调用插入功能
+        // Вызов функции вставки.
         const { insert } = useSchemaInitializer();
         const handleClick = () => {
           insert({
@@ -58,7 +58,7 @@ const myInitializer = new SchemaInitializer({
 
 const Hello = () => {
   const schema = useFieldSchema();
-  return <h1>Hello, world! {schema.name}</h1>
+  return <h1>Привет, мир! {schema.name}</h1>
 };
 
 const Btn = () => {

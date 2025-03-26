@@ -1,58 +1,59 @@
-# 概述
+# Обзор
 
-NocoBase 的 HTTP API 基于 Resource & Action 设计，是 REST API 的超集，操作不局限于增删改查，在 NocoBase 里，Resource Action 可以任意的扩展。
+HTTP API NocoBase основан на дизайне Resource & Action и является надмножеством REST API. Операции не ограничиваются только CRUD. В NocoBase Resource Action можно свободно расширять.
 
-## 资源 Resource
+## Ресурсы (Resource)
 
-在 NocoBase 里，资源（resource）有两种表达方式：
+В NocoBase ресурсы (resource) могут быть представлены двумя способами:
 
 - `<collection>`
 - `<collection>.<association>`
 
 <Alert>
 
-- collection 是所有抽象数据的集合
-- association 为 collection 的关联数据
-- resource 包括 collection 和 collection.association 两类
+- collection — это набор всех абстрактных данных
+- association — это связанные данные collection
+- resource включает два типа: collection и collection.association
 
 </Alert>
 
-### 示例
+</Alert>
+### Примеры
 
-- `posts` 文章
-- `posts.user` 文章用户
-- `posts.tags` 文章标签
+- `posts` — статьи
+- `posts.user` — пользователи статей
+- `posts.tags` — теги статей
 
-## 操作 Action
+## Действия (Action)
 
-以 `:<action>` 的方式表示资源操作
+Действия над ресурсами обозначаются как `:<action>`:
 
 - `<collection>:<action>`
 - `<collection>.<association>:<action>`
 
-内置的全局操作，可用于 collection 或 association
+Встроенные глобальные действия, которые могут быть использованы для коллекции (collection) или ассоциации (association).
 
-- `create`
-- `get`
-- `list`
-- `update`
-- `destroy`
-- `move`
+- `create` (создать)
+- `get` (получить)
+- `list` (список)
+- `update` (обновить)
+- `destroy` (удалить)
+- `move` (переместить)
 
-内置的关联操作，仅用于 association
+Встроенные действия для связей, которые используются только с ассоциациями (association):
 
-- `set`
-- `add`
-- `remove`
-- `toggle`
+- `set` (установить)
+- `add` (добавить)
+- `remove` (удалить)
+- `toggle` (переключить)
 
-### 示例
+### Примеры
 
-- `posts:create` 创建文章
-- `posts.user:get` 查看文章用户
-- `posts.tags:add` 附加文章标签（将现有的标签与文章关联）
+- `posts:create` — создание статьи  
+- `posts.user:get` — просмотр пользователя статьи  
+- `posts.tags:add` — добавление тегов к статье (связывание существующих тегов со статьей)  
 
-## 请求 URL
+## URL запроса
 
 ```bash
 <GET|POST>   /api/<collection>:<action>
@@ -61,19 +62,19 @@ NocoBase 的 HTTP API 基于 Resource & Action 设计，是 REST API 的超集�
 <GET|POST>   /api/<collection>/<collectionIndex>/<association>:<action>/<associationIndex>
 ```
 
-### 示例
+### Примеры
 
-posts 资源
+Ресурс `posts`
 
 ```bash
-POST  /api/posts:create
-GET   /api/posts:list
-GET   /api/posts:get/1
-POST  /api/posts:update/1
-POST  /api/posts:destroy/1
+POST  /api/posts:create    # Создание статьи
+GET   /api/posts:list      # Получение списка статей
+GET   /api/posts:get/1     # Получение статьи с ID = 1
+POST  /api/posts:update/1  # Обновление статьи с ID = 1
+POST  /api/posts:destroy/1 # Удаление статьи с ID = 1
 ```
 
-posts.comments 资源
+Ресурс `posts.comments`
 
 ```bash
 POST  /api/posts/1/comments:create
@@ -83,60 +84,59 @@ POST  /api/posts/1/comments:update/1
 POST  /api/posts/1/comments:destroy/1
 ```
 
-posts.tags 资源
+Ресурс `posts.tags`
 
 ```bash
-POST  /api/posts/1/tags:create
-GET   /api/posts/1/tags:get
-GET   /api/posts/1/tags:list
-POST  /api/posts/1/tags:update
-POST  /api/posts/1/tags:destroy
-POST  /api/posts/1/tags:add
-GET   /api/posts/1/tags:remove
+POST  /api/posts/1/tags:create    # Создание тега для статьи с ID = 1
+GET   /api/posts/1/tags:get       # Получение тега статьи с ID = 1
+GET   /api/posts/1/tags:list      # Получение списка тегов статьи с ID = 1
+POST  /api/posts/1/tags:update    # Обновление тега статьи с ID = 1
+POST  /api/posts/1/tags:destroy   # Удаление тега статьи с ID = 1
+POST  /api/posts/1/tags:add       # Добавление тега к статье с ID = 1
+GET   /api/posts/1/tags:remove    # Удаление тега из статьи с ID = 1
 ```
 
-## 资源定位
+## Идентификация ресурсов
 
-- collection 资源，通过 `collectionIndex` 定位到待处理的数据，`collectionIndex` 必须唯一
-- association 资源，通过 `collectionIndex` 和 `associationIndex` 联合定位待处理的数据，`associationIndex` 可能不是唯一的，但是 `collectionIndex` 和 `associationIndex` 的联合索引必须唯一
+- Ресурс `collection` идентифицируется через `collectionIndex`, который должен быть уникальным.
+- Ресурс `association` идентифицируется через комбинацию `collectionIndex` и `associationIndex`. При этом `associationIndex` может быть не уникальным, но комбинированный индекс (`collectionIndex` + `associationIndex`) должен быть уникальным.
 
-查看 association 资源详情时，请求的 URL 需要同时提供 `<collectionIndex>` 和 `<associationIndex>`，`<collectionIndex>` 并不多余，因为 `<associationIndex>` 可能不是唯一的。
+При просмотре деталей ресурса `association` в URL запроса необходимо указывать как `<collectionIndex>`, так и `<associationIndex>`. Наличие `<collectionIndex>` не является избыточным, поскольку `<associationIndex>` может быть не уникальным.
 
-例如 `tables.fields` 表示数据表的字段
-
+Например, `tables.fields` обозначает поля таблицы данных.
 ```bash
 GET   /api/tables/table1/fields/title
 GET   /api/tables/table2/fields/title
 ```
 
-table1 和 table2 都有 title 字段，title 在 table1 里是唯一的，但是其他表也可能有 title 字段
+`table1` и `table2` имеют поле `title`. Поле `title` уникально в `table1`, но другие таблицы также могут содержать поле `title`.
 
-## 请求参数
+## Параметры запроса
 
-请求的参数可以放在 Request 的 headers、parameters（query string）、body（GET 请求没有 body） 里。
+Параметры запроса могут быть переданы в headers, параметрах URL (query string) или в теле запроса (body). Однако у метода GET тела запроса нет.
 
-几个特殊的 Parameters 请求参数
+Несколько специальных параметров запроса:
 
-- `filter` 数据过滤，用于查询相关操作里；
-- `filterByTk` 根据 tk 字段字过滤，用于指定详情数据的操作里；
-- `sort` 排序，用于查询相关操作里。
-- `fields` 输出哪些数据，用于查询相关操作里；
-- `appends` 附加关系字段，用于查询相关操作里；
-- `except` 排除哪些字段（不输出），用于查询相关操作里；
-- `whitelist` 字段白名单，用于数据的创建和更新相关操作里；
-- `blacklist` 字段黑名单，用于数据的创建和更新相关操作里；
+- `filter` — фильтр данных, используется в операциях, связанных с запросами;
+- `filterByTk` — фильтрация по ключу записи (target key), используется для операций с конкретными записями;
+- `sort` — сортировка, используется в операциях, связанных с запросами;
+- `fields` — указывает, какие поля возвращать, используется в операциях, связанных с запросами;
+- `appends` — добавляет связанные поля, используется в операциях, связанных с запросами;
+- `except` — исключает определенные поля из вывода, используется в операциях, связанных с запросами;
+- `whitelist` — белый список полей, используется при создании и обновлении данных;
+- `blacklist` — черный список полей, используется при создании и обновлении данных;
 
-### filter
+### Фильтры
 
-数据过滤
+Фильтрация данных
 
 ```bash
-# simple
+# простой фильтр
 GET /api/posts?filter[status]=publish
-# 推荐使用 json string 的格式，需要 encodeURIComponent 编码
+# Рекомендуется использовать формат JSON строки, требует кодирования через encodeURIComponent
 GET /api/posts?filter={"status":"published"}
 
-# filter operators
+# операторы фильтрации
 GET /api/posts?filter[status.$eq]=publish
 GET /api/posts?filter={"status.$eq":"published"}
 
@@ -145,40 +145,40 @@ GET /api/posts?filter={"$and": [{"status.$eq":"published"}, {"title.$includes":"
 # $or
 GET /api/posts?filter={"$or": [{"status.$eq":"pending"}, {"status.$eq":"draft"}]}
 
-# association field
+# поле ассоциации
 GET /api/posts?filter[user.email.$includes]=gmail
 GET /api/posts?filter={"user.email.$includes":"gmail"}
 ```
 
-[点此查看更多关于 filter operators 的内容](http-api/filter-operators)
+[Нажмите здесь, чтобы узнать больше о filter operators](http-api/filter-operators)
 
 ### filterByTk
 
-根据 tk 字段过滤，默认情况：
+Фильтрация по полю `tk` (target key). По умолчанию:
 
-- collection 资源，tk 为数据表的主键；
-- association 资源，tk 为 association 的 targetKey 字段。
+- Для ресурса **collection**, `tk` — это первичный ключ таблицы данных;
+- Для ресурса **association**, `tk` — это поле `targetKey` ассоциации.
 
 ```bash
 GET   /api/posts:get?filterByTk=1&fields=name,title&appends=tags
 ```
 
-### sort
+### Сортировка
 
-排序。降序时，字段前面加上减号 `-`。
+Сортировка. Для сортировки по убыванию перед именем поля добавляется знак минус `-`.
 
 ```bash
-# createAt 字段升序
+# Поле createAt по возрастанию
 GET   /api/posts:get?sort=createdAt
-# createAt 字段降序
+# Поле createAt по убыванию
 GET   /api/posts:get?sort=-createdAt
-# 多个字段联合排序，createAt 字段降序、title A-Z 升序
+# Сортировка по нескольким полям: createAt по убыванию, title по возрастанию (A-Z)
 GET   /api/posts:get?sort=-createdAt,title
 ```
 
-### fields
+### Поля
 
-输出哪些数据
+Указывает, какие данные следует выводить.
 
 ```bash
 GET   /api/posts:list?fields=name,title
@@ -197,47 +197,47 @@ Response 200 (application/json)
 
 ### appends
 
-附加关系字段
+Дополнительные поля связей
 
 ### except
 
-排除哪些字段（不输出），用于查询相关操作里；
+Исключает поля (не выводит их) в операциях, связанных с запросами.
 
 ### whitelist
 
-白名单
+Белый список полей
 
 ```bash
 POST  /api/posts:create?whitelist=title
 
 {
-  "title": "My first post",
-  "date": "2022-05-19"      # date 字段会被过滤掉，不会写入数据库
+  "title": "Мой первый пост",
+  "date": "2022-05-19"      # Поле date будет отфильтровано и не будет записано в базу данных
 }
 ```
 
 ### blacklist
 
-黑名单
+Черный список
 
 ```bash
 POST  /api/posts:create?blacklist=date
 
-# date 字段会被过滤掉，不会写入数据库
+# Поле date будет отфильтровано и не будет записано в базу данных
 {
-  "title": "My first post"
+  "title": "Мой первый пост"
 }
 ```
 
-## 请求响应
+## Ответ на запрос
 
-响应的格式
+Формат ответа
 
 ```ts
 type ResponseResult = {
-  data?: any; // 主体数据
-  meta?: any; // 附加数据
-  errors?: ResponseError[]; // 报错
+  data?: any; // Основные данные
+  meta?: any; // Дополнительные данные
+  errors?: ResponseError[]; // Ошибка
 };
 
 type ResponseError = {
@@ -246,9 +246,9 @@ type ResponseError = {
 };
 ```
 
-### 示例
+### Пример
 
-查看列表
+Просмотр списка
 
 ```bash
 GET /api/posts:list
@@ -270,7 +270,7 @@ Response 200 (application/json)
 }
 ```
 
-查看详情
+Просмотр подробной информации
 
 ```bash
 GET /api/posts:get/1
@@ -284,7 +284,7 @@ Response 200 (application/json)
 }
 ```
 
-报错
+Ошибка
 
 ```bash
 POST /api/posts:create
@@ -294,7 +294,7 @@ Response 400 (application/json)
 {
   errors: [
     {
-      message: 'name must be required',
+      message: 'Имя должно быть обязательным',
     },
   ],
 }

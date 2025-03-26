@@ -5,23 +5,23 @@
 ```ts
 {
   properties: {
-    // beforeBegin 在当前节点的前面插入
+    // beforeBegin — вставка перед текущим узлом
     node1: {
       properties: {
-        // afterBegin 在当前节点的第一个子节点前面插入
+        // afterBegin — вставка перед первым дочерним элементом текущего узла
         // ...
-        // beforeEnd 在当前节点的最后一个子节点后面
+        // beforeEnd — вставка после последнего дочернего элемента текущего узла
       },
     },
-    // afterEnd 在当前节点的后面
+    // afterEnd — вставка после текущего узла
   },
 }
 ```
 
-Ядро SchemaInitializer включает два компонента: `<SchemaInitializer.Button />` и `<SchemaInitializer.Item />`. Компонент `<SchemaInitializer.Button />` используется для создания кнопки выпадающего меню схемы, а элементы выпадающего меню представляют собой `<SchemaInitializer.Item />`.
+Ядро **SchemaInitializer** включает два компонента: `<SchemaInitializer.Button />` и `<SchemaInitializer.Item />`. Компонент `<SchemaInitializer.Button />` используется для создания кнопки выпадающего меню схемы, а элементы выпадающего меню представляют собой `<SchemaInitializer.Item />`.
 
 ### `<SchemaInitializerProvider />`
 
 ### `<SchemaInitializer.Button />`
 
-### `<SchemaInitializer.Item/>`
+### `<SchemaInitializer.Item />`

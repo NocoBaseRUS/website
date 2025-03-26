@@ -1,16 +1,16 @@
 # Metric
 
-## 类方法
+## Методы класса
 
 ### `constructor()`
 
-构造函数，创建一个 `Metric` 实例。
+Конструктор, создающий экземпляр `Metric`.
 
-#### 签名
+#### Сигнатура
 
 - `constructor(options?: MetricOptions)`
 
-#### 类型
+#### Типы
 
 ```ts
 export type MetricOptions = {
@@ -20,31 +20,31 @@ export type MetricOptions = {
 };
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 属性         | 类型                   | 描述                                   | 默认值              |
-| ------------ | ---------------------- | -------------------------------------- | ------------------- |
-| `meterName`  | `string`               | meter 标识                             | `nocobase-meter`    |
-| `version`    | `string`               |                                        | NocoBase 当前版本号 |
-| `readerName` | `string` \| `string[]` | 想启用的已注册的 `MetricReader` 的标识 |                     |
+| Свойство      | Тип                   | Описание                          | Значение по умолчанию     |
+| ------------- | --------------------- | --------------------------------- | ------------------------- |
+| `meterName`   | `string`              | Идентификатор `meter`            | `nocobase-meter`          |
+| `version`     | `string`              |                                   | Текущая версия NocoBase   |
+| `readerName`  | `string` \| `string[]`| Идентификаторы зарегистрированных `MetricReader`, которые нужно включить |                         |
 
 ### `init()`
 
-初始化 `MetricProvider`.
+Инициализация `MetricProvider`.
 
-#### 签名
+#### Сигнатура
 
 - `init(): void`
 
 ### `registerReader()`
 
-注册 `MetricReader`
+Регистрация `MetricReader`.
 
-#### 签名
+#### Сигнатура
 
 - `registerReader(name: string, reader: GetMetricReader)`
 
-#### 类型
+#### Типы
 
 ```ts
 import { MetricReader } from '@opentelemetry/sdk-metrics';
@@ -52,22 +52,22 @@ import { MetricReader } from '@opentelemetry/sdk-metrics';
 type GetMetricReader = () => MetricReader;
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 参数        | 类型                 | 描述                       |
-| ----------- | -------------------- | -------------------------- |
-| `name`      | `string`             | `MetricReader` 唯一标识    |
-| `processor` | `() => MetricReader` | 获取 `MetricReader` 的方法 |
+| Параметр    | Тип                 | Описание                           |
+| ----------- | -------------------- | ---------------------------------- |
+| `name`      | `string`             | Уникальный идентификатор `MetricReader` |
+| `processor` | `() => MetricReader` | Метод получения `MetricReader`     |
 
 ### `addView()`
 
-添加 `View`. 参考 <a href="https://opentelemetry.io/docs/instrumentation/js/manual/#configure-metric-views" target="_blank">Configure Metric Views</a>.
+Добавление `View`. См. <a href="https://opentelemetry.io/docs/instrumentation/js/manual/#configure-metric-views" target="_blank">Configure Metric Views</a>.
 
-#### 签名
+#### Сигнатура
 
 - `addView(...view: View[])`
 
-#### 类型
+#### Типы
 
 ```ts
 import { View } from '@opentelemetry/sdk-metrics';
@@ -75,31 +75,31 @@ import { View } from '@opentelemetry/sdk-metrics';
 
 ### `getMeter()`
 
-获取 `Meter`.
+Получение `Meter`.
 
-#### 签名
+#### Сигнатура
 
 - `getMeter(name?: string, version?: string)`
 
-#### 详细信息
+#### Подробная информация
 
-| 参数      | 类型     | 描述       | 默认值              |
-| --------- | -------- | ---------- | ------------------- |
-| `name`    | `string` | meter 标识 | `nocobase-meter`    |
-| `version` | `string` |            | NocoBase 当前版本号 |
+| Параметр   | Тип      | Описание               | Значение по умолчанию     |
+| ---------- | -------- | ---------------------- | ------------------------- |
+| `name`     | `string` | Идентификатор `meter` | `nocobase-meter`          |
+| `version`  | `string` |                        | Текущая версия NocoBase   |
 
 ### `start()`
 
-启动 `MetricReader`.
+Запуск `MetricReader`.
 
-#### 签名
+#### Сигнатура
 
 - `start(): void`
 
 ### `shutdown()`
 
-停止 `MetricReader`.
+Остановка `MetricReader`.
 
-#### 签名
+#### Сигнатура
 
 - `shutdown(): Promise<void>`

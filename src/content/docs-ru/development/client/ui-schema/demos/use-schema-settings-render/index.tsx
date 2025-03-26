@@ -8,7 +8,7 @@ import { Space } from 'antd';
 import React from 'react';
 import { createApp } from './app';
 
-// 自定义 Hello 组件
+// Пользовательский компонент Hello.
 const Hello = (props) => {
   return (
     <Space>
@@ -18,7 +18,7 @@ const Hello = (props) => {
   );
 };
 
-// 通过 useSchemaSettingsRender 来支持 x-settings 的渲染
+// Для поддержки рендеринга `x-settings` используется `useSchemaSettingsRender`.
 const HelloSettings = () => {
   const fieldSchema = useFieldSchema();
   const { render } = useSchemaSettingsRender(fieldSchema['x-settings']);

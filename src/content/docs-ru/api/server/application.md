@@ -1,16 +1,16 @@
 # Application
 
-`Application` 是 NocoBase 服务端核心的应用模块，基于 <a href="https://koajs.com" target="_blank">Koa</a> 扩展，负责主要的应用初始化逻辑，管理应用的生命周期。
+`Application` — это основной модуль приложения на стороне сервера в NocoBase, расширяющий функциональность <a href="https://koajs.com" target="_blank">Koa</a>. Он отвечает за основную логику инициализации приложения и управляет жизненным циклом приложения.
 
-## 构造函数
+## Конструктор
 
 `constructor()`
 
-#### 签名
+#### Сигнатура
 
 - `constructor(public options: ApplicationOptions)`
 
-#### 类型
+#### Типы
 
 ```ts
 export type PluginType = string | typeof Plugin;
@@ -47,125 +47,125 @@ export interface ApplicationOptions {
 }
 ```
 
-#### 详细信息
+#### Подробная информация
 
 ##### ApplicationOptions
 
-| 属性              | 类型                                    | 描述                                                                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `name`            | `string`                                | 应用标识                                                                                               |
-| `database`        | `IDatabaseOptions` \| `DataBase`        | `DataBase` 实例配置或 `DataBase` 实例，参考 [DataBase](../database/index.md)                           |
-| `cacheManager`    | `CacheManagerOptions`                   | `CacheManager` 实例配置，参考 [CacheManager](../cache/cache-manager.md)                                |
-| `resourceManager` | [`ResourcerOptions`](#resourceroptions) | 资源管理配置                                                                                           |
-| `authManager`     | `AuthManagerOptions`                    | 用户认证管理配置，参考 [AuthManager](../auth/auth-manager.md)                                          |
-| `bodyParser`      | `bodyParser.Options`                    | 传递给 <a href="https://github.com/koajs/bodyparser" target="_blank">@koa/bodyparser</a> 中间件的参数  |
-| `bodyParser`      | `any`                                   | 传递给 <a href="https://github.com/koajs/cors" target="_blank">@koa/cors</a> 中间件的参数              |
-| `dataWrapping`    | `boolean`                               | 是否格式化响应数据                                                                                     |
-| `registerActions` | `boolean`                               | 是否给数据表资源注册默认的 CRUD 操作接口                                                               |
-| `i18n`            | `i18n` \| `InitOptions`                 | `i18n` 实现或初始化配置                                                                                |
-| `plugins`         | `PluginConfiguration[]`                 | 内置安装的插件名字或实例数组                                                                           |
-| `acl`             | `boolean`                               | 是否启用访问控制                                                                                       |
-| `logger`          | [`AppLoggerOptions`](#apploggeroptions) | 应用日志配置                                                                                           |
-| `telemetry`       | `AppTelemetryOptions`                   | 遥测模块配置，参考 [Telemetry](../telemetry/telemetry.md) <br />`telemetry.enabled` - 是否开启遥测模块 |
+| Свойство           | Тип                                    | Описание                                                                                               |
+| ------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `name`             | `string`                                | Идентификатор приложения                                                                               |
+| `database`         | `IDatabaseOptions` \| `DataBase`        | Конфигурация или экземпляр `DataBase`, см. [DataBase](../database/index.md)                            |
+| `cacheManager`     | `CacheManagerOptions`                   | Конфигурация экземпляра `CacheManager`, см. [CacheManager](../cache/cache-manager.md)                  |
+| `resourceManager`  | [`ResourcerOptions`](#resourceroptions) | Конфигурация менеджера ресурсов                                                                        |
+| `authManager`      | `AuthManagerOptions`                    | Конфигурация управления аутентификацией пользователей, см. [AuthManager](../auth/auth-manager.md)       |
+| `bodyParser`       | `bodyParser.Options`                    | Параметры, передаваемые в middleware <a href="https://github.com/koajs/bodyparser" target="_blank">@koa/bodyparser</a> |
+| `bodyParser`       | `any`                                   | Параметры, передаваемые в middleware <a href="https://github.com/koajs/cors" target="_blank">@koa/cors</a> |
+| `dataWrapping`     | `boolean`                               | Форматировать ли данные ответа                                                                         |
+| `registerActions`  | `boolean`                               | Регистрировать ли интерфейсы CRUD-операций по умолчанию для таблиц данных                              |
+| `i18n`             | `i18n` \| `InitOptions`                 | Реализация `i18n` или конфигурация инициализации                                                       |
+| `plugins`          | `PluginConfiguration[]`                 | Массив имен или экземпляров встроенных плагинов                                                        |
+| `acl`              | `boolean`                               | Включить ли управление доступом                                                                        |
+| `logger`           | [`AppLoggerOptions`](#apploggeroptions) | Конфигурация логирования приложения                                                                    |
+| `telemetry`        | `AppTelemetryOptions`                   | Конфигурация телеметрии, см. [Telemetry](../telemetry/telemetry.md) <br />`telemetry.enabled` - включена ли телеметрия |
 
 ##### ResourcerOptions
 
-| 属性     | 类型     | 描述             |
-| -------- | -------- | ---------------- |
-| `prefix` | `string` | 资源管理接口前缀 |
+| Свойство | Тип      | Описание                  |
+| -------- | -------- | ------------------------- |
+| `prefix` | `string` | Префикс интерфейса ресурсов |
 
 ##### AppLoggerOptions
 
-| 属性      | 类型                   | 描述                                                                  |
-| --------- | ---------------------- | --------------------------------------------------------------------- |
-| `request` | `RequestLoggerOptions` | 参考 [Logger - requestLogger()](../logger.md#requestlogger)           |
-| `system`  | `SystemLoggerOptions`  | 参考 [Logger - createSystemLogger()](../logger.md#createsystemlogger) |
+| Свойство  | Тип                   | Описание                                                                 |
+| --------- | --------------------- | ------------------------------------------------------------------------ |
+| `request` | `RequestLoggerOptions`| См. [Logger - requestLogger()](../logger.md#requestlogger)              |
+| `system`  | `SystemLoggerOptions` | См. [Logger - createSystemLogger()](../logger.md#createsystemlogger)    |
 
-## 实例属性
+## Свойства экземпляра
 
 ### `name`
 
-应用标识。默认 `main`.
+Идентификатор приложения. По умолчанию `main`.
 
 ### `version`
 
-应用版本号管理。可以通过 `version.get()` 获取应用版本号。
+Управление номером версии приложения. Номер версии можно получить с помощью `version.get()`.
 
 ### `mainDataSource`
 
-主数据源。
+Основной источник данных.
 
 ### `db`
 
-主数据源 `DataBase` 实例。参考 [DataBase](../database/index.md).
+Экземпляр `DataBase` основного источника данных. См. [DataBase](../database/index.md).
 
 ### `acl`
 
-`ACL` 实例。参考 [ACL](../acl/acl.md).
+Экземпляр `ACL`. См. [ACL](../acl/acl.md).
 
 ### `log`
 
-系统日志。参考 [Logger](../logger.md).
+Системный журнал. См. [Logger](../logger.md).
 
 ### `logger`
 
-和 `log` 等价。
+Эквивалентно `log`.
 
 ### `cache`
 
-应用缓存，`Cache` 实例。参考 [Cache](../cache/cache.md).
+Кэш приложения, экземпляр `Cache`. См. [Cache](../cache/cache.md).
 
 ### `cli`
 
-应用命令行方法。
+Методы командной строки приложения.
 
 ### `i18n`
 
-国际化。`i18n` 实例
+Интернационализация. Экземпляр `i18n`.
 
 ### `telemetry`
 
-`Telemetry` 实例。参考 [Telemetry](../telemetry/telemetry.md).
+Экземпляр `Telemetry`. См. [Telemetry](../telemetry/telemetry.md).
 
 ### `pm`
 
-插件管理。参考 [PluginManager](./plugin-manager).
+Управление плагинами. См. [PluginManager](./plugin-manager).
 
 ### `dataSourceManager`
 
-数据源管理。参考 [DataSourceManager](../data-source-manager/).
+Управление источниками данных. См. [DataSourceManager](../data-source-manager/).
 
 ### `resourceManager`
 
-资源管理。参考 [ResourceManager](../resourcer/resource-manager.md).
+Управление ресурсами. См. [ResourceManager](../resourcer/resource-manager.md).
 
 ### `cacheManager`
 
-缓存管理。参考 [CacheManager](../cache/cache-manager.md).
+Управление кэшем. См. [CacheManager](../cache/cache-manager.md).
 
 ### `authManager`
 
-用户认证管理。参考 [AuthManager](../auth/auth-manager.md).
+Управление аутентификацией пользователей. См. [AuthManager](../auth/auth-manager.md).
 
 ### `cronJobManager`
 
-应用定时任务管理。
+Управление задачами по расписанию приложения.
 
 ### `localeManager`
 
-应用本地化资源管理。
+Управление локализованными ресурсами приложения.
 
-## 流程方法
+## Методы процесса
 
 ### `load()`
 
-加载应用，进行应用初始化。
+Загрузка приложения и его инициализация.
 
-#### 签名
+#### Сигнатура
 
 - `load(options?: LoadOptions): Promise<void>`
 
-#### 类型
+#### Типы
 
 ```ts
 interface LoadOptions {
@@ -176,32 +176,32 @@ interface LoadOptions {
 }
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 属性            | 类型      | 描述                                      | 默认值  |
-| --------------- | --------- | ----------------------------------------- | ------- |
-| `reload`        | `boolean` | 是否是重新加载                            | `false` |
-| `hooks`         | `boolean` | 是否触发 `beforeLoad` / `afterLoad` hooks | `true`  |
-| `sync`          | `boolean` | 是否同步数据表配置变更                    | `false` |
-| `[key: string]` | `any`     | 其他配置，会传递给 hooks                  | -       |
+| Свойство        | Тип      | Описание                                      | Значение по умолчанию |
+| --------------- | --------- | --------------------------------------------- | --------------------- |
+| `reload`        | `boolean` | Флаг, указывающий на перезагрузку              | `false`               |
+| `hooks`         | `boolean` | Вызывать ли хуки `beforeLoad` / `afterLoad`   | `true`                |
+| `sync`          | `boolean` | Синхронизировать ли изменения конфигурации таблиц | `false`               |
+| `[key: string]` | `any`     | Дополнительные настройки, передаваемые в хуки  | -                     |
 
 ### `reload()`
 
-重载应用，重新初始化。
+Перезагрузка приложения и повторная инициализация.
 
-#### 签名
+#### Сигнатура
 
 - `reload(options?: LoadOptions): Promise<void>`
 
 ### `start()`
 
-启动应用，接收请求。
+Запуск приложения для приема запросов.
 
-#### 签名
+#### Сигнатура
 
 - `start(options: StartOptions = {}): Promise<void>`
 
-#### 类型
+#### Типы
 
 ```ts
 interface StartOptions {
@@ -209,29 +209,29 @@ interface StartOptions {
 }
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 属性           | 类型      | 描述               | 默认值  |
-| -------------- | --------- | ------------------ | ------- |
-| `checkInstall` | `boolean` | 检查应用是否已安装 | `false` |
+| Свойство       | Тип      | Описание             | Значение по умолчанию |
+| -------------- | --------- | -------------------- | --------------------- |
+| `checkInstall` | `boolean` | Проверка установки приложения | `false`               |
 
 ### `restart()`
 
-重启应用，会执行 `reload()` 和 `start()`.
+Перезапуск приложения, выполняет `reload()` и `start()`.
 
-#### 签名
+#### Сигнатура
 
 - `restart(options: StartOptions = {}): Promise<void>`
 
 ### `install()`
 
-安装应用，整个过程会进行应用初始化，数据表配置变更同步，插件安装，在应用已启动的情况下还会执行应用重启。
+Установка приложения. Весь процесс включает инициализацию приложения, синхронизацию изменений конфигурации таблиц, установку плагинов, а также перезапуск приложения, если оно уже запущено.
 
-#### 签名
+#### Сигнатура
 
 - `install(options: InstallOptions = {}): Promise<void>`
 
-#### 类型
+#### Типы
 
 ```ts
 export interface InstallOptions {
@@ -239,129 +239,129 @@ export interface InstallOptions {
 }
 ```
 
-| 属性    | 类型      | 描述                       | 默认值  |
-| ------- | --------- | -------------------------- | ------- |
-| `force` | `boolean` | 应用已安装时，是否强制重装 | `false` |
+| Свойство | Тип      | Описание                          | Значение по умолчанию |
+| -------- | --------- | --------------------------------- | --------------------- |
+| `force`  | `boolean` | Принудительная переустановка приложения, если оно уже установлено | `false`               |
 
 ### `upgrade()`
 
-升级应用，执行各个插件的 `migration` 脚本，并重启应用。
+Обновление приложения, выполнение скриптов `migration` для всех плагинов и перезапуск приложения.
 
-#### 签名
+#### Сигнатура
 
 - `upgrade(): Promise<void>`
 
 ### `stop()`
 
-停止应用，关闭数据库、缓存中间件、遥测连接。
+Остановка приложения, закрытие базы данных, промежуточного программного обеспечения кэша и соединений телеметрии.
 
-#### 签名
+#### Сигнатура
 
 - `stop(): Promise<void>`
 
 ### `destroy()`
 
-销毁应用，执行 `stop()`.
+Уничтожение приложения, выполняет `stop()`.
 
-#### 签名
+#### Сигнатура
 
 - `destroy(): Promise<void>`
 
 ### `isInstalled()`
 
-检查应用是否已安装。
+Проверка, установлено ли приложение.
 
-#### 签名
+#### Сигнатура
 
 - `isInstalled(): Promise<boolean>`
 
 ### `isStarted()`
 
-检查应用是否已启动。
+Проверка, запущено ли приложение.
 
 - `isStarted(): Promise<boolean>`
 
-## 其他方法
+## Другие методы
 
 ### `on()`
 
-监听应用事件。参考 <a href="https://nodejs.org/api/events.html#emitteroneventname-listener" target="_blank">emitter.on(eventName, listener)</a>.
+Прослушивание событий приложения. См. <a href="https://nodejs.org/api/events.html#emitteroneventname-listener" target="_blank">emitter.on(eventName, listener)</a>.
 
-#### 签名
+#### Сигнатура
 
 - `on(eventName: string | symbol, listener: (...args: any[]) => void): this`
 
 ### `off()`
 
-取消监听事件。参考 <a href="https://nodejs.org/api/events.html#emitteroffeventname-listener" target="_blank">emitter.off(eventName, listener)</a>.
+Отмена прослушивания событий. См. <a href="https://nodejs.org/api/events.html#emitteroffeventname-listener" target="_blank">emitter.off(eventName, listener)</a>.
 
-#### 签名
+#### Сигнатура
 
 - `off(eventName: string | symbol, listener: (...args: any[]) => void): this`
 
 ### `use()`
 
-添加应用中间件。参考 <a href="https://koajs.com/#application" target="_blank">Koa - Application</a>.
+Добавление промежуточного программного обеспечения (middleware) приложения. См. <a href="https://koajs.com/#application" target="_blank">Koa - Application</a>.
 
 ### `command()`
 
-添加应用命令行。
+Добавление командной строки приложения.
 
-#### 签名
+#### Сигнатура
 
 - `command(name: string, desc?: string, opts?: CommandOptions): AppCommand`
 
-#### 详细信息
+#### Подробная информация
 
-| 参数名 | 类型             | 描述                                                                                         |
-| ------ | ---------------- | -------------------------------------------------------------------------------------------- |
-| `name` | `string`         | 命令                                                                                         |
-| `desc` | `string`         | 命令描述                                                                                     |
-| `opts` | `CommandOptions` | 命令配置，参考 <a href="https://github.com/tj/commander.js" target="_blank">Commander.js</a> |
+| Имя параметра | Тип              | Описание                                                                                         |
+| -------------- | ----------------- | ------------------------------------------------------------------------------------------------ |
+| `name`         | `string`          | Команда                                                                                          |
+| `desc`         | `string`          | Описание команды                                                                                 |
+| `opts`         | `CommandOptions`  | Конфигурация команды, см. <a href="https://github.com/tj/commander.js" target="_blank">Commander.js</a> |
 
 ### `runCommand()`
 
-运行应用命令。
+Запуск команды приложения.
 
-#### 签名
+#### Сигнатура
 
 - `runCommand(command: string, ...args: any[])`
 
 ### `authenticate()`
 
-DB 连接检查，版本检查。
+Проверка подключения к базе данных и версии.
 
-#### 签名
+#### Сигнатура
 
 - `authenticate(): Promise<void>`
 
-## 事件
+## События
 
 ### `'beforeLoad'` / `'afterLoad'`
 
-[`load()`](#load), [`reload()`](#reload) 执行前后触发。
+Срабатывают до и после выполнения [`load()`](#load), [`reload()`](#reload).
 
 ### `'beforeReload'` / `'afterReload'`
 
-[`reload()`](#reload) 执行前后触发。
+Срабатывают до и после выполнения [`reload()`](#reload).
 
 ### `'beforeInstall'` / `'afterInstall'`
 
-[`install()`](#install) 执行前后触发。
+Срабатывают до и после выполнения [`install()`](#install).
 
 ### `'beforeUpgrade'` / `'afterUpgrade'`
 
-[`upgrade()`](#upgrade) 执行前后触发。
+Срабатывают до и после выполнения [`upgrade()`](#upgrade).
 
 ### `'beforeStart'` / `'afterStart'`
 
-[`start()`](#start) 执行前后触发。
+Срабатывают до и после выполнения [`start()`](#start).
 
 ### `'beforeStop'` / `'afterStop'`
 
-- [`stop()`](#stop), [`destroy()`](#destroy) 执行前后触发。
-- [`restart()`](#restart) 前会触发 `'beforeStop'`.
+- Срабатывают до и после выполнения [`stop()`](#stop), [`destroy()`](#destroy).
+- `'beforeStop'` также срабатывает перед [`restart()`](#restart).
 
 ### `'beforeDestroy'` / `'afterDestroy'`
 
-[`destroy()`](#destroy) 执行前后触发。
+Срабатывают до и после выполнения [`destroy()`](#destroy).

@@ -15,7 +15,7 @@ const HomePage = () => {
         type: 'void',
         'x-decorator': 'CardItem',
         'x-decorator-props': {
-          title: '卡片',
+          title: 'Карточка',
           bordered: true,
         },
         'x-settings': 'mySettings',
@@ -28,7 +28,7 @@ const HomePage = () => {
 
 class PluginDemoAddSchemaSettings extends Plugin {
   async load() {
-    // 注册全局组件
+    // Регистрация глобальных компонентов.
     this.app.addComponents({ CardItem, HomePage });
     const mySettings = new SchemaSettings({
       name: 'mySettings',
@@ -37,7 +37,7 @@ class PluginDemoAddSchemaSettings extends Plugin {
           type: 'item',
           name: 'edit',
           useComponentProps() {
-            // TODO: 补充相关设置逻辑
+            // TODO: Добавить логику связанных настроек.
             return {
               title: 'Edit',
               onClick() {

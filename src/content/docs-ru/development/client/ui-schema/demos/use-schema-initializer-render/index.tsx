@@ -17,7 +17,7 @@ const Hello = (props) => {
   )
 }
 
-// 通过 useSchemaInitializerRender 来支持 x-initializer 的渲染
+// Для поддержки рендеринга `x-initializer` используется `useSchemaInitializerRender`.
 const HelloInitializer = () => {
   const fieldSchema = useFieldSchema();
   const { render } = useSchemaInitializerRender(fieldSchema['x-initializer']);
@@ -31,7 +31,7 @@ const HomePage = () => {
         name: 'root',
         type: 'void',
         'x-component': 'Hello',
-        'x-initializer': 'myInitializer', // 自定义的 Hello 组件支持 x-initializer 了
+        'x-initializer': 'myInitializer', //Пользовательский компонент Hello теперь поддерживает x-initializer.
       }}
     />
   );

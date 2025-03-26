@@ -1,12 +1,12 @@
 # BlockProvider
 
-## 内核方法
+## Основные методы
 
 ### `<BlockProvider />`
 
 ### `useBlockRequestContext()`
 
-## 内置 BlockProvider 组件
+## Встроенные компоненты BlockProvider
 
 ### `<CalendarBlockProvider />`
 

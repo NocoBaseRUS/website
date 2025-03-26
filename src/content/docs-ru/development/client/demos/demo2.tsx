@@ -6,7 +6,7 @@ import {
 } from '@nocobase/client';
 import React from 'react';
 
-const Hello = () => <h1>Hello NocoBase</h1>;
+const Hello = () => <h1>Привет NocoBase</h1>;
 
 const HelloPage = () => {
   return (

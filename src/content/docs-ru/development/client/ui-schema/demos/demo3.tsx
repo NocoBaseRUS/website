@@ -28,10 +28,10 @@ const mySettings = new SchemaSettings({
 
 const myInitializer = new SchemaInitializer({
   name: 'MyInitializer',
-  //  按钮标题标题
+  //  Заголовок кнопки
   title: 'Button Text',
   wrap: Grid.wrap,
-  // 调用 initializer.render() 时会渲染 items 列表
+  // При вызове `initializer.render()` будет отрендерен список `items`.
   items: [
     {
       name: 'demo1',

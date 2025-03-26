@@ -1,20 +1,20 @@
 # Telemetry
 
-## 概览
+## Обзор
 
-`Telemetry` 是 NocoBase 的遥测模块，基于 <a href="https://opentelemetry.io">OpenTelemetry</a> 封装，支持注册 OpenTelemetry 生态的指标 (Metric) 和链路 (Trace) 工具。
+`Telemetry` — это модуль телеметрии NocoBase, инкапсулированный на основе <a href="https://opentelemetry.io">OpenTelemetry</a>. Поддерживает регистрацию инструментов метрик (Metric) и трассировки (Trace) из экосистемы OpenTelemetry.
 
-## 类方法
+## Методы класса
 
 ### `constructor()`
 
-构造函数，创建一个 `Telemetry` 实例。
+Конструктор, создающий экземпляр `Telemetry`.
 
-#### 签名
+#### Сигнатура
 
 - `constructor(options?: TelemetryOptions)`
 
-#### 类型
+#### Типы
 
 ```ts
 export interface TelemetryOptions {
@@ -25,43 +25,43 @@ export interface TelemetryOptions {
 }
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 属性          | 类型            | 描述                                                                                                                        | 默认值                     |
-| ------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| `serviceName` | `string`        | 可选，参考 <a href="https://opentelemetry.io/docs/specs/semconv/resource/#service" target="_blank">Semantic Conventions</a> | `nocobase`                 |
-| `version`     | `string`        | 可选，参考 <a href="https://opentelemetry.io/docs/specs/semconv/resource/#service" target="_blank">Semantic Conventions</a> | 可选，当前 NocoBase 版本号 |
-| `trace`       | `TraceOptions`  | 可选，参考 [Trace](./trace.md)                                                                                              |
-| `metric`      | `MetricOptions` | 可选，参考 [Metric](./metric.md)                                                                                            |
+| Свойство      | Тип             | Описание                                                                                                                        | Значение по умолчанию     |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `serviceName` | `string`        | Необязательно, см. <a href="https://opentelemetry.io/docs/specs/semconv/resource/#service" target="_blank">Semantic Conventions</a> | `nocobase`                |
+| `version`     | `string`        | Необязательно, см. <a href="https://opentelemetry.io/docs/specs/semconv/resource/#service" target="_blank">Semantic Conventions</a> | Необязательно, текущая версия NocoBase |
+| `trace`       | `TraceOptions`  | Необязательно, см. [Trace](./trace.md)                                                                                          |
+| `metric`      | `MetricOptions` | Необязательно, см. [Metric](./metric.md)                                                                                        |
 
 ### `init()`
 
-注册 Instrumention, 初始化 `Trace`, `Metric`.
+Регистрация инструментария, инициализация `Trace`, `Metric`.
 
-#### 签名
+#### Сигнатура
 
 - `init(): void`
 
 ### `start()`
 
-启动 `Trace`, `Metric` 相关数据的处理程序，如：导出到 Prometheus.
+Запуск процессоров данных для `Trace`, `Metric`, например, экспорт в Prometheus.
 
-#### 签名
+#### Сигнатура
 
 - `start(): void`
 
 ### `shutdown()`
 
-停止 `Trace`, `Metric` 相关的数据处理程序。
+Остановка процессоров данных для `Trace`, `Metric`.
 
-#### 签名
+#### Сигнатура
 
 - `shutdown(): Promise<void>`
 
 ### `addInstrumentation()`
 
-添加插桩工具库
+Добавление библиотек инструментария.
 
-#### 签名
+#### Сигнатура
 
 - `addInstrumentation(...instrumentation: InstrumentationOption[])`

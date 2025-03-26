@@ -37,7 +37,7 @@ class PluginHello extends Plugin {
           type: 'item',
           name: 'edit',
           useComponentProps() {
-            // TODO: 补充相关设置逻辑
+            // TODO: Добавить логику связанных настроек.
             return {
               title: 'Edit',
               onClick() {

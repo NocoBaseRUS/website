@@ -5,7 +5,7 @@ class PluginHello extends Plugin {
   async load() {
     this.router.add('hello', {
       path: '/',
-      Component: () => <div>Hello NocoBase</div>,
+      Component: () => <div>Привет NocoBase</div>,
     });
   }
 }

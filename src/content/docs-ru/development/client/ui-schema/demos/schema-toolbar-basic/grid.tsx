@@ -76,7 +76,7 @@ class PluginDemoToolbar extends Plugin {
                   'x-decorator': 'CardItem',
                   'x-settings': 'mySettings',
                   'x-component': 'h1',
-                  'x-content': 'Hello, world!',
+                  'x-content': 'Привет, мир! 🌍',
                 });
               },
             };

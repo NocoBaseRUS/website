@@ -1,10 +1,10 @@
 # Server
 
-## 概览
+## Обзор
 
-NocoBase 基于 <a href="https://vitest.dev/" target="_blank">Vitest</a> 进行服务端测试。 `@nocobase/test` 为服务端测试提供了一些便捷的方法用于 Mock 服务和数据库。
+NocoBase использует <a href="https://vitest.dev/" target="_blank">Vitest</a> для тестирования серверной части. Пакет `@nocobase/test` предоставляет удобные методы для мокирования сервисов и базы данных в серверных тестах.
 
-### 基本使用
+### Базовое использование
 
 ```ts
 describe('actions', () => {
@@ -30,7 +30,7 @@ describe('actions', () => {
 
 ### `defineConfig()`
 
-获取 vitest 配置。
+Получение конфигурации Vitest.
 
 ```ts
 import { defineConfig } from '@nocobase/test/vitest.mjs';
@@ -40,37 +40,37 @@ const config = defineConfig();
 
 ### `mockDatabase()`
 
-创建一个用于测试的 `MockDataBase` 实例。
+Создание экземпляра `MockDataBase` для тестирования.
 
-#### 签名
+#### Сигнатура
 
 - `mockDatabase(options: IDatabaseOptions = {}): MockDatabase`
 
-#### 详细信息
+#### Подробная информация
 
-| 参数名    | 类型               | 描述                                  |
-| --------- | ------------------ | ------------------------------------- |
-| `options` | `IDatabaseOptions` | 参考 [DataBase](../database/index.md) |
+| Имя параметра | Тип               | Описание                                  |
+| -------------- | ------------------ | ----------------------------------------- |
+| `options`      | `IDatabaseOptions` | См. [DataBase](../database/index.md) |
 
 ### `mockServer()`
 
-创建一个 `MockServer` 实例。
+Создание экземпляра `MockServer`.
 
-#### 签名
+#### Сигнатура
 
 - `mockServer(options?: ApplicationOptions): MockServer`
 
-#### 详细信息
+#### Подробная информация
 
-| 参数名    | 类型                 | 描述                                         |
-| --------- | -------------------- | -------------------------------------------- |
-| `options` | `ApplicationOptions` | 参考 [Application](../server/application.md) |
+| Имя параметра | Тип                 | Описание                                         |
+| ------------- | -------------------- | ------------------------------------------------ |
+| `options`     | `ApplicationOptions` | См. [Application](../server/application.md) |
 
 ### `createMockServer()`
 
-创建一个 `MockServer` 实例，执行强制安装并启动。
+Создание экземпляра `MockServer`, выполнение принудительной установки и запуск.
 
-#### 签名
+#### Сигнатура
 
 ```ts
 createMockServer(options?: ApplicationOptions & {
@@ -81,47 +81,47 @@ createMockServer(options?: ApplicationOptions & {
 }): Promise<MockServer>
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 参数名                  | 类型                 | 描述                                         |
-| ----------------------- | -------------------- | -------------------------------------------- |
-| `options`               | `ApplicationOptions` | 参考 [Application](../server/application.md) |
-| `options.version`       | `string`             | 应用版本号                                   |
-| `options.beforeInstall` | `BeforeInstallFn`    | 安装前执行函数                               |
-| `options.skipInstall`   | `boolean`            | 是否跳过强制安装                             |
-| `options.skipStart`     | `boolean`            | 是否跳过应用启动                             |
+| Имя параметра          | Тип                 | Описание                                         |
+| ---------------------- | -------------------- | ------------------------------------------------ |
+| `options`              | `ApplicationOptions` | См. [Application](../server/application.md) |
+| `options.version`      | `string`             | Номер версии приложения                          |
+| `options.beforeInstall`| `BeforeInstallFn`    | Функция, выполняемая перед установкой            |
+| `options.skipInstall`  | `boolean`            | Пропустить ли принудительную установку           |
+| `options.skipStart`    | `boolean`            | Пропустить ли запуск приложения                  |
 
 ### `MockServer`
 
-`MockServer` 继承自 `Application` ，是用于测试的服务端应用类。
+`MockServer` наследуется от `Application` и представляет собой класс серверного приложения для тестирования.
 
-#### 类方法
+#### Методы класса
 
 ##### `loadAndInstall()`
 
-加载并安装应用。
+Загрузка и установка приложения.
 
 ##### `cleanDb()`
 
-清空数据库。
+Очистка базы данных.
 
 ##### `quickstart()`
 
-执行 `nocobase start --quickstart`.
+Выполнение команды `nocobase start --quickstart`.
 
 ##### `destroy()`
 
-销毁应用。
+Уничтожение приложения.
 
 ##### `agent()`
 
-用于在测试用例中发起接口请求。
+Используется для отправки запросов к интерфейсу в тестовых случаях.
 
-**签名**
+**Сигнатура**
 
 - `agent(): ExtendedAgent`
 
-**类型**
+**Типы**
 
 ```ts
 interface ExtendedAgent extends SuperAgentTest {
@@ -131,27 +131,27 @@ interface ExtendedAgent extends SuperAgentTest {
 }
 ```
 
-**详细信息**
+**Подробная информация**
 
 - `SuperAgentTest`
 
-参考 <a href="https://github.com/ladjs/superagent" target="_blank">superagent</a>.
+См. <a href="https://github.com/ladjs/superagent" target="_blank">superagent</a>.
 
 - `login()`
 
-使用某个用户 Model 登录。
+Вход с использованием модели пользователя.
 
 - `loginUsingId()`
 
-使用某个用户 ID 登录。
+Вход с использованием ID пользователя.
 
 - `resource()`
 
-获取某个资源。
+Получение ресурса.
 
-| 参数名       | 类型     | 描述                                                                                 |
-| ------------ | -------- | ------------------------------------------------------------------------------------ |
-| `name`       | `string` | 1. 资源名称，比如 `a` <br /> 2. 资源的关联对象名称，比如 `a.b`                       |
-| `resourceOf` | `any`    | 当 `resource` 为资源的关联对象名称时，资源的主键值。比如 `a.b` 时，代表 `a` 的主键值 |
+| Имя параметра | Тип      | Описание                                                                                   |
+| ------------- | -------- | ------------------------------------------------------------------------------------------ |
+| `name`        | `string` | 1. Название ресурса, например, `a` <br /> 2. Название связанного объекта ресурса, например, `a.b` |
+| `resourceOf`  | `any`    | Когда `resource` является именем связанного объекта ресурса, это значение представляет собой первичный ключ ресурса. Например, для `a.b` это будет первичный ключ `a`. |
 
 ### sleep

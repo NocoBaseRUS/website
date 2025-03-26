@@ -1,12 +1,12 @@
 # REST API
 
-NocoBase 的 HTTP API 是 REST API 的超集，标准的 CRUD API 也支持 RESTful 风格。
+HTTP API NocoBase является надмножеством REST API, и стандартные CRUD API также поддерживают стиль RESTful.
 
-## Collection 资源
+## Collection Ресурс
 
 ---
 
-### 创建 collection
+### Создание collection
 
 HTTP API
 
@@ -24,7 +24,7 @@ POST  /api/<collection>
 {} # JSON body
 ```
 
-### 查看 collection 列表
+### Просмотр списка collection
 
 HTTP API
 
@@ -38,7 +38,7 @@ REST API
 GET   /api/<collection>
 ```
 
-### 查看 collection 详情
+### Просмотр подробной информации о collection
 
 HTTP API
 
@@ -53,7 +53,7 @@ REST API
 GET   /api/<collection>/<collectionIndex>
 ```
 
-### 更新 collection
+### Обновление collection
 
 HTTP API
 
@@ -76,7 +76,7 @@ PUT    /api/<collection>/<collectionIndex>
 {} # JSON body
 ```
 
-### 删除 collection
+### Удаление collection
 
 HTTP API
 
@@ -92,11 +92,11 @@ REST API
 DELETE    /api/<collection>/<collectionIndex>
 ```
 
-## Association 资源
+## Ресурс Association
 
 ---
 
-### 创建 Association
+### Создание Association
 
 HTTP API
 
@@ -114,7 +114,7 @@ POST    /api/<collection>/<collectionIndex>/<association>
 {} # JSON body
 ```
 
-### 查看 Association 列表
+### Просмотр списка Association
 
 HTTP API
 
@@ -128,7 +128,7 @@ REST API
 GET   /api/<collection>/<collectionIndex>/<association>
 ```
 
-### 查看 Association 详情
+### Просмотр подробной информации о Association
 
 HTTP API
 
@@ -144,7 +144,7 @@ REST API
 GET   /api/<collection>/<collectionIndex>/<association>:get/<associationIndex>
 ```
 
-### 更新 Association
+### Обновление Association
 
 HTTP API
 
@@ -167,7 +167,7 @@ PUT    /api/<collection>/<collectionIndex>/<association>:update/<associationInde
 {} # JSON 数据
 ```
 
-### 删除 Association
+### Удаление Association
 
 HTTP API
 

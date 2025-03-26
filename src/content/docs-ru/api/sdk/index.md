@@ -1,10 +1,10 @@
 # APIClient
 
-## 概览
+## Обзор
 
-`APIClient` 基于 <a href="https://axios-http.com/" target="_blank">`axios`</a> 封装，用于在客户端通过 HTTP， 请求 NocoBase 的资源操作。
+`APIClient` инкапсулирован на основе <a href="https://axios-http.com/" target="_blank">`axios`</a> и используется для выполнения HTTP-запросов к операциям ресурсов NocoBase на стороне клиента.
 
-### 基本使用
+### Основное использование
 
 ```ts
 class PluginSampleAPIClient extends Plugin {
@@ -16,31 +16,31 @@ class PluginSampleAPIClient extends Plugin {
 }
 ```
 
-## 实例属性
+## Свойства экземпляра
 
 ### `axios`
 
-`axios` 实例，可以访问 `axios` API, 比如 `apiClient.axios.interceptors`.
+Экземпляр `axios`, который предоставляет доступ к API `axios`, например, `apiClient.axios.interceptors`.
 
 ### `auth`
 
-客户端鉴权类，参考 [Auth](./auth.md).
+Класс авторизации клиента, см. [Auth](./auth.md).
 
 ### `storage`
 
 客户端存储类，参考 [Storage](./storage.md).
 
-## 类方法
+## Методы класса
 
 ### `constructor()`
 
-构造函数，创建一个 `APIClient` 实例。
+Конструктор, создающий экземпляр `APIClient`.
 
-#### 签名
+#### Сигнатура
 
 - `constructor(instance?: APIClientOptions)`
 
-#### 类型
+#### Типы
 
 ```ts
 interface ExtendedOptions {
@@ -55,13 +55,13 @@ export type APIClientOptions =
 
 ### `request()`
 
-发起 HTTP 请求。
+Инициирует HTTP-запрос.
 
-#### 签名
+#### Сигнатура
 
 - `request<T = any, R = AxiosResponse<T>, D = any>(config: AxiosRequestConfig<D> | ResourceActionOptions): Promise<R>`
 
-#### 类型
+#### Типы
 
 ```ts
 type ResourceActionOptions<P = any> = {
@@ -76,7 +76,7 @@ type ResourceActionOptions<P = any> = {
 
 ##### AxiosRequestConfig
 
-通用的 axios 请求参数。参考 <a href="https://axios-http.com/docs/req_config" target="_blank">Request Config</a>.
+Общие параметры запроса axios. См. <a href="https://axios-http.com/docs/req_config" target="_blank">Request Config</a>.
 
 ```ts
 const res = await apiClient.request({ url: '' });
@@ -84,7 +84,7 @@ const res = await apiClient.request({ url: '' });
 
 ##### ResourceActionOptions
 
-NocoBase 资源操作请求参数。
+Параметры запроса операций с ресурсами NocoBase.
 
 ```ts
 const res = await apiClient.request({
@@ -96,17 +96,17 @@ const res = await apiClient.request({
 });
 ```
 
-| 属性            | 类型     | 描述                                                                                 |
-| --------------- | -------- | ------------------------------------------------------------------------------------ |
-| `resource`      | `string` | 1. 资源名称，比如 `a`<br />2. 资源的关联对象名称，比如 `a.b`                         |
-| `resourceOf`    | `any`    | 当 `resource` 为资源的关联对象名称时，资源的主键值。比如 `a.b` 时，代表 `a` 的主键值 |
-| `action`        | `string` | 操作名称                                                                             |
-| `params`        | `any`    | 请求参数对象，主要是 URL 参数，请求体放到 `params.values` 中                         |
-| `params.values` | `any`    | 请求体对象                                                                           |
+| Свойство       | Тип      | Описание                                                                                             |
+| --------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `resource`      | `string` | 1. Имя ресурса, например, `a`<br />2. Имя связанного объекта ресурса, например, `a.b`                |
+| `resourceOf`    | `any`    | Когда `resource` является именем связанного объекта ресурса, это значение представляет собой первичный ключ ресурса. Например, для `a.b` это будет первичный ключ `a`. |
+| `action`        | `string` | Название операции                                                                                     |
+| `params`        | `any`    | Объект параметров запроса; основные параметры URL, тело запроса помещается в `params.values`          |
+| `params.values` | `any`    | Объект тела запроса                                                                                   |
 
 ### `resource()`
 
-获取 NocoBase 资源操作方法对象。
+Получение объекта методов операций с ресурсами NocoBase.
 
 ```ts
 const resource = apiClient.resource('users');
@@ -123,11 +123,11 @@ const res = await resource.list({
 });
 ```
 
-#### 签名
+#### Сигнатура
 
 - `resource(name: string, of?: any, headers?: AxiosRequestHeaders): IResource`
 
-#### 类型
+#### Типы
 
 ```ts
 export interface ActionParams {
@@ -142,10 +142,10 @@ export type IResource = {
 };
 ```
 
-#### 详细信息
+#### Подробная информация
 
-| 参数名    | 类型                  | 描述                                                                                 |
-| --------- | --------------------- | ------------------------------------------------------------------------------------ |
-| `name`    | `string`              | 1. 资源名称，比如 `a`<br />2. 资源的关联对象名称，比如 `a.b`                         |
-| `of`      | `any`                 | 当 `resource` 为资源的关联对象名称时，资源的主键值。比如 `a.b` 时，代表 `a` 的主键值 |
-| `headers` | `AxiosRequestHeaders` | 后续要发起资源操作请求时，携带的 HTTP 请求头                                         |
+| Имя параметра | Тип                  | Описание                                                                                             |
+| ------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
+| `name`        | `string`             | 1. Название ресурса, например, `a`<br />2. Имя связанного объекта ресурса, например, `a.b`           |
+| `of`          | `any`                | Когда `resource` является именем связанного объекта ресурса, это значение представляет собой первичный ключ ресурса. Например, для `a.b` это будет первичный ключ `a`. |
+| `headers`     | `AxiosRequestHeaders`| HTTP-заголовки, которые будут использоваться при последующих запросах операций с ресурсом.            |
