@@ -1,8 +1,8 @@
-# 页面路由及扩展
+# Маршрутизация страниц и расширения
 
-## 简介
+## Введение
 
-NocoBase 客户端通过 [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager) 和 [app.pluginSettingsManager.add()](https://client.docs.nocobase.com/core/application/plugin-settings-manager) 扩展页面，例如：
+Клиент NocoBase расширяет страницы через [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager) и [app.pluginSettingsManager.add()](https://client.docs.nocobase.com/core/application/plugin-settings-manager), например:
 
 ```tsx | pure
 import { Application, Plugin } from '@nocobase/client';
@@ -12,19 +12,19 @@ class PluginHello extends Plugin {
   async load() {
     this.router.add('hello', {
       path: '/',
-      Component: () => <div>Hello NocoBase</div>,
+      Component: () => <div>Привет, NocoBase!</div>,
     });
 
     this.app.pluginSettingsManager.add('hello', {
       title: 'Hello',
       icon: 'ApiOutlined',
-      Component: () => <div>Hello Setting page</div>,
+      Component: () => <div>Привет, страница настроек!</div>,
     });
   }
 }
 ```
 
-可以通过 `app.router.getRoutes()` 方法，查看所有已经注册的页面
+Можно использовать метод `app.router.getRoutes()`, чтобы просмотреть все зарегистрированные страницы.
 
 ```tsx | pure
 import { Application, Plugin } from '@nocobase/client';
@@ -37,16 +37,16 @@ class PluginHello extends Plugin {
 }
 ```
 
-## 已有页面路由
+## Существующие маршруты страниц
 
-初始安装的 NocoBase，已注册的页面路由有：
+После начальной установки NocoBase зарегистрированы следующие маршруты страниц:
 
-| 名称           | 路径               | 组件                | 说明 |
+| Название       | Путь               | Компонент           | Описание |
 | -------------- | ------------------ | ------------------- |---------|
-| admin          | /admin/\*          | AdminLayout         | 后台管理页面  |
-| admin.page     | /admin/:name       | AdminDynamicPage    | 动态创建的页面 |
-| admin.settings | /admin/settings/\* | AdminSettingsLayout | 插件配置页面  |
-| admin.pm.list  | /admin/pm/list/\* | PluginManager       | 插件管理页面  |
+| admin          | /admin/\*          | AdminLayout         | Страница администрирования  |
+| admin.page     | /admin/:name       | AdminDynamicPage    | Динамически создаваемые страницы |
+| admin.settings | /admin/settings/\* | AdminSettingsLayout | Страница настройки плагинов  |
+| admin.pm.list  | /admin/pm/list/\* | PluginManager       | Страница управления плагинами  |
 
 ### AdminLayout
 
@@ -66,7 +66,7 @@ router.add('admin.page', {
 });
 ```
 
-由菜单管理动态页面，通过添加菜单项 -> 页面添加
+Динамические страницы управляются через меню, добавляя пункт меню -> добавление страницы.
 
 ![](https://static-docs.nocobase.com/9204957c39f644cfbf23eef3cbdc7eca.png)
 
@@ -79,25 +79,25 @@ router.add('admin.settings', {
 });
 ```
 
-插件配置页
+Страница настройки плагинов
 
 ![](https://static-docs.nocobase.com/ea22826eba4fd38d68a5a52fd68e7719.png)
 
-插件配置页的菜单及标签页通过 `app.pluginSettingsManager` 注册。
+Меню и вкладки страницы настройки плагинов регистрируются через `app.pluginSettingsManager`.
 
-## 页面扩展
+## Расширение страниц
 
-- 动态 Schema 页面，通过 `添加菜单项` -> `页面` 添加
-- 常规页面通过 [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager) 添加
-- 插件设置页通过 [app.pluginSettingsManager.add()](https://client.docs.nocobase.com/core/application/plugin-settings-manager) 添加
+- Динамические страницы Schema добавляются через `добавление пункта меню` -> `страница`
+- Обычные страницы добавляются через [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager)
+- Страницы настроек плагинов добавляются через [app.pluginSettingsManager.add()](https://client.docs.nocobase.com/core/application/plugin-settings-manager)
 
-### 动态 Schema 页面
+### Динамические страницы Schema
 
-通过 `添加菜单项` -> `页面` 添加
+Добавляется через `добавление пункта меню` -> `страница`
 
-### 常规页面扩展
+### Расширение обычных страниц
 
-通过 [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager) 扩展页面路由
+Расширение маршрутов страниц осуществляется через [app.router.add()](https://client.docs.nocobase.com/core/application/router-manager)
 
 ```typescript
 import React from 'react';
@@ -161,15 +161,15 @@ const HelloSettingPage = () => <div>Hello Setting page</div>;
 export class HelloPlugin extends Plugin {
   async load() {
     this.app.pluginSettingsManager.add('hello', {
-      title: 'Hello', // 设置页面的标题和菜单名称
-      icon: 'ApiOutlined', // 设置页面菜单图标
+      title: 'Hello', // Установите заголовок и название меню для страницы настроек
+      icon: 'ApiOutlined', // Установить иконку для меню страницы
       Component: HelloSettingPage,
     });
   }
 }
 ```
 
-多级路由用法
+Использование многоуровневых маршрутов
 
 ```tsx | pure
 import { Outlet } from 'react-router-dom';
@@ -181,17 +181,17 @@ class HelloPlugin extends Plugin {
     this.app.pluginSettingsManager.add(pluginName, {
       title: 'HelloWorld',
       icon: '',
-      Component: Outlet, // 可以不传，默认为  `Outlet` 组件
+      Component: Outlet, // Можно не передавать, по умолчанию используется компонент `Outlet`
     });
 
     this.app.pluginSettingsManager.add(`${pluginName}.demo1`, {
       title: 'Demo1 Page',
-      Component: () => <div>Demo1 Page Content</div>,
+      Component: () => <div>Содержимое страницы Demo1</div>,
     });
 
     this.app.pluginSettingsManager.add(`${pluginName}.demo2`, {
       title: 'Demo2 Page',
-      Component: () => <div>Demo2 Page Content</div>,
+      Component: () => <div>Содержимое страницы Demo2</div>,
     });
   }
 }

@@ -23,7 +23,7 @@ const HomePage = () => {
 
 class PluginDemoAddSchemaInitializer extends Plugin {
   async load() {
-    // 注册全局组件
+    // Регистрация глобальных компонентов
     this.app.addComponents({ Grid, HomePage });
     const myInitializer = new SchemaInitializer({
       name: 'myInitializer',
@@ -54,7 +54,7 @@ class PluginDemoAddSchemaInitializer extends Plugin {
   }
 }
 
-// 快捷模拟一个 App
+// Быстрое создание макета приложения (App)
 const app = createApp({ plugins: [PluginDemoAddSchemaInitializer] });
 
 export default app.getRootComponent();

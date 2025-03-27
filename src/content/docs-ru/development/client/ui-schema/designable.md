@@ -352,7 +352,7 @@ class Designable {
 }
 ```
 
-示例查找满足条件的所有节点
+Пример поиска всех узлов, соответствующих условию.
 
 ```ts
 const items = dn.findProperties({
@@ -378,7 +378,7 @@ console.log(items.map((s) => schema.toJSON()));
 
 #### `findProperty`
 
-查找满足条件的第一个子节点
+Найти первый дочерний узел, соответствующий условию.
 
 ```ts
 interface FindOptions {
@@ -397,7 +397,7 @@ class Designable {
 }
 ```
 
-示例
+Пример
 
 ```ts
 const current = new Schema({
@@ -454,7 +454,7 @@ dn.shallowMerge({
 });
 ```
 
-### 删：删除当前节点或者某个子节点
+### Удаление: Удаление текущего узла или определенного дочернего узла
 
 ```ts
 const current = new Schema({
@@ -478,9 +478,9 @@ dn.remove({
 });
 ```
 
-### 移：节点间的移动
+### Перемещение: Перемещение между узлами
 
-insertAdjacent 等方法也可用于节点的拖拽移动
+Методы, такие как `insertAdjacent`, также могут быть использованы для перетаскивания и перемещения узлов.
 
 ```tsx
 import React from 'react';

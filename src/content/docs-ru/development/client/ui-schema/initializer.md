@@ -1,6 +1,6 @@
-# SchemaInitializer 初始化器
+# Инициализатор схемы (SchemaInitializer)
 
-当激活 UI 配置之后，界面上直观可见的各种橙色按钮就是 Schema 初始化器，用于向界面内添加各种区块、字段、操作等。
+После активации конфигурации пользовательского интерфейса (UI), различные видимые оранжевые кнопки на экране представляют собой инициализаторы схемы (Schema Initializer). Они используются для добавления различных блоков, полей, операций и других элементов в интерфейс.
 
 <img src="./image-5.png" style="width: 960px;">
 
@@ -8,16 +8,16 @@
 
 <img src="./image-3.png" style="width: 960px;"/>
 
-## 向已有的初始化器里添加项
+## Добавление элементов в существующий инициализатор
 
-推荐使用 [`schemaInitializerManager.addItem()`](#) 方法添加项，item 的详细配置参考 [SchemaInitializer Item API](#)
+Рекомендуется использовать метод [`schemaInitializerManager.addItem()`](#) для добавления элементов. Подробную конфигурацию элемента можно найти в [SchemaInitializer Item API](#).
 
 ```ts
 class PluginDemoAddSchemaInitializerItem extends Plugin {
   async load() {
     this.schemaInitializerManager.addItem(
-      'myInitializer', // 示例，已存在的 schema initializer
-      'otherBlocks.custom', // 向 otherBlocks 分组内添加 custom
+      'myInitializer', // Пример существующего инициализатора схемы (schema initializer):
+      'otherBlocks.custom', // Добавить **custom** в группу **otherBlocks**.
       {
         type: 'item',
         useComponentProps() {},
@@ -29,20 +29,20 @@ class PluginDemoAddSchemaInitializerItem extends Plugin {
 
 <code src="./demos/schema-initializer-manager-add-item/index.tsx"></code>
 
-## 添加新的初始化器
+## Добавление нового инициализатора
 
-SchemaInitializer 的详细参数参考 [SchemaInitializerOptions API](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer#new-schemainitializeroptions)
+Подробные параметры SchemaInitializer можно найти в [SchemaInitializerOptions API](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer#new-schemainitializeroptions).
 
 ```ts
 const myInitializer = new SchemaInitializer({
-  // 初始化器标识，全局唯一
+  // Идентификатор инициализатора, уникальный в глобальном масштабе.
   name: 'myInitializer',
   title: 'Add Block',
-  // 包装，例如插入到 Grid 里，需要用 Grid.wrap 处理（添加行列标签）
+  // Обертка, например, при вставке в Grid, необходимо обработать с помощью **Grid.wrap** (добавить теги строк и столбцов).
   wrap: Grid.wrap,
-  // 插入位置，默认为 beforeEnd，支持 'beforeBegin' | 'afterBegin' | 'beforeEnd' | 'afterEnd'
+  // Позиция вставки, по умолчанию **beforeEnd**, поддерживаются значения: `'beforeBegin' | 'afterBegin' | 'beforeEnd' | 'afterEnd'`.
   insertPosition: 'beforeEnd',
-  // 下拉菜单项
+  // Пункт выпадающего меню
   items: [
     {
       name: 'a',
@@ -53,9 +53,9 @@ const myInitializer = new SchemaInitializer({
 });
 ```
 
-### 在插件的 load 方法中注册
+### Регистрация в методе `load` плагина
 
-推荐使用 `schemaInitializerManager.add()` 将新增的初始化器添加到应用里
+Рекомендуется использовать `schemaInitializerManager.add()`, чтобы добавить новый инициализатор в приложение.
 
 ```ts
 class PluginDemoAddSchemaInitializer extends Plugin {
@@ -90,13 +90,13 @@ class PluginDemoAddSchemaInitializer extends Plugin {
 }
 ```
 
-### 如何使用新添加的初始化器
+### Как использовать недавно добавленный инициализатор
 
-SchemaInitializer 用于 Schema 的 `x-initializer` 参数中。
+SchemaInitializer используется в параметре `x-initializer` схемы (Schema).
 
-#### 现有支持 `x-initializer` 的 Schema 组件
+#### Общие компоненты Schema, поддерживающие `x-initializer`
 
-通用的支持 `x-initializer` 的 Schema 组件有 Grid、ActionBar、Tabs，例如：
+Компоненты Schema, которые поддерживают `x-initializer`: **Grid**, **ActionBar**, **Tabs**. Например:
 
 ```ts
 {
@@ -108,13 +108,13 @@ SchemaInitializer 用于 Schema 的 `x-initializer` 参数中。
 
 <code src="./demos/schema-initializer-manager-add/index.tsx"></code>
 
-#### 自定义组件如何支持 `x-initializer` 参数
+#### Как добавить поддержку параметра `x-initializer` в пользовательский компонент
 
-如果 Grid、ActionBar、Tabs 这类组件并不满足需求，自定义的组件中，也可以使用 [useSchemaInitializerRender()](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer#useschemainitializerrender) 处理 `x-initializer` 的渲染。
+Если такие компоненты, как **Grid**, **ActionBar**, **Tabs**, не удовлетворяют требованиям, в пользовательских компонентах также можно использовать [useSchemaInitializerRender()](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer#useschemainitializerrender) для обработки рендеринга параметра `x-initializer`.
 
 <code src="./demos/use-schema-initializer-render/index.tsx"></code>
 
-## API 参考
+## API Ссылки:
 
-- [SchemaInitializerManager](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer-manager)
+- [SchemaInitializerManager](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer-manager)  
 - [SchemaInitializer](https://client.docs-cn.nocobase.com/core/ui-schema/schema-initializer)

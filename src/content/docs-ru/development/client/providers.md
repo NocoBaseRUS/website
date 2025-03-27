@@ -1,30 +1,30 @@
-# Provider 组件
+# Компонент Provider
 
-在 NocoBase 客户端应用里，Provider 组件在外层定义，核心结构如下：
+В клиентском приложении NocoBase компоненты Provider определяются во внешнем слое, и основная структура выглядит следующим образом:
 
 ```tsx | pure
 <Router>
   {' '}
-  {/* 路由的 Context Provider */}
+  {/* Провайдер контекста маршрутизации */}
   <ProviderA>
     <ProviderB>
-      {/* 其他自定义 Provider 组件 - 开始标签 */}
+      {/* Другие пользовательские компоненты Provider - открывающий тег */}
       <Routes />
-      {/* 其他自定义 Provider 组件 - 结束标签 */}
+      {/* Другие пользовательские компоненты Provider - закрывающий тег */}
     </ProviderB>
   </ProviderA>
 </Router>
 ```
 
-因为定义在外层，所以 Provider 组件的用处有：
+Поскольку провайдеры определены во внешнем слое, их назначение включает:
 
-- 提供全局共享的上下文（Context），需要渲染 `props.children`
-- 提供全局内容展示，需要渲染 `props.children`
-- 拦截作用，根据条件渲染 `props.children`
+- Предоставление глобально общего контекста (Context), что требует рендеринга `props.children`
+- Отображение глобального содержимого, что также требует рендеринга `props.children`
+- Перехват логики, при котором `props.children` рендерится на основе условий
 
-## 提供全局共享的上下文
+## Предоставление глобально общего контекста
 
-使用 `createContext` 定义上下文，`useContext` 获取定义的上下文
+Используйте `createContext` для определения контекста и `useContext` для получения доступа к созданному контексту.
 
 ```tsx
 import { Plugin, Application } from '@nocobase/client';
@@ -35,7 +35,7 @@ const MyContext = createContext({ color: null });
 const HomePage = () => {
   // 读取 context 值
   const { color } = useContext(MyContext);
-  return <div>color is : {color}</div>;
+  return <div>Цвет: {color}</div>;
 };
 
 class PluginSampleProvider extends Plugin {
@@ -64,12 +64,12 @@ export default app.getRootComponent();
 ```tsx
 import { Plugin, Application } from '@nocobase/client';
 
-// 创建一个组件，注意对 children 的渲染
+// Создаем компонент, обращая внимание на рендеринг `children`
 const MyProvider = (props) => {
   const { children, name } = props;
   return (
     <div>
-      <div>全局内容展示 - {name}</div>
+      <div>Отображение глобального контента - {name}</div>
       {children}
     </div>
   );
@@ -81,7 +81,7 @@ class PluginSampleProvider extends Plugin {
 
     this.app.router.add('home', {
       path: '/',
-      Component: () => <div>Home page</div>,
+      Component: () => <div>Домашняя страница</div>,
     });
   }
 }
@@ -111,14 +111,14 @@ const MyProvider = (props) => {
   if (location.pathname === '/about') {
     return (
       <div>
-        内容被拦截了，返回 <Link to={'/'}>Home</Link>
+        Содержимое было перехвачено, возвращаемся. <Link to={'/'}>Главная страница</Link>
       </div>
     );
   }
   return (
     <div>
-      <div>Hello {name}</div>
-      <Link to={'/'}>Home</Link>, <Link to={'/about'}>About</Link>
+      <div>Привет {name}</div>
+      <Link to={'/'}>Главное</Link>, <Link to={'/about'}>О нас</Link>
       {children}
     </div>
   );
@@ -129,7 +129,7 @@ class PluginSampleProvider extends Plugin {
     this.app.addProvider(MyProvider);
     this.app.router.add('home', {
       path: '/',
-      Component: () => <div>Home page</div>,
+      Component: () => <div>Домашняя страница</div>,
     });
   }
 }

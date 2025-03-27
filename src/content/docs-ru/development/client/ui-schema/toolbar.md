@@ -1,61 +1,61 @@
-# SchemaToolbar 工具栏
+# Панель инструментов SchemaToolbar
 
-激活 UI 配置之后，鼠标移动到指定区块、字段、操作上方时，会显示对应的 Schema 的工具栏。
+После активации конфигурации пользовательского интерфейса (UI), при наведении курсора на определенный блок, поле или действие, отображается соответствующая панель инструментов Schema.
 
 ![Alt text](https://static-docs.nocobase.com/e6d327da8e85d6548529e1051d06c31a.png)
 
-工具栏的组成部分包括：
+Компоненты панели инструментов включают:
 
-- 标题，默认为空
-- 拖拽控件，用于提供拖拽能力，默认可拖拽
-- 初始化器，默认为空
-- 设置器，默认为空
+- Заголовок (по умолчанию пустой),
+- Элемент управления перетаскиванием для обеспечения возможности перетаскивания (по умолчанию доступен),
+- Инициализатор (по умолчанию пустой),
+- Настройщик (по умолчанию пустой).
 
 ```tsx | pure
 <SchemaToolbar
-  title="Title"
+  title="Заголовок"
   draggable
   initialize={'myInitializer'}
   settings={'mySettings'}
 />
 ```
 
-## 用法
+## Использование
 
-SchemaToolbar 组件用于 `x-toolbar` 中，如：
+Компонент `SchemaToolbar` используется в параметре `x-toolbar`, например:
 
 ```ts
-// 使用内置的 SchemaToolbar
+// Использование встроенного SchemaToolbar
 {
   'x-toolbar': 'SchemaToolbar',
   'x-toolbar-props': {},
 }
-// 自定义 SchemaToolbar
+// Пользовательский SchemaToolbar
 {
   'x-toolbar': 'MySchemaToolbar',
   'x-toolbar-props': {},
 }
 ```
 
-## 支持 `x-toolbar` 的 Schema 组件有
+## Компоненты Schema, поддерживающие `x-toolbar`
 
-- `BlockItem`（包装器组件，一般用在 `x-decorator` 中）
-- `CardItem`（包装器组件，一般用在 `x-decorator` 中）
-- `FormItem`（包装器组件，一般用在 `x-decorator` 中）
-- `Action`（操作按钮组件，用在 `x-component` 中）
+- `BlockItem` (обертывающий компонент, обычно используется в `x-decorator`),
+- `CardItem` (обертывающий компонент, обычно используется в `x-decorator`),
+- `FormItem` (обертывающий компонент, обычно используется в `x-decorator`),
+- `Action` (компонент кнопки действий, используется в `x-component`).
 
-如果 schema 的 `x-component` 或 `x-decorator` 使用了以上组件，又配置了 `x-settings`，`x-toolbar` 可以缺失，默认使用内置的 `SchemaToolbar` 渲染
+Если в схеме (schema) для параметров `x-component` или `x-decorator` используются вышеупомянутые компоненты и настроено значение `x-settings`, то параметр `x-toolbar` может быть пропущен. По умолчанию будет использоваться встроенный `SchemaToolbar` для рендеринга.
 
 <code src="./demos/schema-toolbar-basic/index.tsx"></code>
 
-也可以自定义工具栏组件
+Также можно создать пользовательскую панель инструментов.
 
 <code src="./demos/schema-toolbar-basic/custom.tsx"></code>
 
-用在 Grid 布局内，行列内的 schema 将继承 Grid 的 `x-initializer`
+Используется в сетке (Grid). Схемы внутри строк и столбцов будут наследовать `x-initializer` сетки.
 
 <code src="./demos/schema-toolbar-basic/grid.tsx"></code>
 
-## 为自定义组件支持 `x-toolbar`
+## Добавление поддержки `x-toolbar` для пользовательских компонентов
 
 <code src="./demos/schema-toolbar-basic/button.tsx"></code>

@@ -1,8 +1,8 @@
-# 测试
+# Тестирование
 
-## 单元测试
+## Модульное тестирование
 
-基于 [Vitest](https://vitest.dev/) 测试框架。
+На базе тестового фреймворка [Vitest](https://vitest.dev/).
 
 ```ts
 describe('my suite', () => {
@@ -14,9 +14,9 @@ describe('my suite', () => {
 });
 ```
 
-## E2E 测试
+## E2E тестирование
 
-基于 [Playwright](https://playwright.dev/) 测试框架。
+На базе тестового фреймворка [Playwright](https://playwright.dev/).
 
 ```ts
 import { expect, test } from '@nocobase/test/e2e';

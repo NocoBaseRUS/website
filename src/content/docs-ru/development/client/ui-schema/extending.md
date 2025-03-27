@@ -1,16 +1,16 @@
-# 扩展 Schema 组件
+# Расширение компонентов Schema
 
-除了原生的 html 标签，开发也可以适配更多的自定义组件，用于丰富 Schema 组件库。
+Помимо нативных HTML-тегов, разработчики могут адаптировать больше пользовательских компонентов для обогащения библиотеки компонентов Schema.
 
-扩展组件时，常用的方法：
+При расширении компонентов часто используются следующие методы:
 
-- [connect](https://react.formilyjs.org/api/shared/connect) 无侵入接入第三方组件，一般用于适配字段组件，和 [mapProps](https://react.formilyjs.org/api/shared/map-props)[、mapReadPretty](https://react.formilyjs.org/api/shared/map-read-pretty) 搭配使用；
-- [observer](https://react.formilyjs.org/api/shared/observer) 当组件内部使用了 observable 对象，而你希望组件响应 observable 对象的变化时；
-- [withDynamicSchemaProps](#) 用于无入侵实现动态 props。
+- [connect](https://react.formilyjs.org/api/shared/connect) — ненавязчивая интеграция сторонних компонентов, обычно используется для адаптации компонентов полей в сочетании с [mapProps](https://react.formilyjs.org/api/shared/map-props) и [mapReadPretty](https://react.formilyjs.org/api/shared/map-read-pretty);
+- [observer](https://react.formilyjs.org/api/shared/observer) — используется, когда внутри компонента используются observable-объекты, и вы хотите, чтобы компонент реагировал на изменения observable-объектов;
+- [withDynamicSchemaProps](#) — используется для реализации динамических props без вторжения.
 
-## 最简单的扩展
+## Самое простое расширение
 
-直接将现成的 React 组件注册进来。
+Просто зарегистрируйте готовый React-компонент.
 
 ```tsx
 /**
@@ -36,7 +36,7 @@ export default () => {
 };
 ```
 
-## 通过 connect 接入第三方组件
+## Подключение сторонних компонентов через `connect`
 
 ```tsx
 /**
@@ -88,7 +88,7 @@ export default () => {
 };
 ```
 
-## 使用 observer 响应数据
+## Использование `observer` для реакции на изменения данных
 
 ```tsx
 /**
@@ -147,25 +147,25 @@ export default () => {
 };
 ```
 
-## 使用 withDynamicSchemaProps 实现动态 props
+## Использование `withDynamicSchemaProps` для реализации динамических props
 
-## 嵌套的 Schema
+## Вложенные Schema
 
-- `props.children` 嵌套，适用于 void 和 object 类型的 properties，例子见 [void 和 object 类型 schema 的嵌套](#void-和-object-类型-schema-的嵌套)
-- `<RecursionField />` 自定义嵌套，所有类型都适用，例子见 [array 类型 schema 的嵌套](#array-类型-schema-的嵌套)
+- Вложение через `props.children`, применимо для типов `void` и `object`. Примеры см. в разделе [Вложение для схем типа void и object](#вложение-для-схем-типа-void-и-object).
+- `<RecursionField />` — пользовательское вложение, применимо для всех типов. Примеры см. в разделе [Вложение для схем типа array](#вложение-для-схем-типа-array).
 
-注意：
+Важно:
 
-- 除了 void 和 object 类型以外的 schema 的 `properties` 无法直接通过 `props.children` 渲染，但是可以使用 `<RecursionField />` 解决嵌套问题
-- 仅 void 和 object 类型的 schema 可以与 onlyRenderProperties 使用
+- Для схем, тип которых отличен от `void` и `object`, свойство `properties` не может быть отрендерено напрямую через `props.children`, но проблему вложенности можно решить с помощью `<RecursionField />`.
+- Только схемы типов `void` и `object` могут использоваться с `onlyRenderProperties`.
 
 ```tsx | pure
 <RecursionField schema={schema} onlyRenderProperties />
 ```
 
-### void 和 object 类型 schema 的嵌套
+### Вложение схем типа void и object
 
-直接通过 props.children 就可以适配 properties 节点了
+Свойство `properties` можно адаптировать напрямую через `props.children`.
 
 ```tsx
 /**
@@ -174,7 +174,7 @@ export default () => {
 import React from 'react';
 import { SchemaComponent, SchemaComponentProvider } from '@nocobase/client';
 
-// Hello 组件适配了 children，可以嵌套 properties 了
+// Компонент Hello адаптирован для `children`, теперь можно вкладывать `properties`.
 const Hello = (props) => <h1>Hello, {props.children}!</h1>;
 const World = () => <span>world</span>;
 
@@ -199,21 +199,21 @@ export default () => {
 };
 ```
 
-各类型 properties 渲染结果对比
+Сравнение результатов рендеринга для свойств различных типов
 
 ```tsx
 import React from 'react';
 import { SchemaComponent, SchemaComponentProvider } from '@nocobase/client';
 
-const Hello = (props) => <h1>Hello, {props.children}!</h1>;
-const World = () => <span>world</span>;
+const Hello = (props) => <h1>Привет, {props.children}!</h1>;
+const World = () => <span>мир</span>;
 
 const schema = {
   type: 'object',
   properties: {
     title1: {
       type: 'void',
-      'x-content': 'Void schema，渲染 properties',
+      'x-content': 'Схема типа **Void**, рендеринг свойств (**properties**).',
     },
     void: {
       type: 'void',
@@ -228,7 +228,7 @@ const schema = {
     },
     title2: {
       type: 'void',
-      'x-content': 'Object schema，渲染 properties',
+      'x-content': 'Схема типа **Object**, рендеринг свойств (**properties**).',
     },
     object: {
       type: 'object',
@@ -243,7 +243,7 @@ const schema = {
     },
     title3: {
       type: 'void',
-      'x-content': 'Array schema，不渲染 properties',
+      'x-content': 'Схема типа **Array**, свойства (**properties**) не рендерятся.',
     },
     array: {
       type: 'array',
@@ -258,7 +258,7 @@ const schema = {
     },
     title4: {
       type: 'void',
-      'x-content': 'String schema，不渲染 properties',
+      'x-content': 'Схема типа **String**, свойства (**properties**) не рендерятся.',
     },
     string: {
       type: 'string',
@@ -283,11 +283,11 @@ export default () => {
 };
 ```
 
-### array 类型 schema 的嵌套
+### Вложение схем типа array
 
-可以通过 `<RecursionField />` 解决自定义嵌套问题
+Проблему пользовательского вложения можно решить с помощью `<RecursionField />`.
 
-#### Array 元素是 string 或 number 时
+#### Когда элементы Array являются строками (string) или числами (number)
 
 ```tsx
 import React from 'react';
@@ -317,7 +317,7 @@ const ArrayList = observer(
     const schema = useValueSchema();
     return (
       <>
-        String Array
+        Массив строк
         <ul>
           {field.value?.map((item, index) => {
             // 只有一个元素
@@ -360,7 +360,7 @@ export default () => {
 };
 ```
 
-#### Array 元素是 Object 时
+#### Когда элементы Array являются объектами (Object)
 
 ```tsx
 import React from 'react';
@@ -378,7 +378,7 @@ const ArrayList = observer(
   (props) => {
     const field = useField();
     const schema = useFieldSchema();
-    // array 类型的 schema 无法 onlyRenderProperties，需要转化为 object 类型
+    // Схемы типа **array** не могут использовать **onlyRenderProperties**, их нужно преобразовать в тип **object**.
     const objSchema = new Schema({
       type: 'object',
       properties: schema.properties,
@@ -386,7 +386,7 @@ const ArrayList = observer(
     return (
       <ul>
         {field.value?.map((item, index) => {
-          // array 元素是 object
+          // Элементы массива являются объектами.
           return (
             <RecursionField
               name={index}
