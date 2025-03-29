@@ -1,26 +1,26 @@
 # Action API
 
-## Common
+## Общие
 
 ---
 
-Collection 和 Association 资源通用。
+Общие для ресурсов Collection и Association.
 
 ### `create`
 
 ```bash
 POST  /api/users:create?whitelist=a,b&blacklist=c,d
 
-{} # Request Body
+{} # Тело запроса (Request Body)
 ```
 
-- Parameters
-  - whitelist 白名单
-  - blacklist 黑名单
-- Request body: 待插入的 JSON 数据
-- Response body data: 已创建的数据 JSON
+- Параметры:
+  - whitelist: Белый список
+  - blacklist: Черный список
+- Тело запроса: JSON-данные для вставки
+- Тело ответа (data): Созданные данные в формате JSON
 
-#### 新增用户
+#### Создание пользователя
 
 ```bash
 POST  /api/users:create
@@ -37,7 +37,7 @@ Response 200 (application/json)
 }
 ```
 
-#### 新增用户文章
+#### Создание статьи пользователя
 
 ```bash
 POST  /api/users/1/posts:create
@@ -53,7 +53,7 @@ Response 200 (application/json)
 }
 ```
 
-#### Request Body 里的 association
+#### Поле association в теле запроса (Request Body)
 
 ```bash
 POST  /api/posts:create
@@ -82,17 +82,17 @@ Response 200 (application/json)
 ```bash
 POST  /api/users:create?filterByTk=1&whitelist=a,b&blacklist=c,d
 
-{} # Request Body
+{} # Тело запроса (Request Body)
 ```
 
-- Parameters
-  - whitelist 白名单
-  - blacklist 黑名单
-  - filterByTk 根据 tk 字段过滤，默认情况 tk 为数据表的主键
-  - filter 过滤，支持 json string
-- Request body: 待更新的 JSON 数据
+- Параметры:
+  - whitelist: Белый список
+  - blacklist: Черный список
+  - filterByTk: Фильтрация по полю tk, по умолчанию tk является первичным ключом таблицы данных
+  - filter: Фильтр, поддерживающий JSON-строку
+- Тело запроса: JSON-данные для обновления
 
-#### Request Body 里的 association
+#### Поле association в теле запроса (Request Body)
 
 ```bash
 POST  /api/posts:update/1

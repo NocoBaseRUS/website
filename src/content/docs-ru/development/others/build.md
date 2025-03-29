@@ -1,34 +1,34 @@
-# 构建
+# Сборка
 
-## 自定义打包配置
+## Настройка пользовательской конфигурации сборки
 
-如果你想要自定义打包配置，可以在插件根目录下创建 `build.config.ts` 文件，内容如下：
+Если вы хотите настроить конфигурацию сборки, вы можете создать файл `build.config.ts` в корневом каталоге плагина со следующим содержимым:
 
 ```js
 import { defineConfig } from '@nocobase/build';
 
 export default defineConfig({
   modifyViteConfig: (config) => {
-    // vite 是用来打包 `src/client` 端代码的
+    // vite используется для сборки клиентского кода из `src/client`
 
-    // 修改 Vite 配置，具体可参考：https://vitejs.dev/guide/
-    return config
+    // Измените конфигурацию Vite, подробнее можно узнать здесь: https://vitejs.dev/guide/
+    return config;
   },
   modifyTsupConfig: (config) => {
-    // tsup 是用来打包 `src/server` 端代码的
+    // tsup используется для сборки серверного кода из `src/server`
 
-    // 修改 tsup 配置，具体可参考：https://tsup.egoist.dev/#using-custom-configuration
-    return config
+    // Измените конфигурацию tsup, подробнее можно узнать здесь: https://tsup.egoist.dev/#using-custom-configuration
+    return config;
   },
   beforeBuild: (log) => {
-    // 构建开始前的回调函数，可以在构建开始前做一些操作
+    // Функция обратного вызова перед началом сборки, можно выполнять некоторые операции перед началом сборки
   },
   afterBuild: (log: PkgLog) => {
-    // 构建完成后的回调函数，可以在构建完成后做一些操作
-  };
+    // Функция обратного вызова после завершения сборки, можно выполнять некоторые операции после завершения сборки
+  },
 });
 ```
 
-## 插件示例
+## Пример плагина
 
 - [@nocobase/plugin-sample-custom-build](#)

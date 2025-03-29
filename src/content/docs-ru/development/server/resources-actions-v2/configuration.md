@@ -1,14 +1,14 @@
-# 配置资源和操作
+# Настройка ресурсов и операций
 
-最简单的 resource actions
-带默认参数的 Action
-使用全局 Action
-Action 参数的多来源合并
-内置 Actions 的用法
+Самые простые действия с ресурсами (resource actions):
+- Действия с параметрами по умолчанию
+- Использование глобальных действий
+- Слияние параметров действий из разных источников
+- Использование встроенных действий
 
-在 NocoBase 中，resource 是为 collection 服务的，已配置的 collections（包括 associations） 会自动转为相应的 resources。
+В NocoBase resource служит для работы с collection. Настроенные collections (включая связи, associations) автоматически преобразуются в соответствующие resources.
 
-## 自动转换
+## Автоматическое преобразование
 
 ```ts
 export class PluginSampleToResourcesServer extends Plugin {
@@ -30,9 +30,9 @@ export class PluginSampleToResourcesServer extends Plugin {
 }
 ```
 
-以上示例的 `posts` 和 `posts.comments` 的接口如下：
+Интерфейсы для `posts` и `posts.comments` в вышеуказанном примере выглядят следующим образом:
 
-posts 资源
+Ресурс posts
 
 ```bash
 POST  /api/posts:create
@@ -42,7 +42,7 @@ POST  /api/posts:update/1
 POST  /api/posts:destroy/1
 ```
 
-posts.comments 资源
+Ресурс posts.comments
 
 ```bash
 POST  /api/posts/1/comments:create
@@ -52,33 +52,33 @@ POST  /api/posts/1/comments:update/1
 POST  /api/posts/1/comments:destroy/1
 ```
 
-NocoBase 的 HTTP API 是 REST API 的超集，标准的 CRUD API 也支持 RESTful 风格。
+HTTP API в NocoBase является надмножеством REST API, и стандартные CRUD API также поддерживают стиль RESTful.
 
-## 内置的操作
+## Встроенные операции
 
-上面 collection 转为 resource 之后，之所以可以直接进行 CRUD 操作了，是因为内置了一些常用的操作
+После преобразования collection в resource становится возможным выполнение операций CRUD, так как некоторые часто используемые операции уже встроены.
 
-内置的全局操作，可用于 collection 或 association
+Встроенные глобальные операции, которые могут использоваться для collection или association:
 
-- create
-- get
-- list
-- update
-- destroy
-- move
+- create (создать)
+- get (получить)
+- list (список)
+- update (обновить)
+- destroy (удалить)
+- move (переместить)
 
-内置的关联操作，仅用于 association
+Встроенные операции ассоциации, применимые только к association:
 
-- set
-- add
-- remove
-- toggle
+- set (установить)
+- add (добавить)
+- remove (удалить)
+- toggle (переключить)
 
-内置 Actions 的用法参考 API 文档
+Использование встроенных Actions можно найти в документации API.
 
-## 自定义操作
+## Пользовательские операции
 
-### 全局操作
+### Глобальные операции
 
 ```ts
 export class PluginSampleResourcerServer extends Plugin {
@@ -91,7 +91,7 @@ export class PluginSampleResourcerServer extends Plugin {
 }
 ```
 
-### 某资源的操作
+### Операции для определенного ресурса
 
 ```ts
 export class PluginSampleResourcerServer extends Plugin {
@@ -103,9 +103,9 @@ export class PluginSampleResourcerServer extends Plugin {
 }
 ```
 
-## 自定义资源
+## Пользовательские ресурсы
 
-如果有特殊需求，也可以显式的定义资源及相关操作
+Если есть особые требования, ресурсы и связанные с ними операции также могут быть явно определены.
 
 ```ts
 app.resourcer.define({

@@ -1,12 +1,12 @@
-# Collection 协议
+# Протокол Collection
 
-Collection 是 NocoBase 的中枢，是一种用于描述数据结构（数据表和字段）的协议，和关系型数据库的概念非常接近，但不仅限于关系型数据库，也可以是 NoSQL 数据库、HTTP API 等数据源。
+Collection является центральным элементом NocoBase — это протокол, используемый для описания структуры данных (таблиц и полей). Он очень близок к концепциям реляционных баз данных, но не ограничивается только ими. Collection может работать с NoSQL базами данных, HTTP API и другими источниками данных.
 
 <img src="./schema.svg" style="max-width: 800px;" >
 
-现阶段基于 Collection 协议实现了关系型数据库的对接（db.collections），NoSQL 数据库、HTTP API 等数据源在未来也会逐步实现。
+На данный момент на основе протокола Collection реализована интеграция с реляционными базами данных (db.collections). В будущем планируется постепенная поддержка NoSQL баз данных, HTTP API и других источников данных.
 
-Collection 协议主要包括 CollectionOptions 和 FieldOptions 两部分，因为 Field 是可扩展的，所以 FieldOptions 的参数非常灵活。
+Протокол Collection включает в себя две основные части: CollectionOptions и FieldOptions. Поскольку поля (Field) являются расширяемыми, параметры FieldOptions отличаются высокой гибкостью.
 
 ## CollectionOptions
 
@@ -14,13 +14,13 @@ Collection 协议主要包括 CollectionOptions 和 FieldOptions 两部分，因
 interface CollectionOptions {
   name: string;
   title?: string;
-  // 树结构表，TreeRepository
+  // Таблица древовидной структуры, TreeRepository
   tree?:
     | 'adjacency-list'
     | 'closure-table'
     | 'materialized-path'
     | 'nested-set';
-  // 父子继承
+  // Наследование родительско-дочерних отношений
   inherits?: string | string[];
   fields?: FieldOptions[];
   timestamps?: boolean;
@@ -39,7 +39,7 @@ type CollectionSortable =
 
 ## FieldOptions
 
-通用的字段参数
+Общие параметры полей
 
 ```ts
 interface FieldOptions {
@@ -51,11 +51,11 @@ interface FieldOptions {
   uiSchema?: ISchema;
 ```
 
-[UI Schema 的介绍点此查看](/development/client/ui-schema-designer/what-is-ui-schema)
+[Описание UI Schema смотрите здесь](/development/client/ui-schema-designer/what-is-ui-schema)
 
 ### Field Type
 
-Field Type 包括 Attribute Type 和 Association Type 两类：
+Field Type включает два типа: Attribute Type и Association Type:
 
 **Attribute Type**
 

@@ -1,23 +1,23 @@
-# 核心概念
+# Основные концепции
 
 ## Collection
 
-Collection 是所有种类数据的集合，中文翻译为「数据表」，如订单、商品、用户、评论等都是 Collection。不同 Collection 通过 name 区分，如：
+Collection — это набор всех видов данных, который на китайский переводится как «таблица данных». Примеры: заказы, товары, пользователи, комментарии — всё это является Collection. Различные Collection различаются по имени (name), например:
 
 ```ts
-// 订单
+// Заказы
 {
   name: 'orders',
 }
-// 商品
+// Товары
 {
   name: 'products',
 }
-// 用户
+// Пользователи
 {
   name: 'users',
 }
-// 评论
+// Комментарии
 {
   name: 'comments',
 }
@@ -25,40 +25,40 @@ Collection 是所有种类数据的集合，中文翻译为「数据表」，如
 
 ## Collection Field
 
-每个 Collection 都有若干 Fields。
+У каждой Collection имеется несколько Fields (полей).
 
 ```ts
-// Collection 配置
+// Конфигурация Collection
 {
   name: 'users',
   fields: [
     { type: 'string', name: 'name' },
     { type: 'integer', name: 'age' },
-    // 其他字段
+    // другие поля
   ],
 }
-// 示例数据
+// Пример данных
 [
   {
-    name: '张三',
+    name: 'Андрей',
     age: 20,
   },
   {
-    name: '李四',
+    name: 'Михаил',
     age: 18,
   }
 ];
 ```
 
-在 NocoBase 中 Collection Field 的构成包括：
+В NocoBase состав Collection Field включает в себя:
 
 <img src="./collection-field.svg" />
 
 ### Field Type
 
-不同字段通过 name 区分，type 表示字段的数据类型，分为 Attribute Type 和 Association Type，如：
+Различные поля различаются по имени (name), а type указывает тип данных поля. Типы делятся на Attribute Type и Association Type, например:
 
-**属性 - Attribute Type**
+**Атрибуты - Attribute Type**
 
 - string
 - text
@@ -72,7 +72,7 @@ Collection 是所有种类数据的集合，中文翻译为「数据表」，如
 - virtual
 - ...
 
-**关系 - Association Type**
+**Связи - Association Type**
 
 - hasOne
 - hasMany
@@ -82,10 +82,10 @@ Collection 是所有种类数据的集合，中文翻译为「数据表」，如
 
 ### Field Component
 
-字段有了数据类型，字段值的 IO 没问题了，但是还不够，如果需要将字段展示在界面上，还需要另一个维度的配置 —— `uiSchema`，如：
+У поля есть тип данных, и ввод/вывод значений поля работает корректно, но этого недостаточно. Если необходимо отобразить поле на интерфейсе, требуется дополнительная конфигурация другого уровня — `uiSchema`, например:
 
 ```tsx | pure
-// 邮箱字段，用 Input 组件展示，使用 email 校验规则
+// Поле для email, отображается компонентом Input, использует правило валидации email
 {
   type: 'string',
   name: 'email',
@@ -93,31 +93,31 @@ Collection 是所有种类数据的集合，中文翻译为「数据表」，如
     'x-component': 'Input',
     'x-component-props': { size: 'large' },
     'x-validator': 'email',
-    'x-pattern': 'editable', // 可编辑状态，还有 readonly 不可编辑状态、read-pretty 阅读态
+    'x-pattern': 'editable', // Редактируемое состояние, также есть состояние readonly (только для чтения) и read-pretty (красивое представление для чтения)
   },
 }
 
-// 数据示例
+// Пример данных
 {
   email: 'admin@nocobase.com',
 }
 
-// 组件示例
+// Пример компонента
 <Input name={'email'} size={'large'} value={'admin@nocobase.com'} />
 ```
 
-uiSchema 用于配置字段展示在界面上的组件，每个字段组件都会对应一个 value，包括几个维护的配置：
+uiSchema используется для настройки компонента, отображающего поле на интерфейсе. Каждый компонент поля соответствует определенному значению (value) и включает несколько конфигураций:
 
-- 字段的组件
-- 组件的参数
-- 字段的校验规则
-- 字段的模式（editable、readonly、read-pretty）
-- 字段的默认值
-- 其他
+- Компонент поля
+- Параметры компонента
+- Правила валидации поля
+- Режим поля (editable, readonly, read-pretty)
+- Значение по умолчанию для поля
+- Другие параметры
 
-[更多信息查看 UI Schema 章节](/development/client/ui-schema-designer/what-is-ui-schema)。
+[Подробнее о UI Schema смотрите в соответствующем разделе](/development/client/ui-schema-designer/what-is-ui-schema).
 
-NocoBase 内置的字段组件有：
+В NocoBase встроены следующие компоненты полей:
 
 - Input
 - InputNumber
@@ -128,10 +128,10 @@ NocoBase 内置的字段组件有：
 
 ### Field Interface
 
-有了 Field Type 和 Field Component 就可以自由组合出若干字段，我们将这种组合之后的模板称之为 Field Interface，如：
+Имея Field Type и Field Component, можно создавать различные комбинации полей. Такую комбинированную конфигурацию мы называем Field Interface, например:
 
 ```ts
-// 邮箱字段 string + input，email 校验规则
+// Поле для email: string + input, правило валидации email
 {
   type: 'string',
   name: 'email',
@@ -142,7 +142,7 @@ NocoBase 内置的字段组件有：
   },
 }
 
-// 手机字段 string + input，phone 校验规则
+// Поле для телефона: string + input, правило валидации phone
 {
   type: 'string',
   name: 'phone',
@@ -154,10 +154,10 @@ NocoBase 内置的字段组件有：
 }
 ```
 
-上面 email 和 phone 每次都需要配置完整的 uiSchema 非常繁琐，为了简化配置，又引申出另一个概念 Field interface，可以将一些参数模板化，如：
+Приведённые выше примеры с email и phone требуют каждый раз настраивать полную uiSchema, что довольно утомительно. Чтобы упростить процесс конфигурации, появляется ещё одно понятие — Field interface, которое позволяет шаблонизировать некоторые параметры. Например:
 
 ```ts
-// email 字段的模板
+// Шаблон для поля email
 interface email {
   type: 'string';
   uiSchema: {
@@ -167,7 +167,7 @@ interface email {
   };
 }
 
-// phone 字段的模板
+// Шаблон для поля phone
 interface phone {
   type: 'string';
   uiSchema: {
@@ -177,7 +177,7 @@ interface phone {
   };
 }
 
-// 简化之后的字段配置
+// Упрощённая конфигурация поля
 // email
 {
   interface: 'email',
@@ -191,4 +191,4 @@ interface phone {
 }
 ```
 
-[更多 Field Interface 点此查看](https://github.com/nocobase/nocobase/tree/main/packages/core/client/src/collection-manager/interfaces)
+[Подробнее о Field Interface смотрите здесь](https://github.com/nocobase/nocobase/tree/main/packages/core/client/src/collection-manager/interfaces)

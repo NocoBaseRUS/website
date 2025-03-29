@@ -1,6 +1,6 @@
-# 关系字段配置
+# Конфигурация полей отношений
 
-在关系数据库里，标准的建表关系的方式是添加一个外键字段，然后再加一个外键约束。例如 Knex 建表的例子：
+В реляционных базах данных стандартный способ создания таблиц с отношениями заключается в добавлении внешнего ключа и затем наложения ограничения внешнего ключа. Например, пример создания таблицы с помощью Knex:
 
 ```ts
 knex.schema.table('posts', function (table) {
@@ -9,7 +9,7 @@ knex.schema.table('posts', function (table) {
 });
 ```
 
-这个过程会在 posts 表里创建一个 userId 字段，并且设置上外键约束 posts.userId 引用 users.id。而在 NocoBase 的 Collection 中，是通过配置关系字段来建立上这样一种关系约束，如：
+Этот процесс создаст в таблице posts поле userId, и наложит внешний ключ с ограничением, где posts.userId ссылается на users.id. В NocoBase в коллекции (Collection) такая связь и ограничение создаются путем конфигурации поля отношений, например:
 
 ```ts
 {
@@ -25,7 +25,7 @@ knex.schema.table('posts', function (table) {
 }
 ```
 
-## 关系参数说明
+## Описание параметров отношений
 
 ### BelongsTo
 
@@ -33,15 +33,15 @@ knex.schema.table('posts', function (table) {
 interface BelongsTo {
   type: 'belongsTo';
   name: string;
-  // 默认值为 name 复数
+  // Значение по умолчанию — множественное число от name
   target?: string;
-  // 默认值为 target model 的主键，一般为 'id'
+  // Значение по умолчанию — первичный ключ целевой модели (target model), обычно 'id'
   targetKey?: any;
-  // 默认值为 target + 'Id'
+  // Значение по умолчанию — target + 'Id'
   foreignKey?: any;
 }
 
-// authors 表主键 id 和 books 表外键 authorId 相连
+// Первичный ключ id таблицы authors связан с внешним ключом authorId таблицы books
 {
   name:  'books',
   fields: [
@@ -49,8 +49,8 @@ interface BelongsTo {
       type: 'belongsTo',
       name: 'author',
       target: 'authors',
-      targetKey: 'id',         // authors 表主键
-      foreignKey: 'authorId',  // 外键在 books 表
+      targetKey: 'id',         // Первичный ключ таблицы authors
+      foreignKey: 'authorId',  // Внешний ключ находится в таблице books
     }
   ],
 }
@@ -62,15 +62,15 @@ interface BelongsTo {
 interface HasOne {
   type: 'hasOne';
   name: string;
-  // 默认值为 name 复数
+  // Значение по умолчанию — множественное число от name
   target?: string;
-  // 默认值为 source model 的主键，一般为 'id'
+  // Значение по умолчанию — первичный ключ исходной модели (source model), обычно 'id'
   sourceKey?: string;
-  // 默认值为 source collection name 的单数形态 + 'Id'
+  // Значение по умолчанию — единственное число от имени source collection + 'Id'
   foreignKey?: string;
 }
 
-// users 表主键 id 和 profiles 外键 userId 相连
+// Первичный ключ id таблицы users связан с внешним ключом userId таблицы profiles
 {
   name:  'users',
   fields: [
@@ -78,8 +78,8 @@ interface HasOne {
       type: 'hasOne',
       name: 'profile',
       target: 'profiles',
-      sourceKey: 'id',      // users 表主键
-      foreignKey: 'userId', // 外键在 profiles 表
+      sourceKey: 'id',      // Первичный ключ таблицы users
+      foreignKey: 'userId', // Внешний ключ находится в таблице profiles
     }
   ],
 }
@@ -91,15 +91,15 @@ interface HasOne {
 interface HasMany {
   type: 'hasMany';
   name: string;
-  // 默认值为 name
+  // Значение по умолчанию — name
   target?: string;
-  // 默认值为 source model 的主键，一般为 'id'
+  // Значение по умолчанию — первичный ключ исходной модели (source model), обычно 'id'
   sourceKey?: string;
-  // 默认值为 source collection name 的单数形态 + 'Id'
+  // Значение по умолчанию — единственное число от имени source collection + 'Id'
   foreignKey?: string;
 }
 
-// posts 表主键 id 和 comments 表 postId 相连
+// Первичный ключ id таблицы posts связан с полем postId таблицы comments
 {
   name:  'posts',
   fields: [
@@ -107,8 +107,8 @@ interface HasMany {
       type: 'hasMany',
       name: 'comments',
       target: 'comments',
-      sourceKey: 'id',          // posts 表主键
-      foreignKey: 'postId',     // 外键在 comments 表
+      sourceKey: 'id',          // Первичный ключ таблицы posts
+      foreignKey: 'postId',     // Внешний ключ в таблице comments
     }
   ],
 }
@@ -120,21 +120,21 @@ interface HasMany {
 interface BelongsToMany {
   type: 'belongsToMany';
   name: string;
-  // 默认值为 name
+  // Значение по умолчанию - name
   target?: string;
-  // 默认值为 source collection name 和 target 的首字母自然顺序拼接的字符串
+  // Значение по умолчанию - строка, составленная из имён source collection name и target в естественном алфавитном порядке
   through?: string;
-  //默认值为 source collection name 的单数形态 + 'Id'
+  // Значение по умолчанию - единственная форма source collection name + 'Id'
   foreignKey?: string;
-  // 默认值为 source model 的主键，一般为 id
+  // Значение по умолчанию - первичный ключ source model, обычно id
   sourceKey?: string;
-  //默认值为 target 的单数形态 + 'Id'
+  // Значение по умолчанию - единственная форма target + 'Id'
   otherKey?: string;
-  // 默认值为 target model 的主键，一般为 id
+  // Значение по умолчанию - первичный ключ target model, обычно id
   targetKey?: string;
 }
 
-// tags 表主键、posts 表主键和 posts_tags 两个外键相连
+// Первичный ключ таблицы tags, первичный ключ таблицы posts и два внешних ключа таблицы posts_tags связаны
 {
   name: 'posts',
   fields: [
@@ -142,11 +142,11 @@ interface BelongsToMany {
       type: 'belongsToMany',
       name: 'tags',
       target: 'tags',
-      through: 'posts_tags', // 中间表
-      foreignKey: 'tagId',   // 外键1，在 posts_tags 表里
-      otherKey: 'postId',    // 外键2，在 posts_tags 表里
-      targetKey: 'id',       // tags 表主键
-      sourceKey: 'id',       // posts 表主键
+      through: 'posts_tags', // Промежуточная таблица
+      foreignKey: 'tagId',   // Внешний ключ 1, в таблице posts_tags
+      otherKey: 'postId',    // Внешний ключ 2, в таблице posts_tags
+      targetKey: 'id',       // Первичный ключ таблицы tags
+      sourceKey: 'id',       // Первичный ключ таблицы posts
     }
   ],
 }

@@ -1,24 +1,24 @@
-# 如何配置数据表？
+# Как настроить таблицы данных?
 
-NocoBase 有三种方式配置数据表：
+В NocoBase есть три способа настройки таблиц данных:
 
 <img src="./cm.svg" style="max-width: 800px;" />
 
-## 通过界面配置数据表
+## Настройка таблиц данных через интерфейс
 
-业务数据一般建议使用界面配置，NocoBase 平台提供了两种界面配置数据表
+Для бизнес-данных рекомендуется использовать конфигурацию через интерфейс. Платформа NocoBase предоставляет два варианта настройки таблиц данных через интерфейс.
 
-### 常规的表格界面
+### Стандартный табличный интерфейс
 
 <img src="./table.jpg" style="max-width: 800px;" />
 
-### 图形化配置界面
+### Графический интерфейс настройки
 
 <img src="./graph.jpg" style="max-width: 800px;" />
 
-## 在插件代码里定义
+## Определение в коде плагина
 
-在插件里，自定义的数据表必须放在插件的 `src/server/collections/*.ts` 目录下，内容如下：
+В плагине пользовательские таблицы данных должны находиться в директории `src/server/collections/*.ts` плагина со следующим содержанием:
 
 ```ts
 import { defineCollection } from '@nocobase/database';
@@ -28,7 +28,7 @@ export default defineCollection({
 });
 ```
 
-扩展已有 collection 的配置，使用 `extendCollection()`
+Для расширения конфигурации существующего collection используется `extendCollection()`
 
 ```ts
 import { extendCollection } from '@nocobase/database';
@@ -38,20 +38,20 @@ export default extendCollection({
 });
 ```
 
-相关 API 参考
+Ссылки на соответствующие API:
 
 - [defineCollection()](/api/database#definecollection)
 - [extendCollection()](/api/database#extendcollection)
 
-:::info{title="提示"}
-在插件里配置的 collection，插件激活时自动与数据库同步，生成相对应的数据表和字段。如果插件已经激活，需要通过升级命令 `yarn nocobase upgrade` 来处理数据表的同步问题。
+:::info{title="Примечание"}
+Collections, настроенные в плагине, автоматически синхронизируются с базой данных при активации плагина, создавая соответствующие таблицы и поля. Если плагин уже активирован, для синхронизации таблиц необходимо использовать команду обновления `yarn nocobase upgrade`.
 :::
 
-## 通过 REST API 管理数据表
+## Управление таблицами данных через REST API
 
-第三方还可以通过 HTTP 接口管理数据表（需要开放权限）
+Третьи стороны также могут управлять таблицами данных через HTTP-интерфейс (требуется открытие прав доступа).
 
-### Collections
+### Коллекции (Collections)
 
 ```bash
 GET     /api/collections
@@ -61,7 +61,7 @@ PUT     /api/collections/<collectionName>
 DELETE  /api/collections/<collectionName>
 ```
 
-### Collection fields
+### Поля коллекции (Collection fields)
 
 ```bash
 GET     /api/collections/<collectionName>/fields

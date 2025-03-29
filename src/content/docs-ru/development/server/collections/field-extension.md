@@ -1,12 +1,12 @@
-# 字段扩展
+# Расширение полей
 
-在 NocoBase 中 Collection Field 的构成包括：
+В NocoBase структура Collection Field включает в себя:
 
 <img src="./collection-field.svg" />
 
-## Field Type 扩展
+## Расширение типов полей (Field Type)
 
-例如扩展密码类型字段 `type: 'password'`
+Например, расширение поля типа пароль `type: 'password'`
 
 ```ts
 export class MyPlugin extends Plugin {
@@ -24,16 +24,16 @@ export class PasswordField extends Field {
 }
 ```
 
-- [更多内置 field types 的实现点此查看](https://github.com/nocobase/nocobase/tree/main/packages/core/database/src/fields)
-- 也可以查看完整的 samples 插件 [packages/samples/shop-modeling](https://github.com/nocobase/nocobase/tree/main/packages/samples/shop-modeling)
+- [Посмотреть больше реализаций встроенных типов полей можно здесь](https://github.com/nocobase/nocobase/tree/main/packages/core/database/src/fields)
+- Также можно посмотреть полный пример плагина [packages/samples/shop-modeling](https://github.com/nocobase/nocobase/tree/main/packages/samples/shop-modeling)
 
-## Field Component 扩展
+## Расширение компонентов полей (Field Component)
 
-相关扩展文档查看：
+Дополнительная документация по расширениям:
 
-- [扩展 Schema 组件](/development/client/ui-schema-designer/extending-schema-components)
-- [Schema 组件库](/development/client/ui-schema-designer/component-library)
+- [Расширение компонентов схемы](/development/client/ui-schema-designer/extending-schema-components)
+- [Библиотека компонентов схемы](/development/client/ui-schema-designer/component-library)
 
-## Field Interface 扩展
+## Расширение интерфейса полей (Field Interface)
 
-- [内置 field interfaces 点此查看](https://github.com/nocobase/nocobase/tree/main/packages/core/client/src/collection-manager/interfaces)
+- [Посмотреть встроенные интерфейсы полей можно здесь](https://github.com/nocobase/nocobase/tree/main/packages/core/client/src/collection-manager/interfaces)
