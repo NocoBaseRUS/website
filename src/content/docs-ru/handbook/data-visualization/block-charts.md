@@ -1,4 +1,3 @@
-# 图表区块
+# Блок диаграмм
 
 <PluginInfo name="data-visualization"></PluginInfo>
-

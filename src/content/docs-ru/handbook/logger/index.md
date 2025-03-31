@@ -1,20 +1,20 @@
-# 日志
+# Логи
 
-## 介绍
+## Введение
 
-日志是帮助我们定位系统问题的重要手段。NocoBase 的服务端日志主要包括接口请求日志和系统运行日志，支持日志级别、滚动策略、大小、打印格式等配置。本篇文档主要介绍 NocoBase 服务端日志的相关内容，以及如何使用日志插件提供的服务端日志打包和下载的功能。
+Логи являются важным инструментом для выявления проблем в системе. Логи на стороне сервера NocoBase включают журналы запросов к API и логи работы системы. Поддерживаются такие настройки, как уровень логирования, стратегия ротации, размер файлов и формат вывода. В этом документе описываются основные аспекты логирования на стороне сервера NocoBase, а также функции, предоставляемые плагином логов, такие как упаковка и скачивание серверных логов.
 
-## 日志配置
+## Настройка логов
 
-可以通过 [环境变量](../../welcome/getting-started/env.md#logger_transport) 配置日志级别、输出方式、打印格式等的日志相关参数。
+Параметры, связанные с логами, такие как уровень логирования, способ вывода и формат, можно настроить через [переменные окружения](../../welcome/getting-started/env.md#logger_transport).
 
-## 日志格式
+## Форматы логов
 
-NocoBase 支持配置4种不同的日志格式。
+NocoBase поддерживает 4 различных формата логов.
 
 ### `console`
 
-开发环境默认格式，消息以高亮颜色显示。
+Формат по умолчанию для среды разработки, сообщения отображаются с цветовым выделением.
 
 ```
 2023-12-30 22:40:06 [info ] response                                     method=GET path=/api/uiSchemas:getJsonSchema/nocobase-admin-menu res={"status":200} action={"actionName":"getJsonSchema","resourceName":"uiSchemas","params":{"filterByTk":"nocobase-admin-menu","resourceName":"uiSchemas","resourceIndex":"nocobase-admin-menu","actionName":"getJsonSchema"}} userId=1 status=200 cost=5 app=main reqId=ccf4e3bd-beb0-4350-af6e-b1fc1d9b6c3f
@@ -24,7 +24,7 @@ NocoBase 支持配置4种不同的日志格式。
 
 ### `json`
 
-生产环境默认格式。
+Формат по умолчанию для производственной среды.
 
 ```json
 {
@@ -58,91 +58,91 @@ userId=undefined status=200 cost=14
 
 ### `delimiter`
 
-分隔符 `|` 分割。
+Разделитель `|` используется для разделения.
 
 ```
 info|2023-12-26 22:07:09|13cd16f0-1568-418d-ac37-6771ee650e14|response|POST|/api/authenticators:publicList|{"status":200}|{"actionName":"publicList","resourceName":"authenticators","params":{"resourceName":"authenticators","actionName":"publicList"}}||200|25
 ```
 
-## 日志目录
+## Каталог логов
 
-NocoBase 日志文件的主要目录结构为：
+Основная структура каталогов файлов логов NocoBase:
 
-- `storage/logs` - 日志输出目录
-  - `main` - 主应用名称
-    - `request_YYYY-MM-DD.log` - 请求日志
-    - `system_YYYY-MM-DD.log` - 系统日志
-    - `system_error_YYYY-MM-DD.log` - 系统错误日志
-    - `sql_YYYY-MM-DD.log` - SQL 执行日志
+- `storage/logs` - Директория вывода логов
+  - `main` - Имя основного приложения
+    - `request_YYYY-MM-DD.log` - Логи запросов
+    - `system_YYYY-MM-DD.log` - Системные логи
+    - `system_error_YYYY-MM-DD.log` - Логи системных ошибок
+    - `sql_YYYY-MM-DD.log` - Логи выполнения SQL
     - ...
-  - `sub-app` - 子应用名称
+  - `sub-app` - Имя подприложения
     - `request_YYYY-MM-DD.log`
     - ...
 
-## 日志文件
+## Файлы логов
 
-### 请求日志
+### Логи запросов
 
-`request_YYYY-MM-DD.log`, 接口请求和响应日志。
+`request_YYYY-MM-DD.log`, логи запросов и ответов API.
 
-| 字段          | 说明                               |
-| ------------- | ---------------------------------- |
-| `level`       | 日志级别                           |
-| `timestamp`   | 日志打印时间 `YYYY-MM-DD hh:mm:ss` |
-| `message`     | `request` 或 `response`            |
-| `userId`      | `response` 中才有                  |
-| `method`      | 请求方法                           |
-| `path`        | 请求路径                           |
-| `req` / `res` | 请求/响应内容                      |
-| `action`      | 请求资源和参数                     |
-| `status`      | 响应状态码                         |
-| `cost`        | 请求耗时                           |
-| `app`         | 当前应用名称                       |
-| `reqId`       | 请求 ID                            |
+| Поле          | Описание                               |
+| ------------- | -------------------------------------- |
+| `level`       | Уровень логирования                    |
+| `timestamp`   | Время записи лога `YYYY-MM-DD hh:mm:ss` |
+| `message`     | `request` или `response`               |
+| `userId`      | Присутствует только в `response`        |
+| `method`      | Метод запроса                          |
+| `path`        | Путь запроса                           |
+| `req` / `res` | Содержимое запроса/ответа               |
+| `action`      | Запрашиваемый ресурс и параметры        |
+| `status`      | Код состояния ответа                    |
+| `cost`        | Время выполнения запроса                |
+| `app`         | Имя текущего приложения                 |
+| `reqId`       | ID запроса                             |
 
-:::info{title=提示}
-`reqId` 会通过 `X-Request-Id` 响应头携带给前端。
+:::info{title=Примечание}
+`reqId` передается на фронтэнд через заголовок ответа `X-Request-Id`.
 :::
 
-### 系统日志
+### Системные логи
 
-`system_YYYY-MM-DD.log`, 应用、中间件、插件等系统运行日志，`error` 级别日志会单独打印到 `system_error_YYYY-MM-DD.log`
+`system_YYYY-MM-DD.log`, логи работы системы, включая приложение, middleware и плагины. Логи уровня `error` дополнительно выводятся в файл `system_error_YYYY-MM-DD.log`.
 
-| 字段        | 说明                               |
-| ----------- | ---------------------------------- |
-| `level`     | 日志级别                           |
-| `timestamp` | 日志打印时间 `YYYY-MM-DD hh:mm:ss` |
-| `message`   | 日志消息                           |
-| `module`    | 模块                               |
-| `submodule` | 子模块                             |
-| `method`    | 调用方法                           |
-| `meta`      | 其他相关信息, JSON 格式            |
-| `app`       | 当前应用名称                       |
-| `reqId`     | 请求 ID                            |
+| Поле        | Описание                               |
+| ----------- | -------------------------------------- |
+| `level`     | Уровень логирования                    |
+| `timestamp` | Время записи лога `YYYY-MM-DD hh:mm:ss` |
+| `message`   | Сообщение лога                         |
+| `module`    | Модуль                                 |
+| `submodule` | Подмодуль                              |
+| `method`    | Вызываемый метод                       |
+| `meta`      | Дополнительная информация (в формате JSON) |
+| `app`       | Имя текущего приложения                 |
+| `reqId`     | ID запроса                             |
 
-### SQL 执行日志
+### Логи выполнения SQL
 
-`sql_YYYY-MM-DD.log`, 数据库 SQL 执行日志。其中 `INSERT INTO` 语句仅保留前 2000 个字符。
+`sql_YYYY-MM-DD.log`, логи выполнения SQL-запросов к базе данных. Для операторов `INSERT INTO` сохраняются только первые 2000 символов.
 
-| 字段        | 说明                               |
-| ----------- | ---------------------------------- |
-| `level`     | 日志级别                           |
-| `timestamp` | 日志打印时间 `YYYY-MM-DD hh:mm:ss` |
-| `sql`       | SQL 语句                           |
-| `app`       | 当前应用名称                       |
-| `reqId`     | 请求 ID                            |
+| Поле        | Описание                               |
+| ----------- | -------------------------------------- |
+| `level`     | Уровень логирования                    |
+| `timestamp` | Время записи лога `YYYY-MM-DD hh:mm:ss` |
+| `sql`       | SQL-запрос                             |
+| `app`       | Имя текущего приложения                 |
+| `reqId`     | ID запроса                             |
 
-## 日志打包下载
+## Скачивание архива логов
 
 <PluginInfo name="logger"></PluginInfo>
 
-1. 进入日志管理页面。
-2. 选择想要下载的日志文件。
-3. 点击下载 (Download) 按钮。
+1. Перейдите на страницу управления логами.
+2. Выберите файлы логов, которые хотите скачать.
+3. Нажмите кнопку "Скачать" (Download).
 
 ![2024-04-10_10-50-50](https://static-docs.nocobase.com/2024-04-10_10-50-50.png)
 
-## 相关文档
+## Связанные документы
 
-- [插件开发 - 服务端 - 日志](../../development/server/logger)
-- [API参考 - @nocobase/logger](../../api/logger)
+- [Разработка плагинов - Серверная часть - Логи](../../development/server/logger)
+- [Справочник API - @nocobase/logger](../../api/logger)

@@ -1,9 +1,9 @@
-# 导入 Pro
+# Импорт Pro
 
 <PluginInfo commercial="true" name="action-import-pro"></PluginInfo>
 
-## 介绍
+## Введение
 
 :::warning
-插件正在开发中。
+Плагин находится в разработке.
 :::

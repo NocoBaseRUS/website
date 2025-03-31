@@ -1,32 +1,32 @@
-# 认证：CAS
+# Аутентификация: CAS
 
-## 介绍
+## Введение
 
-认证：CAS 插件遵循 CAS (Central Authentication Service) 协议标准，实现用户使用第三方身份认证服务商 (IdP) 提供的账号登录NocoBase.
+Плагин "Аутентификация: CAS" соответствует стандарту протокола CAS (Central Authentication Service) и позволяет пользователям входить в NocoBase с использованием учетных данных, предоставленных сторонним поставщиком услуг аутентификации (IdP).
 
-## 安装
+## Установка
 
-## 使用手册
+## Руководство пользователя
 
-### 激活插件
+### Активация плагина
 
 ![](https://static-docs.nocobase.com/469c48d9f2e8d41a088092c34ddb41f5.png)
 
-### 添加 CAS 认证
+### Добавление аутентификации CAS
 
-访问用户认证管理页面
+Перейдите на страницу управления аутентификацией пользователей:
 
 http://localhost:13000/admin/settings/auth/authenticators
 
-添加 CAS 认证方式
+Добавьте метод аутентификации CAS:
 
 ![](https://static-docs.nocobase.com/a268500c5008d3b90e57ff1e2ea41aca.png)
 
-配置 CAS 并激活
+Настройте CAS и активируйте его:
 
 ![](https://static-docs.nocobase.com/2518b3fcc80d8a41391f3b629a510a02.png)
 
-### 访问登录页
+### Переход на страницу входа
 
 http://localhost:13000/signin
 

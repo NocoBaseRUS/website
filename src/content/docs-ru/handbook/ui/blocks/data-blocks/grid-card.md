@@ -1,80 +1,80 @@
-# 网格卡片
+# Карточки сетки
 
-## 介绍
+## Введение
 
-网格卡片区块以卡片形式展示数据记录的摘要信息，支持根据不同屏幕尺寸配置列数，以确保在不同尺寸的设备上友好显示。
+Блок карточек сетки отображает сводную информацию о записях данных в виде карточек. Он поддерживает настройку количества столбцов в зависимости от размера экрана, чтобы обеспечить удобное отображение на устройствах с различными размерами.
 
-### 添加区块
+### Добавление блока
 
 <video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240418120045.mp4" type="video/mp4">
 </video>
 
-## 区块配置项
+## Параметры конфигурации блока
 
 ![20240419220708](https://static-docs.nocobase.com/20240419220708.png)
 
-### 数据范围
+### Диапазон данных
 
 <video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240419173617.mp4" type="video/mp4">
 </video>
 
-更多内容参考 [设置数据范围](/handbook/ui/blocks/block-settings/data-scope)
+Более подробная информация доступна в разделе [Настройка диапазона данных](/handbook/ui/blocks/block-settings/data-scope).
 
-### 设置一行展示的列数
+### Настройка количества столбцов в одной строке
 
 ![20240408160228](https://static-docs.nocobase.com/20240408160228.png)
 
-支持为不同屏幕尺寸配置列数。
+Поддерживается настройка количества столбцов для разных размеров экрана.
 
 ![20240408160844](https://static-docs.nocobase.com/20240408160844.png)
 
-### 设置数据加载方式
+### Настройка способа загрузки данных
 
-示例：连接数据区块+设置数据加载方式。
+Пример: подключение блока данных + настройка способа загрузки данных.
 
-订单表和商品表是多对多的关系，订单表格区块和商品网格卡片区块实现数据筛选联动，同时设置网格区块数据加载方式为“筛选数据后”。
+Между таблицей заказов и таблицей товаров существует отношение «многие-ко-многим». Блок таблицы заказов и блок карточек сетки товаров реализуют взаимодействие фильтрации данных. Одновременно настраивается способ загрузки данных для блока карточек сетки как «После фильтрации данных».
 
 <video width="100%" height="440" controls>
 <source src="https://static-docs.nocobase.com/20240419175643.mp4" type="video/mp4">
 </video>
 
-- [设置排序规则](/handbook/ui/blocks/block-settings/sorting-rule)
-- [保存为区块模板](/handbook/ui/blocks/block-settings/block-template)
+- [Настройка правил сортировки](/handbook/ui/blocks/block-settings/sorting-rule)
+- [Сохранение как шаблон блока](/handbook/ui/blocks/block-settings/block-template)
 
-## 配置字段
+## Настройка полей
 
-### 本表字段
+### Поля текущей таблицы
 
 ![20240418123118](https://static-docs.nocobase.com/20240418123118.png)
 
-### 关系表字段
+### Поля связанных таблиц
 
 ![20240418123147](https://static-docs.nocobase.com/20240418123147.png)
 
-网格卡片区块字段配置项可参考 [详情字段](/handbook/ui/fields/generic/detail-form-item)
+Параметры настройки полей блока карточек сетки можно найти в разделе [Поля деталей](/handbook/ui/fields/generic/detail-form-item).
 
-## 配置操作
+## Настройка операций
 
-### 全局操作
+### Глобальные операции
 
 ![20240418122905](https://static-docs.nocobase.com/20240418122905.png)
 
-- [筛选](/handbook/ui/actions/types/filter)
-- [添加](/handbook/ui/actions/types/add-new)
-- [删除](/handbook/ui/actions/types/delete)
-- [刷新](/handbook/ui/actions/types/refresh)
-- [导入](/handbook/action-import)
-- [导出](/handbook/action-export)
+- [Фильтрация](/handbook/ui/actions/types/filter)
+- [Добавление](/handbook/ui/actions/types/add-new)
+- [Удаление](/handbook/ui/actions/types/delete)
+- [Обновление](/handbook/ui/actions/types/refresh)
+- [Импорт](/handbook/action-import)
+- [Экспорт](/handbook/action-export)
 
-### 行操作
+### Операции со строками
 
 ![20240419222251](https://static-docs.nocobase.com/20240419222251.png)
 
-- [编辑](/handbook/ui/actions/types/edit)
-- [删除](/handbook/ui/actions/types/delete)
-- [弹窗](/handbook/ui/actions/types/pop-up)
-- [更新记录](/handbook/ui/actions/types/update-record)
-- [自定义请求](/handbook/action-custom-request)
-- [触发工作流](/handbook/workflow/manual/triggers/custom-action)
+- [Редактирование](/handbook/ui/actions/types/edit)
+- [Удаление](/handbook/ui/actions/types/delete)
+- [Всплывающее окно](/handbook/ui/actions/types/pop-up)
+- [Обновление записи](/handbook/ui/actions/types/update-record)
+- [Пользовательский запрос](/handbook/action-custom-request)
+- [Запуск рабочего процесса](/handbook/workflow/manual/triggers/custom-action)

@@ -1,53 +1,53 @@
-# 认证：LDAP
+# Аутентификация: LDAP
 
-## 介绍
+## Введение
 
-认证：LDAP 插件遵循 LDAP (Lightweight Directory Access Protocol) 协议标准，实现用户使用 LDAP 服务器的账号密码登录NocoBase。
+Плагин "Аутентификация: LDAP" соответствует стандарту протокола LDAP (Lightweight Directory Access Protocol) и позволяет пользователям входить в NocoBase с использованием учетных данных аккаунта с сервера LDAP.
 
-## 激活插件
+## Активация плагина
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101600789.png"/>
 
-## 添加 LDAP 认证
+## Добавление аутентификации LDAP
 
-进入用户认证插件管理页面。
+Перейдите на страницу управления плагином аутентификации пользователей.
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101601510.png"/>
 
-添加 - LDAP
+Добавьте - LDAP
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101602104.png"/>
 
-## 配置
+## Настройка
 
-### 基础配置
+### Базовая конфигурация
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101605728.png"/>
 
-- Sign up automatically when the user does not exist - 当找不到可匹配绑定的已有用户时，是否自动创建新用户。
-- LDAP URL - LDAP 服务器地址
-- Bind DN - 用于测试服务器连通性和搜索用户的 DN
-- Bind password - Bind DN 的密码
-- Test connection - 点击按钮测试服务器连通性和 Bind DN 有效性。
+- Sign up automatically when the user does not exist - Автоматическое создание нового пользователя, если не удается найти существующего пользователя для привязки.
+- LDAP URL - Адрес сервера LDAP.
+- Bind DN - DN, используемый для тестирования подключения к серверу и поиска пользователей.
+- Bind password - Пароль для Bind DN.
+- Test connection - Нажмите кнопку для тестирования подключения к серверу и проверки работоспособности Bind DN.
 
-### 搜索配置
+### Настройки поиска
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101609984.png"/>
 
-- Search DN - 用于搜索用户的 DN
-- Search filter - 搜索用户的过滤条件，用 `{{account}}` 表示登录时使用的用户账号
-- Scope - `Base`, `One level`, `Subtree`, 默认 `Subtree`
-- Size limit - 搜索分页大小
+- Search DN - DN, используемый для поиска пользователей.
+- Search filter - Условие фильтрации для поиска пользователей, где `{{account}}` обозначает учетную запись пользователя, используемую при входе.
+- Scope - Область поиска: `Base`, `One level`, `Subtree`. По умолчанию `Subtree`.
+- Size limit - Размер страницы для результатов поиска.
 
-### 属性映射
+### Сопоставление атрибутов
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101612814.png"/>
 
-- Use this field to bind the user - 用于绑定已有用户的字段。如果登录账号是用户名，选择用户名，如果是邮箱则选择邮箱。默认用户名。
-- Attribute map - 用户属性和 NocoBase 用户表的字段映射。
+- Use this field to bind the user - Поле, используемое для привязки существующих пользователей. Если для входа используется имя пользователя, выберите имя пользователя; если используется электронная почта, выберите электронную почту. По умолчанию используется имя пользователя.
+- Attribute map - Сопоставление атрибутов пользователя с полями таблицы пользователей NocoBase.
 
-## 登录
+## Вход в систему
 
-访问登录页面，在登录表单中输入 LDAP 用户名密码登录。
+Перейдите на страницу входа и введите имя пользователя и пароль LDAP в форме входа для авторизации.
 
 <img src="https://nocobase-docs.oss-cn-beijing.aliyuncs.com/202405101614300.png"/>

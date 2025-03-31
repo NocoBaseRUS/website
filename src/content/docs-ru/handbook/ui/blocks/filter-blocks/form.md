@@ -1,49 +1,49 @@
-# 表单筛选区块
+# Блок фильтрации формы
 
-## 介绍
+## Введение
 
-表单筛选区块需要连接数据区块使用，为数据区块提供筛选能力。
+Блок фильтрации формы используется совместно с блоком данных и предоставляет возможность фильтрации для блока данных.
 
-## 添加区块
+## Добавление блока
 
-  <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240426172722.mp4" type="video/mp4">
-    </video>
+</video>
 
-## 区块配置项
+## Параметры конфигурации блока
 
 ![20240421172115](https://static-docs.nocobase.com/20240421172115.png)
 
-### 连接数据区块
+### Подключение блока данных
 
-表单筛选区块连接详情数据区块实现联动。
+Блок фильтрации формы подключается к блоку деталей данных для реализации взаимодействия.
 
-  <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240421170947.mp4" type="video/mp4">
-    </video>
+</video>
 
-更多内容参考 [连接数据区块](/handbook/ui/blocks/block-settings/connect-block)
+Более подробная информация доступна в разделе [Подключение блока данных](/handbook/ui/blocks/block-settings/connect-block).
 
-- [编辑区块标题](/handbook/ui/blocks/block-settings/block-title)
-- [联动规则](/handbook/ui/blocks/block-settings/linkage-rule)
-- [保存为区块模板](/handbook/ui/blocks/block-settings/block-template)
+- [Редактирование заголовка блока](/handbook/ui/blocks/block-settings/block-title)
+- [Правила взаимодействия](/handbook/ui/blocks/block-settings/linkage-rule)
+- [Сохранение как шаблон блока](/handbook/ui/blocks/block-settings/block-template)
 
-## 配置字段
+## Настройка полей
 
-### 本表字段
+### Поля текущей таблицы
 
 ![20240421171135](https://static-docs.nocobase.com/20240421171135.png)
 
-### 关系表字段
+### Поля связанных таблиц
 
-支持以关系表的字段为筛选条件
+Поддерживается использование полей связанных таблиц в качестве условий фильтрации.
 
-示例：订单表有多对一关系字段「客户」，以客户名称和手机号为筛选条件筛选订单
+Пример: в таблице заказов есть поле отношения «многие-к-одному» для «клиентов». Фильтрация заказов выполняется по имени клиента и номеру телефона.
 
 <video width="100%" height="440" controls>
 <source src="https://static-docs.nocobase.com/20240421171437.mp4" type="video/mp4">
 </video>
 
-## 配置操作
+## Настройка операций
 
-![筛选操作](https://static-docs.nocobase.com/20240421171839.png)
+![Операция фильтрации](https://static-docs.nocobase.com/20240421171839.png)

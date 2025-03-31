@@ -1,23 +1,23 @@
-# 日志
+# Логи
 
-NocoBase 日志基于 <a href="https://github.com/winstonjs/winston" target="_blank">Winston</a> 封装。默认情况下，NocoBase 将日志分为接口请求日志、系统运行日志和 SQL 执行日志，其中接口请求日志和 SQL 执行日志由应用内部打印，插件开发者通常只需要打印插件相关的系统运行日志。
+Логи NocoBase основаны на библиотеке <a href="https://github.com/winstonjs/winston" target="_blank">Winston</a>. По умолчанию NocoBase разделяет логи на журнал запросов API, системные логи и логи выполнения SQL-запросов, где журналы запросов API и логи SQL генерируются внутри приложения. Разработчикам плагинов обычно нужно только регистрировать логи, связанные с работой их плагинов.
 
-本文档主要介绍在开发插件的时候，如何创建和打印日志。日志的更多介绍可以参考：[日志插件](../../plugins/logger/index.md)。
+В этом документе основное внимание уделяется тому, как создавать и выводить логи при разработке плагинов. Дополнительную информацию о логах можно найти здесь: [Плагин логирования](../../plugins/logger/index.md).
 
-## 默认打印方法
+## Методы вывода логов по умолчанию
 
-NocoBase 提供了系统运行日志的打印方法，日志按照规定字段打印，同时输出到指定文件。 参考：[日志插件 - 系统日志](../../plugins/logger/index.md#系统日志)。
+NocoBase предоставляет методы для записи системных логов, которые регистрируются в соответствии с определенными полями и одновременно выводятся в указанный файл. Подробнее: [Плагин логирования - Системные логи](../../plugins/logger/index.md#системные-логи).
 
 ```ts
-// 默认打印方法
+// Метод вывода логов по умолчанию
 app.log.info("message");
 
-// 在中间件中使用
+// Использование в middleware
 async function (ctx, next) {
   ctx.log.info("message");
 }
 
-// 在插件中使用
+// Использование в плагине
 class CustomPlugin extends Plugin {
   async load() {
     this.log.info("message");
@@ -25,9 +25,9 @@ class CustomPlugin extends Plugin {
 }
 ```
 
-以上方法都遵循下面的用法：
+Все вышеперечисленные методы следуют следующему формату использования:
 
-第一个参数为日志消息，第二个参数为可选 metadata 对象，可以是任意键值对，其中 `module`, `submodule`, `method` 会被提取为单独字段，其余字段则放到 `meta` 字段中。
+Первый параметр — это сообщение лога, второй параметр — необязательный объект `metadata`, который может содержать любые пары ключ-значение. При этом поля `module`, `submodule` и `method` будут извлечены как отдельные поля, а остальные поля попадут в поле `meta`.
 
 ```ts
 app.log.info('message', {
@@ -44,9 +44,9 @@ app.log.warn();
 app.log.error();
 ```
 
-## 输出到其他文件
+## Вывод в другие файлы
 
-如果想沿用系统默认的打印方法，但是不想输出到默认的文件中，可以使用 `createSystemLogger` 创建一个自定义的系统日志实例。
+Если вы хотите использовать системный метод вывода логов по умолчанию, но не хотите записывать их в стандартный файл, можно создать собственный экземпляр системного логгера с помощью `createSystemLogger`.
 
 ```ts
 import { createSystemLogger } from '@nocobase/logger';
@@ -54,13 +54,13 @@ import { createSystemLogger } from '@nocobase/logger';
 const logger = createSystemLogger({
   dirname: '/pathto/',
   filename: 'xxx',
-  seperateError: true, // 是否将 error 级别日志单独输出到 'xxx_error.log'
+  seperateError: true, // Определяет, будут ли логи уровня error отдельно выводиться в файл 'xxx_error.log'
 });
 ```
 
-## 自定义日志
+## Пользовательские логи
 
-如果不想使用系统提供的打印方法，想使用 Winston 原生的方法，可以通过以下方法创建日志。
+Если вы не хотите использовать методы вывода, предоставляемые системой, и предпочитаете использовать нативные методы Winston, можно создать логи следующим способом.
 
 ### `createLogger`
 
@@ -68,35 +68,35 @@ const logger = createSystemLogger({
 import { createLogger } from '@nocobase/logger';
 
 const logger = createLogger({
-  // options
+  // параметры (options)
 });
 ```
 
-`options` 在原来 `winston.LoggerOptions` 的基础上进行了扩展。
+`options` расширяет базовые параметры `winston.LoggerOptions`.
 
-- `transports` - 可以使用 `'console' | 'file' | 'dailyRotateFile'` 应用预置的输出方式。
-- `format` - 可以使用 `'logfmt' | 'json' | 'delimiter'` 应用预置的打印格式。
+- `transports` — можно использовать `'console' | 'file' | 'dailyRotateFile'` для применения предустановленных методов вывода.
+- `format` — можно использовать `'logfmt' | 'json' | 'delimiter'` для применения предустановленных форматов вывода.
 
 ### `app.createLogger`
 
-在多应用的场景下，有时候我们希望自定义的输出目录和文件，可以输出到当前应用名称的目录下。参考：[日志插件 - 日志目录](../../plugins/logger/index.md#日志目录)。
+В сценариях с несколькими приложениями иногда требуется настроить пользовательские каталоги и файлы для вывода данных в папку с именем текущего приложения. Подробнее: [Плагин логирования - Каталог логов](../../plugins/logger/index.md#каталог-логов).
 
 ```ts
 app.createLogger({
   dirname: '',
-  filename: 'custom', // 输出到 /storage/logs/main/custom.log
+  filename: 'custom', // Вывод в /storage/logs/main/custom.log
 });
 ```
 
 ### `plugin.createLogger`
 
-使用场景和用法同 `app.createLogger`.
+Сценарии использования и способ применения аналогичны `app.createLogger`.
 
 ```ts
 class CustomPlugin extends Plugin {
   async load() {
     const logger = this.createLogger({
-      // 输出到 /storage/logs/main/custom-plugin/YYYY-MM-DD.log
+      // Вывод в /storage/logs/main/custom-plugin/YYYY-MM-DD.log
       dirname: 'custom-plugin',
       filename: '%DATE%.log',
       transports: ['dailyRotateFile'],
@@ -105,7 +105,7 @@ class CustomPlugin extends Plugin {
 }
 ```
 
-## 相关文档
+## Связанные документы
 
-- [日志插件](../../plugins/logger/index.md)
-- [API参考](../../api/logger.md)
+- [Плагин логирования](../../plugins/logger/index.md)
+- [Справочник API](../../api/logger.md)

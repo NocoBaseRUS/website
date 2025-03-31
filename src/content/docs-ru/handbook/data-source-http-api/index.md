@@ -1,11 +1,11 @@
-# HTTP API 数据源
+# Источник данных HTTP API
 
 <PluginInfo commercial="true" name="data-source-http-api"></PluginInfo>
 
-## 介绍
+## Введение
 
-用于接入 HTTP API 来源的数据。
+Используется для подключения данных из источников HTTP API.
 
 :::warning
-插件正在开发中，敬请期待。
+Плагин находится в разработке, следите за обновлениями.
 :::

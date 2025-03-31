@@ -1,31 +1,31 @@
-# 批量编辑表单字段#
+# Пакетное редактирование полей формы
 
-## 介绍
+## Введение
 
-批量编辑表单是批量编辑操作特有的表单区块。
+Форма пакетного редактирования — это специальный блок формы, предназначенный для операций пакетного редактирования.
 
 ![20240425100652](https://static-docs.nocobase.com/20240425100652.png)
 
 ![20240422151115](https://static-docs.nocobase.com/20240422151115.png)
 
-## 配置字段
+## Настройка полей
 
-仅支持配置本表字段，字段更新逻辑有三种。
+Поддерживается только настройка полей текущей таблицы. Логика обновления полей имеет три варианта:
 
-- 不更新：提交后字段保持原值；
-- 修改为：字段为必填；
-- 清空：提交后清空字段的值；
+- **Не обновлять**: после отправки значение поля остается неизменным;
+- **Изменить на**: поле является обязательным;
+- **Очистить**: после отправки значение поля очищается.
 
 ![20240425100730](https://static-docs.nocobase.com/20240425100730.png)
 
-关系字段可以切换字段组件灵活使用。
+Поля отношений могут использовать различные компоненты полей для гибкости.
 
 ![20240425100857](https://static-docs.nocobase.com/20240425100857.png)
 
-## 字段配置项
+## Параметры конфигурации полей
 
-- [编辑字段标题](/handbook/ui/fields/field-settings/edit-title)
-- [显示标题](/handbook/ui/fields/field-settings/display-title)
-- [编辑字段描述](/handbook/ui/fields/field-settings/edit-description)
-- [编辑字段提示信息](/handbook/ui/fields/field-settings/edit-tooltip)
-- [设置验证规则](/handbook/ui/fields/field-settings/validation-rules)
+- [Редактирование заголовка поля](/handbook/ui/fields/field-settings/edit-title)
+- [Отображение заголовка](/handbook/ui/fields/field-settings/display-title)
+- [Редактирование описания поля](/handbook/ui/fields/field-settings/edit-description)
+- [Редактирование подсказки поля](/handbook/ui/fields/field-settings/edit-tooltip)
+- [Настройка правил валидации](/handbook/ui/fields/field-settings/validation-rules)

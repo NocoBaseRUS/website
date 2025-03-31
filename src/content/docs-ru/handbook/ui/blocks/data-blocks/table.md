@@ -1,92 +1,91 @@
-# 表格区块
+# Блок таблицы
 
-## 介绍
+## Введение
 
-表格区块是 NocoBase 内置的核心数据区块之一，以表格形式展示和管理结构化数据。它具备灵活的配置选项，可定制表格列、列宽、排序规则、数据范围等，同时内置了多种操作供配置：筛选、新建、复制、编辑、删除等。
-## 添加区块
+Блок таблицы является одним из ключевых встроенных блоков данных NocoBase и используется для отображения и управления структурированными данными в табличной форме. Он обладает гибкими настройками, такими как настройка столбцов таблицы, их ширины, правил сортировки, диапазона данных и других параметров. Также он имеет встроенный набор операций, таких как фильтрация, создание, копирование, редактирование и удаление.
 
- <video width="100%" height="440" controls>
+## Добавление блока
+
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240415215027.mp4" type="video/mp4">
 </video>
 
-## 区块配置项
+## Параметры конфигурации блока
 
 ![20240415215319](https://static-docs.nocobase.com/20240415215319.png)
 
-### 设置数据范围
+### Настройка диапазона данных
 
-示例：默认筛选「状态」为已发货的单据。
+Пример: по умолчанию фильтруются документы со статусом «Отправлено».
 
 ![20240415215404](https://static-docs.nocobase.com/20240415215404.png)
 
-更多内容参考 [设置数据范围](/handbook/ui/blocks/block-settings/data-scope)
+Более подробная информация доступна в разделе [Настройка диапазона данных](/handbook/ui/blocks/block-settings/data-scope).
 
-### 设置排序规则
+### Настройка правил сортировки
 
-示例：将单据按发货日期倒序显示。
+Пример: отобразить документы в обратном порядке по дате отправки.
 
 ![20240415215509](https://static-docs.nocobase.com/20240415215509.png)
 
-更多内容参考 [设置排序规则](/handbook/ui/blocks/block-settings/sorting-rule)
+Более подробная информация доступна в разделе [Настройка правил сортировки](/handbook/ui/blocks/block-settings/sorting-rule).
 
-### 连接数据区块
+### Подключение блоков данных
 
-示例：订单表格区块和订单详情区块连接，实现筛选联动。
+Пример: подключение блока таблицы заказов и блока деталей заказа для реализации взаимодействия фильтрации.
 
-  <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240415221426.mp4" type="video/mp4">
 </video>
 
-更多内容参考 [连接数据区块](/handbook/ui/blocks/block-settings/connect-block)
+Более подробная информация доступна в разделе [Подключение блоков данных](/handbook/ui/blocks/block-settings/connect-block).
 
-- [编辑区块标题](/handbook/ui/blocks/block-settings/block-title)
-- [设置数据加载方式](/handbook/ui/blocks/block-settings/loading-mode)
-- [保存为区块模板](/handbook/ui/blocks/block-settings/block-template)
+- [Редактирование заголовка блока](/handbook/ui/blocks/block-settings/block-title)
+- [Настройка способа загрузки данных](/handbook/ui/blocks/block-settings/loading-mode)
+- [Сохранение как шаблон блока](/handbook/ui/blocks/block-settings/block-template)
 
+## Настройка полей
 
-## 配置字段
-
-### 本表字段
+### Поля текущей таблицы
 
 ![20240415223714](https://static-docs.nocobase.com/20240415223714.png)
 
-### 关系表字段
+### Поля связанных таблиц
 
 ![20240415223746](https://static-docs.nocobase.com/20240415223746.png)
 
-### 显示继承表字段（父表字段）
+### Отображение полей родительской таблицы (поля наследуемой таблицы)
 
-示例：租赁订单表继承订单表。
+Пример: таблица аренды заказов наследует таблицу заказов.
 
 ![20240415224242](https://static-docs.nocobase.com/20240415224242.png)
 
-表格列字段配置项可参考 [表格列字段](/handbook/ui/fields/generic/table-column)
+Параметры настройки полей столбцов таблицы можно найти в разделе [Поля столбцов таблицы](/handbook/ui/fields/generic/table-column).
 
-## 配置操作
+## Настройка операций
 
-### 全局操作
+### Глобальные операции
 
 ![20240415225525](https://static-docs.nocobase.com/20240415225525.png)
 
-- [筛选](/handbook/ui/actions/types/filter)
-- [添加](/handbook/ui/actions/types/add-new)
-- [删除](/handbook/ui/actions/types/delete)
-- [刷新](/handbook/ui/actions/types/refresh)
-- [导入](/handbook/action-import)
-- [导出](/handbook/action-export)
-- [添加数据](/handbook/action-add-record)
-- [批量更新](/handbook/action-bulk-update)
-- [批量编辑](/handbook/action-bulk-edit)
+- [Фильтрация](/handbook/ui/actions/types/filter)
+- [Добавление](/handbook/ui/actions/types/add-new)
+- [Удаление](/handbook/ui/actions/types/delete)
+- [Обновление](/handbook/ui/actions/types/refresh)
+- [Импорт](/handbook/action-import)
+- [Экспорт](/handbook/action-export)
+- [Добавление данных](/handbook/action-add-record)
+- [Массовое обновление](/handbook/action-bulk-update)
+- [Массовое редактирование](/handbook/action-bulk-edit)
 
-### 行操作
+### Операции со строками
 
 ![20240415225657](https://static-docs.nocobase.com/20240415225657.png)
 
-- [查看](/handbook/ui/actions/types/view)
-- [编辑](/handbook/ui/actions/types/edit)
-- [复制](/handbook/action-duplicate)
-- [删除](/handbook/ui/actions/types/delete)
-- [弹窗](/handbook/ui/actions/types/pop-up)
-- [更新记录](/handbook/ui/actions/types/update-record)
-- [自定义请求](/handbook/action-custom-request)
-
+- [Просмотр](/handbook/ui/actions/types/view)
+- [Редактирование](/handbook/ui/actions/types/edit)
+- [Копирование](/handbook/action-duplicate)
+- [Удаление](/handbook/ui/actions/types/delete)
+- [Всплывающее окно](/handbook/ui/actions/types/pop-up)
+- [Обновление записи](/handbook/ui/actions/types/update-record)
+- [Пользовательский запрос](/handbook/action-custom-request)

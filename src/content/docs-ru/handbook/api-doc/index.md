@@ -1,39 +1,39 @@
-# API 文档
+# Документация API
 
 <PluginInfo name="api-doc"></PluginInfo>
 
-## 介绍
+## Введение
 
-基于 Swagger 生成 NocoBase HTTP API 文档。  
+Генерация документации HTTP API для NocoBase на основе Swagger.
 
-## 安装
+## Установка
 
-内置插件，无需安装。激活即可使用。
+Встроенный плагин, не требует установки. Достаточно активировать для использования.
 
-## 使用说明
+## Инструкция по использованию
 
-### 访问 API 文档页面
+### Доступ к странице документации API
 
 http://localhost:13000/admin/settings/api-doc/documentation
 
 ![](https://static-docs.nocobase.com/8db51cf50e3c666aba5a850a0fb664a0.png)
 
-### 文档概览
+### Обзор документации
 
 ![](https://static-docs.nocobase.com/5bb4d3e5bba6c6fdfcd830592e72385b.png)
 
-- 总 API 文档：`/api/swagger:get`
-- 内核 API 文档：`/api/swagger:get?ns=core`
-- 所有插件 API 文档：`/api/swagger:get?ns=plugins`
-- 每个插件的文档：`/api/swagger:get?ns=plugins/{name}`
-- 用户自定义 collections 的 API 文档：`/api/swagger:get?ns=collections`
-- 指定 `${collection}` 及相关 `${collection}.${association}` 资源：`/api/swagger:get?ns=collections/{name}`
+- Общая документация API: `/api/swagger:get`
+- Документация API ядра: `/api/swagger:get?ns=core`
+- Документация API всех плагинов: `/api/swagger:get?ns=plugins`
+- Документация для каждого плагина: `/api/swagger:get?ns=plugins/{name}`
+- Документация API пользовательских коллекций: `/api/swagger:get?ns=collections`
+- Указанные ресурсы `${collection}` и связанные `${collection}.${association}`: `/api/swagger:get?ns=collections/{name}`
 
-## 开发指南
+## Руководство разработчика
 
-### 如何为插件编写 swagger 文档
+### Как написать документацию Swagger для плагина
 
-在插件 `src` 文件夹里添加 `swagger/index.ts` 文件，内容如下：
+Добавьте файл `swagger/index.ts` в папку `src` вашего плагина со следующим содержанием:
 
 ```typescript
 export default {
@@ -48,4 +48,4 @@ export default {
 };
 ```
 
-详细编写规则请参考 [Swagger 官方文档](https://swagger.io/docs/specification/about/)
+Подробные правила написания можно найти в [официальной документации Swagger](https://swagger.io/docs/specification/about/)

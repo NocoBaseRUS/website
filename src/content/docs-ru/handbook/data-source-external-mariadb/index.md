@@ -1,17 +1,17 @@
-# 外部数据源 - MariaDB
+# Внешний источник данных - MariaDB
 
 <PluginInfo commercial="true" name="data-source-external-mariadb"></PluginInfo>
 
-## 介绍
+## Введение
 
-使用外部的 MariaDB 数据库作为数据源。
+Использование внешней базы данных MariaDB в качестве источника данных.
 
-## 安装
+## Установка
 
-该插件为商业插件，需要通过插件管理器上传并激活插件
+Этот плагин является коммерческим и требует загрузки и активации через менеджер плагинов.
 
 ![20240323162741](https://static-docs.nocobase.com/20240323162741.png)
 
-## 使用说明
+## Инструкция по использованию
 
-查看 [数据源 / 外部数据库](/handbook/data-source-manager/external-database) 章节
+См. раздел [Источники данных / Внешняя база данных](/handbook/data-source-manager/external-database).

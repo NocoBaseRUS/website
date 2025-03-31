@@ -1,9 +1,9 @@
-# 导出 Pro
+# Экспорт Pro
 
 <PluginInfo commercial="true" name="action-export-pro"></PluginInfo>
 
-## 介绍
+## Введение
 
 :::warning
-插件正在开发中。
+Плагин находится в разработке.
 :::

@@ -1,14 +1,14 @@
-# 测试
+# Тестирование
 
-测试基于 [Jest](https://jestjs.io/) 测试框架。为了方便的编写测试，提供了 `mockDatabase()` 和 `mockServer()` 用于数据库和服务端应用的测试。
+Тестирование основано на тестовом фреймворке [Jest](https://jestjs.io/). Для удобства написания тестов предоставляются функции `mockDatabase()` и `mockServer()`, которые используются для тестирования базы данных и серверной части приложения.
 
 :::warning
-测试的环境变量在 `.env.test` 文件里配置，建议使用独立的测试数据库进行测试。
+Переменные окружения для тестов настраиваются в файле `.env.test`. Рекомендуется использовать отдельную тестовую базу данных для проведения тестов.
 :::
 
 ## `mockDatabase()`
 
-默认提供一种完全隔离的 db 测试环境
+По умолчанию предоставляется полностью изолированная тестовая среда для базы данных.
 
 ```ts
 import { mockDatabase } from '@nocobase/test';
@@ -49,12 +49,12 @@ describe('my db suite', () => {
 
 ## `mockServer()`
 
-提供模拟的服务端应用实例，对应的 app.db 为 `mockDatabase()` 实例，同时还提供了便捷的 `app.agent()` 用于测试 HTTP API，针对 NocoBase 的 Resource Action 还封装了 `app.agent().resource()` 用于测试资源的 Action。
+Предоставляется смоделированный экземпляр серверного приложения, где соответствующий `app.db` является экземпляром `mockDatabase()`. Также предоставляется удобный метод `app.agent()` для тестирования HTTP API. Для Resource Action в NocoBase дополнительно реализован метод `app.agent().resource()`, который используется для тестирования действий (Action) над ресурсами.
 
 ```ts
 import { MockServer, mockServer } from '@nocobase/test';
 
-// 每个插件的 app 最小化安装的插件都不一样，需要插件根据自己的情况添加必备插件
+// Минимальный набор установленных плагинов для каждого приложения (app) различается, и каждый плагин должен самостоятельно добавлять необходимые плагины в зависимости от своих требований.
 async function createApp(options: any = {}) {
   const app = mockServer({
     ...options,
@@ -65,17 +65,17 @@ async function createApp(options: any = {}) {
       'error-handler',
       ...options.plugins,
     ],
-    // 还会有些其他参数配置
+    // Также могут быть дополнительные параметры конфигурации
   });
-  // 这里可以补充一些需要特殊处理的逻辑，比如导入测试需要的数据表
+  // Здесь можно добавить логику для специальной обработки, например, импортировать таблицы данных, необходимые для тестирования
   return app;
 }
 
-// 大部分的测试都需要启动应用，所以也可以提供一个通用的启动方法
+// Поскольку большинство тестов требуют запуска приложения, можно также предоставить общий метод для запуска приложения
 async function startApp() {
   const app = createApp();
   await app.quickstart({
-    // 运行测试前，清空数据库
+    // Перед запуском тестов очистить базу данных
     clean: true,
   });
   return app;
@@ -89,9 +89,9 @@ describe('test example', () => {
   });
 
   afterEach(async () => {
-    // 运行测试后，清空数据库
+    // После завершения тестов очистить базу данных
     await app.destroy();
-    // 只停止不清空数据库
+    // Только остановить, не очищая базу данных
     await app.stop();
   });
 
@@ -101,20 +101,20 @@ describe('test example', () => {
 });
 ```
 
-## 常用的应用流程
+## Обычные сценарии работы приложения
 
-如果需要测试不同流程的情况，可以根据以下示例执行相关命令。
+Если необходимо протестировать различные сценарии, можно выполнить соответствующие команды на основе следующих примеров.
 
-### 先安装再启动
+### Сначала установка, затем запуск
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn nocobase install
 yarn start
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -122,17 +122,17 @@ await app.runCommand('install');
 await app.runCommand('start');
 ```
 
-### 先启动再安装
+### Сначала запуск, затем установка
 
-终端命令行
+Командная строка терминала:
 
 ```bash
-yarn start # 常驻内存
-# 另一个终端里执行
+yarn start # Постоянно в памяти
+# Выполнить в другом терминале
 yarn nocobase install
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -140,32 +140,32 @@ await app.runCommand('start');
 await app.runCommand('install');
 ```
 
-### 快速启动（自动安装或升级）
+### Быстрый запуск (автоматическая установка или обновление)
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn start --quickstart
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
 await app.runCommand('start', '--quickstart');
 ```
 
-### 对已安装启动的应用进行重装
+### Переустановка уже установленного и запущенного приложения
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn start --quickstart
-# 另一个终端里执行
+# Выполнить в другом терминале
 yarn nocobase install -f
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -173,16 +173,16 @@ await app.runCommand('start', '--quickstart');
 await app.runCommand('install', '-f');
 ```
 
-### 升级应用（启动前）
+### Обновление приложения (до запуска)
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn nocobase upgrade
 yarn start
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -190,15 +190,15 @@ await app.runCommand('upgrade', '-f');
 await app.runCommand('start', '--quickstart');
 ```
 
-### 升级应用（启动后）
+### Обновление приложения (после запуска)
 
 ```bash
-yarn start # 常驻内存
-# 另一个终端里执行
+yarn start # Постоянно в памяти
+# Выполнить в другом терминале
 yarn nocobase upgrade
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -206,16 +206,16 @@ await app.runCommand('start', '--quickstart');
 await app.runCommand('upgrade', '-f');
 ```
 
-### 激活插件
+### Активация плагина
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn start --quickstart
 yarn pm enable @my-project/plugin-hello
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();
@@ -223,16 +223,16 @@ await app.runCommand('start', '--quickstart');
 await app.runCommand('pm', 'enable', '@my-project/plugin-hello');
 ```
 
-### 禁用插件
+### Отключение плагина
 
-终端命令行
+Командная строка терминала:
 
 ```bash
 yarn start --quickstart
 yarn pm disable @my-project/plugin-hello
 ```
 
-前置的测试流程
+Предварительный процесс тестирования
 
 ```ts
 const app = mockServer();

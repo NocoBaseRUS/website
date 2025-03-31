@@ -1,79 +1,79 @@
-# 列表区块
+# Блок списка
 
-## 介绍
+## Введение
 
-列表区块以列表形式展示数据，适用于任务列表、新闻资讯、产品信息等数据展示场景。
+Блок списка отображает данные в виде списка и подходит для сценариев демонстрации данных, таких как списки задач, новостные ленты или информация о продуктах.
 
-## 添加区块
+## Добавление блока
 
- <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240417224417.mp4" type="video/mp4">
 </video>
 
-## 区块配置项
+## Параметры конфигурации блока
 
 ![20240417224539](https://static-docs.nocobase.com/20240417224539.png)
 
-### 设置数据范围
+### Настройка диапазона данных
 
-如图：默认筛选订单状态为退款的单据
+Как показано на рисунке: по умолчанию фильтруются заказы со статусом "Возврат".
 
 ![20240417224701](https://static-docs.nocobase.com/20240417224701.png)
 
-更多内容参考 [设置数据范围](/handbook/ui/blocks/block-settings/data-scope)
+Более подробная информация доступна в разделе [Настройка диапазона данных](/handbook/ui/blocks/block-settings/data-scope).
 
-### 设置排序规则
+### Настройка правил сортировки
 
-如图：按订单金额大小倒序排序
+Как показано на рисунке: сортировка по размеру суммы заказа в обратном порядке.
 
 ![20240417225302](https://static-docs.nocobase.com/20240417225302.png)
 
-更多内容参考 [设置排序规则](/handbook/ui/blocks/block-settings/sorting-rule)
+Более подробная информация доступна в разделе [Настройка правил сортировки](/handbook/ui/blocks/block-settings/sorting-rule).
 
-### 设置数据加载方式
+### Настройка способа загрузки данных
 
-通常与筛选区块搭配使用，实现筛选时才加载数据
+Обычно используется вместе с блоком фильтрации для загрузки данных только после применения фильтрации.
 
- <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240417225539.mp4" type="video/mp4">
 </video>
 
-更多内容参考 [设置数据加载方式](/handbook/ui/blocks/block-settings/loading-mode)
+Более подробная информация доступна в разделе [Настройка способа загрузки данных](/handbook/ui/blocks/block-settings/loading-mode).
 
-- [编辑区块标题](/handbook/ui/blocks/block-settings/block-title)
-- [保存为区块模板](/handbook/ui/blocks/block-settings/block-template)
+- [Редактирование заголовка блока](/handbook/ui/blocks/block-settings/block-title)
+- [Сохранение как шаблон блока](/handbook/ui/blocks/block-settings/block-template)
 
-## 配置字段
+## Настройка полей
 
-### 本表字段
+### Поля текущей таблицы
 
 ![20240417230027](https://static-docs.nocobase.com/20240417230027.png)
 
-### 关系表字段
+### Поля связанных таблиц
 
 ![20240417230115](https://static-docs.nocobase.com/20240417230115.png)
 
-列表字段配置项可参考 [详情字段](/handbook/ui/fields/generic/detail-form-item)
+Параметры настройки полей списка можно найти в разделе [Поля деталей](/handbook/ui/fields/generic/detail-form-item).
 
-## 配置操作
+## Настройка операций
 
-### 全局操作
+### Глобальные операции
 
 ![20240421115811](https://static-docs.nocobase.com/20240421115811.png)
 
-- [筛选](/handbook/ui/actions/types/filter)
-- [添加](/handbook/ui/actions/types/add-new)
-- [刷新](/handbook/ui/actions/types/refresh)
-- [导入](/handbook/action-import)
-- [导出](/handbook/action-export)
+- [Фильтрация](/handbook/ui/actions/types/filter)
+- [Добавление](/handbook/ui/actions/types/add-new)
+- [Обновление](/handbook/ui/actions/types/refresh)
+- [Импорт](/handbook/action-import)
+- [Экспорт](/handbook/action-export)
 
-### 行操作
+### Операции со строками
 
 ![20240418114424](https://static-docs.nocobase.com/20240418114424.png)
 
-- [查看](/handbook/ui/actions/types/view)
-- [编辑](/handbook/ui/actions/types/edit)
-- [删除](/handbook/ui/actions/types/delete)
-- [弹窗](/handbook/ui/actions/types/pop-up)
-- [更新记录](/handbook/ui/actions/types/update-record)
-- [自定义请求](/handbook/action-custom-request)
+- [Просмотр](/handbook/ui/actions/types/view)
+- [Редактирование](/handbook/ui/actions/types/edit)
+- [Удаление](/handbook/ui/actions/types/delete)
+- [Всплывающее окно](/handbook/ui/actions/types/pop-up)
+- [Обновление записи](/handbook/ui/actions/types/update-record)
+- [Пользовательский запрос](/handbook/action-custom-request)

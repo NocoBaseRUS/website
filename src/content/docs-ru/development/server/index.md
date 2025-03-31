@@ -1,16 +1,16 @@
-# 概述
+# Обзор
 
-初始化的空插件，服务端相关目录结构如下：
+При инициализации пустого плагина структура каталогов на стороне сервера выглядит следующим образом:
 
 ```bash
 |- /plugin-sample-hello
-  |- /src              # 插件源码
+  |- /src              # Исходный код плагина
     |- /server
-      |- collections   # 约定式目录，插件的数据表配置
-      |- commands      # 约定式目录，自定义命令
-      |- migrations    # 约定式目录，迁移文件
-      |- plugin.ts     # 插件类
-      |- index.ts      # 服务端入口
+      |- collections   # Директория по соглашению, конфигурации таблиц данных плагина
+      |- commands      # Директория по соглашению, пользовательские команды
+      |- migrations    # Директория по соглашению, файлы миграций
+      |- plugin.ts     # Класс плагина
+      |- index.ts      # Точка входа на стороне сервера
   |- package.json
   |- server.d.ts
   |- server.js
@@ -18,32 +18,32 @@
 
 ## Plugin
 
-`plugin.ts` 提供了插件生命周期的各种方法的调用
+`plugin.ts` предоставляет вызов различных методов жизненного цикла плагина.
 
 ```ts
 import { Plugin } from '@nocobase/server';
 
 export class PluginDemoServer extends Plugin {
   async afterAdd() {
-    // 插件 pm.add 注册进来之后。主要用于放置 app beforeLoad 事件的监听
+    // После регистрации плагина через pm.add. В основном используется для размещения обработчиков события beforeLoad приложения.
     this.app.on('beforeLoad');
   }
   async beforeLoad() {
-    // 自定义类或方法
+    // Пользовательские классы или методы
     this.db.registerFieldTypes();
     this.db.registerModels();
     this.db.registerRepositories();
     this.db.registerOperators();
-    // 事件监听
+    // Прослушивание событий
     this.app.on();
     this.db.on();
   }
   async load() {
-    // 定义 resource
+    // Определение resource
     this.resourcer.define();
-    // resource action
+    // действие ресурса (resource action)
     this.resourcer.registerActions();
-    // 注册 middleware
+    // Регистрация middleware
     this.resourcer.use();
     this.acl.use();
     this.app.use();
@@ -51,55 +51,55 @@ export class PluginDemoServer extends Plugin {
     this.app.i18n;
   }
   async install() {
-    // 安装逻辑
+    // Логика установки
   }
   async afterEnable() {
-    // 激活之后
+    // После активации
   }
   async afterDisable() {
-    // 禁用之后
+    // После отключения
   }
   async remove() {
-    // 删除逻辑
+    // Логика удаления
   }
 }
 
 export default MyPlugin;
 ```
 
-## 插件的生命周期
+## Жизненный цикл плагина
 
-<img alt="插件的生命周期" src="./image.png" style="width: 320px;" />
+<img alt="Жизненный цикл плагина" src="./image.png" style="width: 320px;" />
 
-- 在插件初始化之后，触发 `afterAdd`，在 `afterAdd` 里其他插件不一定都实例化
-- 在 `beforeLoad` 里所有已激活的插件都实例化了，可以通过 `app.pluginManager.get()` 获取到实例
-- 在 `load` 里，所有插件的 `beforeLoad` 方法都已执行
+- После инициализации плагина срабатывает событие `afterAdd`, однако в этот момент другие плагины могут быть ещё не проинициализированы.
+- В методе `beforeLoad` все активированные плагины уже проинициализированы, и можно получить их экземпляры через `app.pluginManager.get()`.
+- В методе `load` выполнены все методы `beforeLoad` у всех плагинов.
 
-## 插件类里常用的属性及方法
+## Часто используемые свойства и методы в классе плагина
 
-| API                              | 教程               |
+| API                              | Описание           |
 | -------------------------------- | ------------------ |
-| this.name                        | 插件名             |
-| this.enabled                     | 已激活             |
-| this.installed                   | 已安装             |
-| this.app                         | 应用实例           |
-| this.pm                          | 插件管理器实例     |
-| this.db                          | 数据库实例         |
-| this.resourcer                   | 资源管理器         |
-| this.acl                         | 权限控制           |
-| this.log                         | 日志               |
-| this.app.i18n                    | 国际化             |
-| this.db.registerFieldTypes()     | 注册字段 type      |
-| this.db.registerModels()         | 注册 Model         |
-| this.db.registerRepositories()   | 注册 Repository    |
-| this.db.registerOperators()      | 注册自定义的运算符 |
-| this.app.on()                    | 应用事件           |
-| this.db.on()                     | 数据库事件         |
-| this.db.collection()             | 配置数据表         |
-| this.db.import()                 | 导入数据表配置     |
-| this.db.addMigrations()          | 迁移               |
-| this.resourcer.registerActions() | 注册资源操作       |
-| this.resourcer.use()             | 中间件             |
-| this.acl.use()                   | 中间件             |
-| this.app.use()                   | 中间件             |
-| this.app.command()               | 命令行             |
+| this.name                        | Имя плагина        |
+| this.enabled                     | Активирован        |
+| this.installed                   | Установлен         |
+| this.app                         | Экземпляр приложения |
+| this.pm                          | Экземпляр менеджера плагинов |
+| this.db                          | Экземпляр базы данных |
+| this.resourcer                   | Менеджер ресурсов  |
+| this.acl                         | Контроль доступа   |
+| this.log                         | Логирование        |
+| this.app.i18n                    | Интернационализация |
+| this.db.registerFieldTypes()     | Регистрация типов полей |
+| this.db.registerModels()         | Регистрация моделей (Model) |
+| this.db.registerRepositories()   | Регистрация репозиториев (Repository) |
+| this.db.registerOperators()      | Регистрация пользовательских операторов |
+| this.app.on()                    | События приложения |
+| this.db.on()                     | События базы данных |
+| this.db.collection()             | Настройка таблицы данных |
+| this.db.import()                 | Импорт конфигурации таблицы |
+| this.db.addMigrations()          | Миграции           |
+| this.resourcer.registerActions() | Регистрация действий над ресурсами |
+| this.resourcer.use()             | Middleware         |
+| this.acl.use()                   | Middleware         |
+| this.app.use()                   | Middleware         |
+| this.app.command()               | Командная строка   |

@@ -1,3 +1,3 @@
-# 快照字段
+# Поле снимка
 
 <PluginInfo name="field-snapshot"></PluginInfo>

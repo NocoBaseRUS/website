@@ -1,21 +1,21 @@
-# Sign in with Google
+# Вход через Google
 
 > https://developers.google.com/identity/openid-connect/openid-connect
 
-## 获取 Google OAuth 2.0 凭据
+## Получение учетных данных Google OAuth 2.0
 
-[Google Cloud控制台](https://console.cloud.google.com/apis/credentials) - 创建凭据 - OAuth客户端ID
+[Консоль Google Cloud](https://console.cloud.google.com/apis/credentials) — Создать учетные данные — Идентификатор клиента OAuth
 
 ![](https://static-docs.nocobase.com/0f2946c8643565ecc4ac13249882638c.png)
 
-进入到配置界面，填写授权重定向 URL. 重定向 URL 可以在 Nocobase，新增认证器时获取，通常情况下为 `http(s)://host:port/api/oidc:redirect`. 见[使用手册 - 配置](../index.md#配置)部分。
+Перейдите в интерфейс настройки и укажите URL перенаправления авторизации. URL перенаправления можно получить в NocoBase при добавлении нового аутентификатора. Обычно он имеет вид `http(s)://host:port/api/oidc:redirect`. См. раздел [Руководство пользователя - Настройка](../index.md#配置).
 
 ![](https://static-docs.nocobase.com/24078bf52ec966a16334894cb3d9d126.png)
 
-## 在 NocoBase 上新增认证器
+## Добавление нового аутентификатора в NocoBase
 
-插件设置 - 用户认证 - 添加 - OIDC
+Настройки плагина — Аутентификация пользователей — Добавить — OIDC
 
 ![](https://static-docs.nocobase.com/0e4b1acdef6335aaee2139ae6629977b.png)
 
-参考配[使用手册 - 配置](../index.md#配置)中介绍的参数，完成认证器配置即可。
+Следуйте параметрам, описанным в разделе [Руководство пользователя - Настройка](../index.md#配置), чтобы завершить конфигурацию аутентификатора.

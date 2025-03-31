@@ -1,17 +1,17 @@
-# 外部数据源 - PostgreSQL
+# Внешний источник данных - PostgreSQL
 
 <PluginInfo commercial="true" name="data-source-external-postgres"></PluginInfo>
 
-## 介绍
+## Введение
 
-使用外部的 PostgreSQL 数据库作为数据源。
+Использование внешней базы данных PostgreSQL в качестве источника данных.
 
-## 安装
+## Установка
 
-该插件为商业插件，需要通过插件管理器上传并激活插件
+Данный плагин является коммерческим. Для его использования необходимо загрузить и активировать плагин через менеджер плагинов.
 
 ![20240323162741](https://static-docs.nocobase.com/20240323162741.png)
 
-## 使用说明
+## Инструкция по использованию
 
-查看 [数据源 / 外部数据库](/handbook/data-source-manager/external-database) 章节
+Подробная информация доступна в разделе [Источники данных / Внешняя база данных](/handbook/data-source-manager/external-database).

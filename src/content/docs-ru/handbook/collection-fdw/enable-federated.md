@@ -1,6 +1,6 @@
-# MySQL 如何启用 federated 引擎
+# Как включить движок federated в MySQL
 
-MySQL 数据库默认没有开启 federated 模块，需要修改 my.cnf 配置，如果是 docker 版本，可以通过 volumes 来处理扩展的情况：
+Модуль federated в базе данных MySQL по умолчанию не включен. Для его активации необходимо изменить конфигурацию my.cnf. Если используется версия Docker, ситуацию с расширением можно обработать через volumes:
 
 ```yml
 mysql:
@@ -17,20 +17,20 @@ mysql:
     - nocobase
 ```
 
-新建 `./storage/mysql-conf/federated.cnf` 文件
+Создайте новый файл `./storage/mysql-conf/federated.cnf`
 
 ```conf
 [mysqld]
 federated
 ```
 
-重启 mysql
+Перезапустите mysql
 
 ```bash
 docker compose up -d mysql
 ```
 
-查看 federated 是否已经激活
+Проверьте, активирован ли federated
 
 ```sql
 show engines

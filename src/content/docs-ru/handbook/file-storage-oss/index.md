@@ -1,7 +1,7 @@
-# 阿里云 OSS
+# AliCloud OSS
 
 <PluginInfo name="file-storage-oss"></PluginInfo>
 
-## 介绍
+## Введение
 
-## 使用手册
+## Руководство пользователя

@@ -1,20 +1,20 @@
-# API 参考
+# Справочник API
 
-## 服务端
+## Серверная часть
 
 ### Auth
 
-内核 API，参考: [Auth](../../../api/auth/auth.md)
+API ядра, см. [Auth](../../../api/auth/auth.md)
 
 ### BaseAuth
 
-内核 API, 参考: [BaseAuth](../../../api/auth/base-auth.md)
+API ядра, см. [BaseAuth](../../../api/auth/base-auth.md)
 
 ### AuthModel
 
-#### 概览
+#### Обзор
 
-`AuthModel` 是 NocoBase 应用中使用的认证器 (`Authenticator`, 参考: [AuthManager - setStorer](../../../api/auth/auth-manager.md#setstorer) 和 [Auth - constructor](../../../api/auth/auth.md#constructor)) 数据模型，提供了一些和用户数据表交互的方法。除此之外，也可以使用 Sequelize Model 提供的方法。
+`AuthModel` — это модель аутентификатора (`Authenticator`, см. [AuthManager - setStorer](../../../api/auth/auth-manager.md#setstorer) и [Auth - constructor](../../../api/auth/auth.md#constructor)), используемая в приложении NocoBase. Она предоставляет методы для взаимодействия с таблицей данных пользователей. Кроме того, можно использовать методы, предоставляемые Sequelize Model.
 
 ```ts
 import { AuthModel } from '@nocobase/plugin-auth';
@@ -31,26 +31,24 @@ class CustomAuth extends BaseAuth {
 }
 ```
 
-#### 类方法
+#### Методы класса
 
-- `findUser(uuid: string): UserModel` - 通过 `uuid` 查询用户。
+- `findUser(uuid: string): UserModel` — поиск пользователя по `uuid`.
+  - `uuid` — уникальный идентификатор пользователя для текущего типа аутентификации.
 
-  - `uuid` - 来自当前认证类型的用户唯一标识
+- `newUser(uuid: string, userValues?: any): UserModel` — создание нового пользователя, связывание пользователя с текущим аутентификатором через `uuid`.
+  - `uuid` — уникальный идентификатор пользователя для текущего типа аутентификации.
+  - `userValues` — опционально. Дополнительная информация о пользователе. Если не указано, `uuid` будет использован как псевдоним пользователя.
 
-- `newUser(uuid: string, userValues?: any): UserModel` - 创建新用户，通过 `uuid` 将用户和当前认证器绑定。
+- `findOrCreateUser(uuid: string, userValues?: any): UserModel` — поиск или создание нового пользователя (правила создания такие же, как выше).
+  - `uuid` — уникальный идентификатор пользователя для текущего типа аутентификации.
+  - `userValues` — опционально. Дополнительная информация о пользователе.
 
-  - `uuid` - 来自当前认证类型的用户唯一标识
-  - `userValues` - 可选。用户其他信息。不传递时将 `uuid` 作为用户昵称。
-
-- `findOrCreateUser(uuid: string, userValues?: any): UserModel` - 查找或创建新用户，创建规则同上。
-  - `uuid` - 来自当前认证类型的用户唯一标识
-  - `userValues` - 可选。用户其他信息。
-
-## 客户端
+## Клиентская часть
 
 ### `plugin.registerType()`
 
-注册认证类型的客户端。
+Регистрация клиентской части типа аутентификации.
 
 ```ts
 import AuthPlugin from '@nocobase/plugin-auth/client';
@@ -70,11 +68,11 @@ class CustomAuthPlugin extends Plugin {
 }
 ```
 
-#### 签名
+#### Сигнатура
 
 - `registerType(authType: string, options: AuthOptions)`
 
-#### 类型
+#### Типы
 
 ```ts
 export type AuthOptions = {
@@ -87,28 +85,28 @@ export type AuthOptions = {
 };
 ```
 
-#### 详细信息
+#### Подробная информация
 
-- `SignInForm` - 登录表单
-- `SignInButton` - 登录（第三方）按钮，可以和登录表单二选一
-- `SignUpForm` - 注册表单
-- `AdminSettingsForm` - 后台配置表单
+- `SignInForm` — форма входа в систему.
+- `SignInButton` — кнопка входа (для сторонних сервисов), может быть выбрана вместо формы входа.
+- `SignUpForm` — форма регистрации.
+- `AdminSettingsForm` — форма настроек администрирования.
 
-### Route
+### Маршрут
 
-auth 插件注册前端路由如下：
+Плагин auth регистрирует клиентские маршруты следующим образом:
 
-- Auth 布局
+- Макет Auth
   - name: `auth`
   - path: `-`
   - component: `AuthLayout`
 
-- 登录页
+- Страница входа
   - name: `auth.signin`
   - path: `/signin`
   - component: `SignInPage`
 
-- 注册页
+- Страница регистрации
   - name: `auth.signup`
   - path: `/signup`
   - component: `SignUpPage`

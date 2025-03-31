@@ -1,24 +1,26 @@
-# 升级脚本
+# Скрипты обновления
 
-插件在更新迭代过程中，可能会出现某些不兼容的改动，这些不兼容的升级脚本可以通过编写 migration 文件来处理，由 `nocobase upgrade` 命令触发，相关流程如下：
+В процессе обновления и развития плагина могут возникать определённые несовместимые изменения. Эти несовместимые изменения можно обработать с помощью написания файлов миграций (migration), которые будут запускаться командой `nocobase upgrade`. Соответствующий процесс выглядит следующим образом:
 
 <img src="./image-2.png" style="max-width: 800px; width: 800px;">
 
-升级的 migrations 有 beforeLoad、afterSync 和 afterLoad 之分：
+Миграции обновлений делятся на три типа: beforeLoad, afterSync и afterLoad:
 
-- beforeLoad：在各模块加载前执行，分为三个阶段：
-  - 内核模块加载前
-  - preset 插件加载前
-  - 其他插件加载前
-- afterSync：在数据表配置与数据库同步之后，分为三个阶段：
-  - 内核表与数据库同步之后
-  - preset 插件的表与数据库同步之后
-  - 其他插件的表与数据库同步后
-- afterLoad：应用全部加载之后才执行
+- **beforeLoad**: Выполняется до загрузки всех модулей, разделено на три этапа:
+  - Перед загрузкой ядра.
+  - Перед загрузкой preset-плагинов.
+  - Перед загрузкой других плагинов.
+  
+- **afterSync**: Выполняется после синхронизации конфигурации таблиц с базой данных, разделено на три этапа:
+  - После синхронизации ядра с базой данных.
+  - После синхронизации таблиц preset-плагинов с базой данных.
+  - После синхронизации таблиц других плагинов с базой данных.
 
-## 创建 migration 文件
+- **afterLoad**: Выполняется после полной загрузки приложения.
 
-通过 create-migration 命令创建 migration 文件
+## Создание файла миграции
+
+Создание файла миграции с помощью команды **create-migration**.
 
 ```bash
 yarn nocobase create-migration -h
@@ -31,7 +33,7 @@ Options:
   -h, --help   display help for command
 ```
 
-示例
+Пример:
 
 ```bash
 $ yarn nocobase create-migration update-ui --pkg=@nocobase/plugin-client
@@ -41,7 +43,7 @@ $ yarn nocobase create-migration update-ui --pkg=@nocobase/plugin-client
 ✨  Done in 5.02s.
 ```
 
-将在插件包 @nocobase/plugin-client 的 src/server/migrations 里生成一个 migration 文件，名为 20240107173313-update-ui.ts，初始内容如下：
+В пакете плагина @nocobase/plugin-client в каталоге src/server/migrations будет создан файл миграции с именем **20240107173313-update-ui.ts**, начальное содержимое которого выглядит следующим образом:
 
 ```ts
 import { Migration } from '@nocobase/server';
@@ -56,15 +58,15 @@ export default class extends Migration {
 }
 ```
 
-## 触发 migration
+## Запуск миграции (migration)
 
-通过 `nocobase upgrade` 命令触发
+Миграция запускается с помощью команды `nocobase upgrade`.
 
 ```bash
 $ yarn nocobase upgrade
 ```
 
-## 测试 migration
+## Тестирование миграции
 
 ```ts
 import { createMockServer, MockServer } from '@nocobase/test';
@@ -74,8 +76,8 @@ describe('test example', () => {
 
   beforeEach(async () => {
     app = await createMockServer({
-      plugins: ['my-plugin'], // 插件
-      version: '0.18.0-alpha.5', // 升级前的版本
+      plugins: ['my-plugin'], // Плагин
+      version: '0.18.0-alpha.5', // Версия до обновления
     });
   });
 

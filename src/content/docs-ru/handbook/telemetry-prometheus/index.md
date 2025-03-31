@@ -20,7 +20,7 @@
 
 #### TELEMETRY_ENABLED
 
-配置为 `on`.
+Настройка `on`.
 
 ```bash
 TELEMETRY_ENABLED=on
@@ -28,7 +28,7 @@ TELEMETRY_ENABLED=on
 
 #### TELEMETRY_METRIC_READER
 
-添加 `prometheus`.
+Добавить `prometheus`.
 
 ```bash
 TELEMETRY_METRIC_READER=prometheus
@@ -36,22 +36,22 @@ TELEMETRY_METRIC_READER=prometheus
 
 #### TELEMETRY_PROMETHEUS_SERVER
 
-是否启动单独的服务。
+Запускать ли отдельный сервис.
 
-- `off`. 抓取接口为 `/api/prometheus:metrics`.
-- `on`. 抓取接口为 `:port/metrics`.
+- `off`. Интерфейс сбора данных: `/api/prometheus:metrics`.
+- `on`. Интерфейс сбора данных: `:port/metrics`.
 
 #### TELEMETRY_PROMETHEUS_PORT
 
-启动单独服务时的服务端口。默认 `9464`.
+Порт сервиса при запуске отдельного сервера. По умолчанию `9464`.
 
-#### 相关文档
+#### Связанные документы
 
-- [环境变量](../../welcome/getting-started/env.md#telemetry_enabled)
+- [Переменные окружения](../../welcome/getting-started/env.md#telemetry_enabled)
 
-### Prometheus 配置
+### Настройка Prometheus
 
-单独 server
+Отдельный server
 
 ```yaml
 scrape_configs:
@@ -60,7 +60,7 @@ scrape_configs:
       - targets: ['localhost:9464']
 ```
 
-内部 API
+Внутренний API
 
 ```yaml
 scrape_configs:

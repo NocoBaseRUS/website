@@ -1,86 +1,86 @@
-# 外部数据库
+# Внешняя база данных
 
-## 介绍
+## Введение
 
-使用外部已有的数据库作为数据源，目前已支持的外部数据库有 MySQL、MariaDB、PostgreSQL。
+Использование существующей внешней базы данных в качестве источника данных. На данный момент поддерживаются следующие внешние базы данных: MySQL, MariaDB и PostgreSQL.
 
-## 使用说明
+## Инструкция по использованию
 
-### 添加外部数据库
+### Добавление внешней базы данных
 
-激活插件之后，才可以在数据源管理的 Add new 下拉菜单中选择并添加。
+После активации плагина можно выбрать и добавить внешнюю базу данных из выпадающего меню "Add new" в управлении источниками данных.
 
 ![20240507204316](https://static-docs.nocobase.com/20240507204316.png)
 
-填写需要接入的数据库信息
+Заполните информацию о подключаемой базе данных.
 
 ![20240507204820](https://static-docs.nocobase.com/20240507204820.png)
 
-### 数据表同步
+### Синхронизация таблиц данных
 
-外部数据库建立连接之后，会直接读取数据源里的所有数据表。外部数据库不支持直接添加数据表或修改表结构，如果需要修改，可以通过数据库客户端进行操作，再在界面上点击「刷新」按钮来同步。
+После установления соединения с внешней базой данных будут автоматически загружены все таблицы данных из источника. Напрямую добавлять или изменять структуру таблиц во внешней базе данных не поддерживается. Если требуется внести изменения, это можно сделать через клиент базы данных, а затем нажать кнопку "Обновить" в интерфейсе для синхронизации.
 
 ![20240507204725](https://static-docs.nocobase.com/20240507204725.png)
 
-### 配置字段
+### Настройка полей
 
-外部数据库会自动读取已有数据表的字段，并展示出来。可以快速查看并配置字段的标题、数据类型（Field type）和 UI 类型（Field interface），也可以点击「编辑」按钮，修改更多配置。
+Внешняя база данных автоматически считывает поля существующих таблиц данных и отображает их. Можно быстро просмотреть и настроить заголовки полей, типы данных (Field type) и типы интерфейса (Field interface). Также можно нажать кнопку "Редактировать", чтобы изменить дополнительные настройки.
 
 ![20240507210537](https://static-docs.nocobase.com/20240507210537.png)
 
-因为外部数据库不支持修改表结构，所以新增字段时，可选的类型只有关系字段。关系字段并不是真实的字段，而是用于建立表和表之间的连接。
+Поскольку внешняя база данных не поддерживает изменение структуры таблиц, при добавлении нового поля доступны только типы отношений. Поля отношений не являются реальными полями, они используются для установления связей между таблицами.
 
 ![20240507220140](https://static-docs.nocobase.com/20240507220140.png)
 
-更多内容 [数据表字段/概述](/handbook/data-modeling/collection-fields) 章节。
+Более подробная информация доступна в разделе [Поля таблиц данных / Обзор](/handbook/data-modeling/collection-fields).
 
-### 字段类型映射
+### Сопоставление типов полей
 
-NocoBase 会自动为外部数据库的字段类型，映射相对应的数据类型（Field type）和 UI 类型（Field Interface）。
+NocoBase автоматически сопоставляет типы полей внешней базы данных с соответствующими типами данных (Field type) и типами интерфейса (Field Interface).
 
-- 数据类型（Field type）：用于定义字段可以存储的数据的种类、格式和结构；
-- UI 类型（Field interface）：是指在用户界面中用于显示和输入字段值的控件类型。
+- **Тип данных (Field type)**: Используется для определения типа, формата и структуры данных, которые могут храниться в поле;
+- **Тип интерфейса (Field interface)**: Определяет тип элемента управления, используемого для отображения и ввода значений поля в пользовательском интерфейсе.
 
-| PostgreSQL | MySQL/MariaDB | NocoBase Data Type | NocoBase Interface Type |
+| PostgreSQL | MySQL/MariaDB | Тип данных NocoBase | Тип интерфейса NocoBase |
 | - | - | - | - |
-| BOOLEAN | BOOLEAN<br/>TINYINT(1) | boolean | checkbox <br/> switch |
-| SMALLINT<br/>INTEGER<br/>SERIAL<br/>SMALLSERIAL | TINYINT<br/>SMALLINT<br/>MEDIUMINT<br/>INTEGER | integer<br/>boolean<br/>sort | integer<br/>sort<br/>checkbox<br/>switch<br/>select<br/>radioGroup |
-| BIGINT<br/>BIGSERIAL | BIGINT | bigInt<br/>sort | integer<br/>sort<br/>checkbox<br/>switch<br/>select<br/>radioGroup<br/>unixTimestamp<br/>createdAt<br/>updatedAt |
-| REAL | FLOAT | float | number<br/>percent |
-| DOUBLE PRECISION | DOUBLE PRECISION | double | number<br/>percent |
-| DECIMAL<br/>NUMERIC | DECIMAL | decimal | number<br/>percent<br/>currency |
-| VARCHAR<br/>CHAR | VARCHAR<br/>CHAR | string<br/>password<br/>uuid<br/>nanoid | input<br/>email<br/>phone<br/>password<br/>color<br/>icon<br/>select<br/>radioGroup<br/>uuid<br/>nanoid |
-| TEXT | TEXT<br/>TINYTEXT<br/>MEDIUMTEXT<br/>LONGTEXT | text<br/>json | textarea<br/>markdown<br/>vditor<br/>richText<br/>url<br/>json |
-| UUID | - | uuid | uuid |
-| JSON<br/>JSONB | JSON | json | json |
-| TIMESTAMP | DATETIME<br/>TIMESTAMP | date | date<br/>time<br/>createdAt<br/>updatedAt |
-| DATE | DATE | dateOnly | datetime |
-| TIME | TIME | time | time |
-| - | YEAR |  | datetime |
-| CIRCEL |  | circle | json<br/>circle |
-| PATH<br/>GEOMETRY(LINESTRING) | LINESTRING | lineString | Json<br/>lineString |
-| POINT<br/>GEOMETRY(POINT) | POINT | point | json<br/>point |
-| POLYGON<br/>GEOMETRY(POLYGON) | POLYGON | polygon | json<br/>polygon |
+| BOOLEAN | BOOLEAN<br/>TINYINT(1) | boolean | чекбокс <br/> переключатель |
+| SMALLINT<br/>INTEGER<br/>SERIAL<br/>SMALLSERIAL | TINYINT<br/>SMALLINT<br/>MEDIUMINT<br/>INTEGER | integer<br/>boolean<br/>сортировка | целое число<br/>сортировка<br/>чекбокс<br/>переключатель<br/>выпадающий список<br/>радиогруппа |
+| BIGINT<br/>BIGSERIAL | BIGINT | bigInt<br/>сортировка | целое число<br/>сортировка<br/>чекбокс<br/>переключатель<br/>выпадающий список<br/>радиогруппа<br/>UNIX временная метка<br/>дата создания<br/>дата обновления |
+| REAL | FLOAT | float | число<br/>процент |
+| DOUBLE PRECISION | DOUBLE PRECISION | double | число<br/>процент |
+| DECIMAL<br/>NUMERIC | DECIMAL | decimal | число<br/>процент<br/>валюта |
+| VARCHAR<br/>CHAR | VARCHAR<br/>CHAR | строка<br/>пароль<br/>UUID<br/>NanoID | текстовое поле<br/>email<br/>телефон<br/>пароль<br/>цвет<br/>икона<br/>выпадающий список<br/>радиогруппа<br/>UUID<br/>NanoID |
+| TEXT | TEXT<br/>TINYTEXT<br/>MEDIUMTEXT<br/>LONGTEXT | текст<br/>JSON | многострочное текстовое поле<br/>Markdown<br/>Vditor<br/>форматированный текст<br/>URL<br/>JSON |
+| UUID | - | UUID | UUID |
+| JSON<br/>JSONB | JSON | JSON | JSON |
+| TIMESTAMP | DATETIME<br/>TIMESTAMP | дата | дата<br/>время<br/>дата создания<br/>дата обновления |
+| DATE | DATE | только дата | дата/время |
+| TIME | TIME | время | время |
+| - | YEAR |  | дата/время |
+| CIRCLE |  | круг | JSON<br/>круг |
+| PATH<br/>GEOMETRY(LINESTRING) | LINESTRING | линия | JSON<br/>линия |
+| POINT<br/>GEOMETRY(POINT) | POINT | точка | JSON<br/>точка |
+| POLYGON<br/>GEOMETRY(POLYGON) | POLYGON | многоугольник | JSON<br/>многоугольник |
 | GEOMETRY | GEOMETRY |  -  |  -  |
-| BLOB | BLOB | blob |  -  |
-| ENUM | ENUM | enum | select<br/>radioGroup |
-| ARRAY |  -  | array | multipleSelect<br/>checkboxGroup |
+| BLOB | BLOB | двоичный объект |  -  |
+| ENUM | ENUM | enum | выпадающий список<br/>радиогруппа |
+| ARRAY |  -  | массив | множественный выбор<br/>группа чекбоксов |
 | BIT | BIT | - | - |
-| SET | SET | set | multipleSelect<br/>checkboxGroup |
+| SET | SET | набор | множественный выбор<br/>группа чекбоксов |
 | RANGE | - | - | - |
 
-### 不支持的字段类型
+### Неподдерживаемые типы полей
 
-不支持的字段类型会单独展示出来，这些字段需要开发适配之后才能使用。
+Неподдерживаемые типы полей отображаются отдельно. Эти поля требуют адаптации разработчиками для использования.
 
 ![20240507221854](https://static-docs.nocobase.com/20240507221854.png)
 
-### 筛选目标键
+### Фильтрация по ключу цели
 
-作为区块展示的数据表必须配置了筛选目标键（Filter target key），筛选目标键指的是根据特定字段筛选数据，字段值必须具备唯一性。筛选目标键默认为数据表主键字段，如果是视图或者无主键数据表、联合主键的数据表，需要自定义筛选目标键。
+Для таблиц данных, используемых в блоках отображения, необходимо настроить фильтрацию по ключу цели (Filter target key). Ключ фильтрации указывает на поле, по которому будут фильтроваться данные, и его значения должны быть уникальными. По умолчанию ключом фильтрации является первичный ключ таблицы. Если это представление (view), таблица без первичного ключа или таблица с составным первичным ключом, необходимо настроить пользовательский ключ фильтрации.
 
 ![20240507210230](https://static-docs.nocobase.com/20240507210230.png)
 
-设置了筛选目标键的数据表才可以在页面里添加
+Только таблицы данных с настроенным ключом фильтрации могут быть добавлены на страницу.
 
 ![20240507222827](https://static-docs.nocobase.com/20240507222827.png)

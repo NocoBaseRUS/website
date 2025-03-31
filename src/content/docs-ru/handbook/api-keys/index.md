@@ -1,27 +1,27 @@
-# API 密钥
+# API-ключи
 
-## 介绍
+## Введение
 
-## 安装
+## Установка
 
-## 使用说明
+## Инструкция по использованию
 
 http://localhost:13000/admin/settings/api-keys/configuration
 
 ![](https://static-docs.nocobase.com/d64ccbdc8a512a0224e9f81dfe14a0a8.png)
 
-### 添加 API 密钥
+### Добавление API-ключа
 
 ![](https://static-docs.nocobase.com/46141872fc0ad9a96fa5b14e97fcba12.png)
 
-**注意事项**
+**Важные замечания**
 
-- 添加的 API 密钥为当前用户的，角色为当前用户所属角色
-- 请确保已经配置了 `APP_KEY` 环境变量，并保证不变泄漏，如果 APP_KEY 变更了，所有已添加的 API 密钥会失效。
+- Добавленный API-ключ принадлежит текущему пользователю, а роль соответствует роли текущего пользователя.
+- Убедитесь, что переменная окружения `APP_KEY` настроена и не была скомпрометирована. Если значение `APP_KEY` изменится, все ранее добавленные API-ключи станут недействительными.
 
-### 如何配置 APP_KEY
+### Как настроить APP_KEY
 
-docker 版本，修改 docker-compose.yml 文件
+Для версии Docker отредактируйте файл `docker-compose.yml`:
 
 ```diff
 services:
@@ -31,7 +31,7 @@ services:
 +     - APP_KEY=4jAokvLKTJgM0v_JseUkJ
 ```
 
-源码或 create-nocobase-app 安装，直接修改 .env 文件的 APP_KEY 即可
+Для установки из исходного кода или через `create-nocobase-app`, просто измените значение `APP_KEY` в файле `.env`:
 
 ```bash
 APP_KEY=4jAokvLKTJgM0v_JseUkJ

@@ -1,38 +1,38 @@
-# 折叠面板
+# Блок панели сворачивания (Collapse)
 
-## 介绍
+## Введение
 
-Collapse 筛选区块需要连接数据区块使用，为数据区块提供筛选能力，它支持选择关系字段和选项字段作为筛选字段，并以折叠面板效果展示。
+Блок фильтрации в виде панели сворачивания (Collapse) используется совместно с блоком данных и предоставляет возможность фильтрации для блока данных. Он поддерживает выбор полей отношений и полей с вариантами в качестве полей фильтрации, которые отображаются в виде сворачивающихся панелей.
 
-## 添加区块
+## Добавление блока
 
 ![20240408212222](https://static-docs.nocobase.com/20240408212222.png)
 
-示例：配置订单折叠面板区块与订单表格区块实现筛选联动。
+Пример: настройка блока сворачивающейся панели заказов для взаимодействия фильтрации с блоком таблицы заказов.
 
-  <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240408212817.mp4" type="video/mp4">
-    </video>
+</video>
 
-## 区块配置项
+## Параметры конфигурации блока
 
 ![20240421173427](https://static-docs.nocobase.com/20240421173427.png)
 
-### 连接数据区块
+### Подключение блока данных
 
-示例：连接弹窗内同数据表区块实现筛选联动。
+Пример: подключение блока той же таблицы данных внутри всплывающего окна для реализации взаимодействия фильтрации.
 
-  <video width="100%" height="440" controls>
+<video width="100%" height="440" controls>
       <source src="https://static-docs.nocobase.com/20240408214743.mp4" type="video/mp4">
-    </video>
+</video>
 
-更多内容参考 [连接数据区块](/handbook/ui/blocks/block-settings/connect-block)
+Более подробная информация доступна в разделе [Подключение блока данных](/handbook/ui/blocks/block-settings/connect-block).
 
-- [编辑区块标题](/handbook/ui/blocks/block-settings/block-title)
-- [保存为区块模板](/handbook/ui/blocks/block-settings/block-template)
+- [Редактирование заголовка блока](/handbook/ui/blocks/block-settings/block-title)
+- [Сохранение как шаблон блока](/handbook/ui/blocks/block-settings/block-template)
 
-## 配置字段
+## Настройка полей
 
-仅支持关系字段和选项字段为筛选字段。
+Поддерживаются только поля отношений и поля с вариантами в качестве полей фильтрации.
 
 ![20240408212301](https://static-docs.nocobase.com/20240408212301.png)
