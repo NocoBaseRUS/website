@@ -1,9 +1,9 @@
-# 审批
+# Утверждение
 
 <PluginInfo commercial="true" name="workflow-approval" link="/handbook/workflow/plugins/approval"></PluginInfo>
 
 <embed src="../plugins/approval/node.md#L3-L999"></embed>
 
-## 相关内容
+## Связанные материалы
 
-除节点配置外，审批还有一些相关的内容可以通过 [插件文档](../plugins/approval/index.md) 进一步了解。
+Кроме настройки узлов, существуют другие аспекты утверждения, которые можно узнать из [документации плагина](../plugins/approval/index.md).

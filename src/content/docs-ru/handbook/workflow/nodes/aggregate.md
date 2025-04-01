@@ -1,3 +1,3 @@
-# 聚合查询
+# Агрегирующие запросы
 
-<embed src="../plugins/aggregate.md#L3-L999"></embed>
+<embed src="../plugins/aggregation.md#L3-L999"></embed>
