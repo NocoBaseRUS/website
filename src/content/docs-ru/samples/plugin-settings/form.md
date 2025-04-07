@@ -1,18 +1,18 @@
-# 表单配置页面
+# Страница настройки формы
 
-## 场景说明
+## Описание сценария
 
-配置界面是由一个表单组成的。
+Страница настроек состоит из формы.
 
-## 示例说明
+## Описание примера
 
-假设我们需要对接一个第三方地图服务，需要配置地图的 `key` 和 `secret`，我们可以通过插件的方式添加一个配置页面，用于填写这些信息。
+Предположим, что нам нужно интегрировать сторонний сервис карт и настроить для него `key` и `secret`. Мы можем добавить страницу настроек через плагин, чтобы пользователи могли вводить эти данные.
 
-本文档完整的示例代码可以在 [plugin-samples](https://github.com/nocobase/plugin-samples/tree/main/packages/plugins/%40nocobase-sample/plugin-settings-form) 中查看。
+Полный код примера из этого документа можно посмотреть в [plugin-samples](https://github.com/nocobase/plugin-samples/tree/main/packages/plugins/%40nocobase-sample/plugin-settings-form).
 
-## 初始化插件
+## Инициализация плагина
 
-我们按照 [编写第一个插件](/development/your-fisrt-plugin) 文档说明，如果没有一个项目，可以先创建一个项目，如果已经有了或者是 clone 的源码，则跳过这一步。
+Мы следуем инструкциям из документа [Написание первого плагина](/development/your-fisrt-plugin). Если у вас нет проекта, вы можете сначала создать его. Если проект уже существует или вы клонировали исходный код, этот шаг можно пропустить.
 
 ```bash
 yarn create nocobase-app my-nocobase-app -d sqlite
@@ -21,34 +21,34 @@ yarn install
 yarn nocobase install
 ```
 
-然后初始化一个插件，并添加到系统中：
+Затем инициализируем плагин и добавим его в систему:
 
 ```bash
 yarn pm create @nocobase-sample/plugin-settings-form
 yarn pm enable @nocobase-sample/plugin-settings-form
 ```
 
-然后启动项目即可：
+После этого запустите проект:
 
 ```bash
 yarn dev
 ```
 
-然后登录后访问 [http://localhost:13000/admin/pm/list/local/](http://localhost:13000/admin/pm/list/local/) 就可以看到插件已经安装并启用了。
+После входа в систему перейдите по адресу [http://localhost:13000/admin/pm/list/local/](http://localhost:13000/admin/pm/list/local/), чтобы увидеть, что плагин установлен и включен.
 
-## 后端功能实现
+## Реализация функционала на стороне сервера
 
-### 1. 创建数据表
+### 1. Создание таблицы данных
 
-后端主要是创建一个数据表用于存储配置信息。关于数据表创建我们需要了解以下知识：
+Основная задача серверной части — создать таблицу данных для хранения конфигурационной информации. Для создания таблицы данных необходимо ознакомиться со следующими материалами:
 
-- [数据表和字段](/development/server/collections)
-- [数据表创建](/development/server/collections/configure#在插件代码里定义)
+- [Таблицы данных и поля](/development/server/collections)
+- [Создание таблицы данных](/development/server/collections/configure#в-коде-плагина)
 - [Field Type](/development/server/collections/options#field-type)
-- [defineCollection()  API](/api/database#definecollection)
-- [Collection API](/api/database/collection)
+- [API defineCollection()](/api/database#definecollection)
+- [API Collection](/api/database/collection)
 
-对于本示例而言，我们创建 `packages/plugins/@nocobase-sample/plugin-settings-form/src/server/collections/map-configuration.ts` 文件，其内容如下：
+Для данного примера создадим файл `packages/plugins/@nocobase-sample/plugin-settings-form/src/server/collections/map-configuration.ts` со следующим содержимым:
 
 ```ts
 import { defineCollection } from '@nocobase/database';
@@ -68,11 +68,11 @@ export default defineCollection({
 });
 ```
 
-根据需求，我们创建了一个 `SamplesMapConfiguration` 数据表，包含 `key` 和 `secret` 两个字段，并且都是字符串类型。
+Исходя из требований, мы создали таблицу данных `SamplesMapConfiguration`, которая содержит два поля: `key` и `secret`, оба типа строка.
 
-### 2. 执行更新
+### 2. Выполнение обновления
 
-我们还需要将数据表定义更新到数据库中，我们可以通过以下命令来执行更新：
+Также необходимо применить определение таблицы данных к базе данных. Это можно сделать с помощью следующей команды:
 
 ```bash
 yarn nocobase upgrade
@@ -80,13 +80,13 @@ yarn nocobase upgrade
 
 ![img_v3_02av_db5e9985-eb20-4420-a0b2-8a809ff05a5g](https://static-docs.nocobase.com/img_v3_02av_db5e9985-eb20-4420-a0b2-8a809ff05a5g.jpg)
 
-## 前端功能实现
+## Реализация функционала на стороне клиента
 
-### 1. 创建插件配置页面
+### 1. Создание страницы настроек плагина
 
-之前的 [新增插件配置页面（单个路由）](/plugin-samples/router/add-setting-page-single-route) 已经详细介绍过，我们这里就不再赘述了。
+Ранее в разделе [Добавление страницы настроек плагина (один маршрут)](/plugin-samples/router/add-setting-page-single-route) уже было подробное описание. Здесь мы не будем углубляться.
 
-我们修改 `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/index.tsx` 文件，其内容如下：
+Изменим файл `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/index.tsx`. Его содержимое будет следующим:
 
 ```tsx | pure
 import { Plugin } from '@nocobase/client';
@@ -106,21 +106,21 @@ export class PluginSettingsFormClient extends Plugin {
 export default PluginSettingsFormClient;
 ```
 
-然后访问 [http://localhost:13000/admin/settings/@nocobase-sample/plugin-settings-form](http://localhost:13000/admin/settings/@nocobase-sample/plugin-settings-form) 就可以我们的配置页面了。
+Затем перейдите по адресу [http://localhost:13000/admin/settings/@nocobase-sample/plugin-settings-form](http://localhost:13000/admin/settings/@nocobase-sample/plugin-settings-form), чтобы увидеть нашу страницу настроек.
 
 ![img_v3_02av_c90b5767-97dd-4fef-8dd0-c7ff9a136a9g](https://static-docs.nocobase.com/img_v3_02av_c90b5767-97dd-4fef-8dd0-c7ff9a136a9g.jpg)
 
-### 2. 定义数据表结构
+### 2. Определение структуры таблицы данных
 
-基于 Schema 的写法，我们需要先定义数据表的结构。关于前端数据表结构的定义，我们需要了解以下知识：
+Используя подход, основанный на Schema, нам нужно сначала определить структуру таблицы данных. Для определения структуры таблицы данных на стороне клиента необходимо ознакомиться со следующими материалами:
 
-- [数据表和字段](/development/server/collections#field-component)
+- [Таблицы данных и поля](/development/server/collections#field-component)
 - [Field Type](/development/server/collections/options#field-type)
 - [Field Interface](/development/server/collections/options#field-interface)
-- [UI Schema 协议](/development/client/ui-schema/what-is-ui-schema)
-- [字段组件](https://client.docs.nocobase.com/components)
+- [Протокол UI Schema](/development/client/ui-schema/what-is-ui-schema)
+- [Компоненты полей](https://client.docs.nocobase.com/components)
 
-然后我们新建 `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/PluginSettingsForm.tsx` 文件，其内容如下：
+Затем создадим файл `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/PluginSettingsForm.tsx` со следующим содержимым:
 
 ```ts
 const mapConfigurationCollection = {
@@ -151,28 +151,28 @@ const mapConfigurationCollection = {
 };
 ```
 
-我们定义了一个 `SamplesMapConfiguration` 数据表，包含 `key` 和 `secret` 两个字段。以下是 `fields` 字段的说明：
+Мы определили таблицу данных `SamplesMapConfiguration`, которая содержит два поля: `key` и `secret`. Ниже приведено описание поля `fields`:
 
-- `type`：因为是其值字符串，所以其值为 `string`，需要和后端的数据表字段类型一致
-- `name`：字段的名称，需要和后端的数据表字段名称一致
-- `interface`：这里因为其值字符串，对应到 interface，所以其值为 `input`
-- `uiSchema`：其对应着前端表单项组件的渲染
-  - `title`：表单项的标题
-  - `required`：因为是必填项，所以其值为 `true`
-  - `x-component`：这里选用单行文本的 [Input 组件](https://client.docs.nocobase.com/components/input)
+- `type`: так как значение является строкой, его тип равен `string`, и он должен соответствовать типу поля в базе данных на стороне сервера.
+- `name`: имя поля, которое должно совпадать с именем поля в базе данных на стороне сервера.
+- `interface`: поскольку это строковое значение, оно соответствует интерфейсу `input`.
+- `uiSchema`: отвечает за рендеринг компонента формы на стороне клиента:
+  - `title`: заголовок элемента формы.
+  - `required`: так как поле является обязательным, его значение равно `true`.
+  - `x-component`: здесь используется компонент [Input](https://client.docs.nocobase.com/components/input) для однострочного текста.
 
-### 3. 创建表单 Schema
+### 3. Создание схемы формы
 
-关于表单 Schema 的写法，我们需要了解以下知识：
+Чтобы создать схему формы, необходимо ознакомиться со следующими материалами:
 
-- [Form 组件](https://client.docs.nocobase.com/components/form-v2)
-- [CollectionField 组件](https://client.docs.nocobase.com/core/data-source/collection-field)
-- [CardItem 组件](https://client.docs.nocobase.com/components/card-item)
-- [Schema 协议](/development/client/ui-schema/what-is-ui-schema)
-- [DataBlockProvider 组件](https://client.docs.nocobase.com/core/data-block/data-block-provider)
-- [Action 组件](https://client.docs.nocobase.com/components/action)
+- [Компонент Form](https://client.docs.nocobase.com/components/form-v2)
+- [Компонент CollectionField](https://client.docs.nocobase.com/core/data-source/collection-field)
+- [Компонент CardItem](https://client.docs.nocobase.com/components/card-item)
+- [Протокол Schema](/development/client/ui-schema/what-is-ui-schema)
+- [Компонент DataBlockProvider](https://client.docs.nocobase.com/core/data-block/data-block-provider)
+- [Компонент Action](https://client.docs.nocobase.com/components/action)
 
-我们依然在 `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/PluginSettingsForm.tsx` 文件中继续编写：
+Продолжим работу в файле `packages/plugins/@nocobase-sample/plugin-settings-form/src/client/PluginSettingsForm.tsx`:
 
 ```ts
 import { useMemo } from 'react';
